@@ -6,7 +6,7 @@ const themes = {
     buttons:'#1F2733',
     notif:'#D9E9F0',
     create:'#E1DEDE',
-    gradiant:'linear-gradient(180deg, rgba(8,99,156,1) 0%, rgba(8,99,156,1) 100%, rgba(8,99,156,0) 100%, rgba(0,212,255,1) 100%)',//badlouh
+    gradiant:'linear-gradient(to bottom , #08639C,#9FD4FA)',
     streamControls:'#000000',
     sentMessage:'#97C8FF',
     reveivedMessage:'#C6C2C2',
