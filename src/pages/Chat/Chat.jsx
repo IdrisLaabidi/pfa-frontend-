@@ -3,7 +3,7 @@ import styles from './Chat.module.css';
 import { io } from 'socket.io-client';
 import { useRef, useState, useEffect, useMemo } from 'react';
 
-const SERVER_URL = 'http://localhost:4000';
+const SERVER_URL = 'http://localhost:8080';
 const socket = io(SERVER_URL);
 
 const Chat = () => {
@@ -25,9 +25,16 @@ const Chat = () => {
             }
             setMessages(messages =>[...messages,newMessage]);
         })
-        const handleKeyUpEvent =  (e)=>{
-
+        const handleEnterKeyUp =  (e)=>{
+            if(e.keyCode===13){
+                document.getElementById('sendMessageButton').click();
+            }
         }
+        document.getElementById("inputMessage").addEventListener("keyup",handleEnterKeyUp);
+        return()=>{
+            document.getElementById("inputMessage").removeEventListener("keyup",handleEnterKeyUp);
+            socket.off();
+        };
     },[messages]
     )
     return (
@@ -36,12 +43,17 @@ const Chat = () => {
             </div>
             <div className={styles.sendMessageContainer}>
                 <input 
+                    id='inputMessage'
                     type='text' 
                     placeholder='Type your message here ...' 
                     value={message}
                     onChange={(e)=>setMessage(e.target.value)}
                 />
-                <button onClick={sendMessage}>
+                <button 
+                id='sendMessageButton'
+                onClick={sendMessage}
+                type='submit'
+                >
                     Send message
                 </button>
             </div>
