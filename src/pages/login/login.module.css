@@ -1,0 +1,24 @@
+.container{
+    display: flex;
+    height: 100vh;
+}
+.formContainer{
+    height: 100vh;
+    width: 30%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.image{
+    width: 925px;
+    height: 600px ;
+    border-radius: 230px;
+}
+.logo{
+    width : 170px;
+    height: 90px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px grey;
+}
