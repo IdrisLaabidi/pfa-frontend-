@@ -1,7 +1,9 @@
-import { BrowserRouter , Routes, Route } from "react-router-dom"; // import react router dom
-//import pages 
+import { BrowserRouter , Routes, Route } from "react-router-dom"; 
 import HomePage from "./pages/dashboard/dashboardPage";
 import LoginPage from "./pages/login/loginPage";
+import Chat from "./pages/Chat/Chat";
+import "./Themes/Themes";
+
 
 function App() {
   return (
@@ -9,6 +11,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route index element={<LoginPage />}/>
+          <Route path="/Chat" element={<Chat />}/>
           <Route path="/Home" element={ <HomePage/> } />
         </Routes>
       </BrowserRouter>
