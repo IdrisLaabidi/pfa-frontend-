@@ -5,6 +5,7 @@ const themes = {
   buttons:'#1F2733',
   notif:'#D9E9F0',
   create:'#E1DEDE',
+  gradient:'linear-gradient(to bottom , #08639C,#9FD4FA)',
   streamControls:'#000000',
   sentMessage:'#97C8FF',
   reveivedMessage:'#C6C2C2',
