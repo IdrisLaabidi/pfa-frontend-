@@ -1,0 +1,50 @@
+.SideMenu {
+  width: 270px;
+  height: 94vh;
+  background-color: #f1f1f1;
+  padding: 20px;
+  border-radius: 30px;
+}
+
+img{
+  width: 166px;
+  height: 102px;
+  border-radius: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 15px;
+}
+
+.CreateMenuButton, .logoutButton{
+  width: 100%;
+  padding: 10px;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  border-radius: 24px;
+  border: none;
+}
+
+.CreateMenuButton{
+    background-color: var(--color-create);
+}
+
+.logoutButton{
+  margin-top: 75px;
+    background-color: var(--color-buttons);
+    color: #f1f1f1;
+}
+
+.menu {
+    list-style-type: none;
+    padding-left: 0;
+}
+  
+.menu li {
+    margin-bottom: 10px;
+}
+  
+.menu li a {
+    color: #333;
+    text-decoration: none;
+}
