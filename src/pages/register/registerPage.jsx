@@ -4,6 +4,7 @@ import logo from '../../assets/logo.png'
 import image from '../../assets/loginPageImage.jpg'
 //import components
 import OrDivider from '../../components/orDivider/orDivider'
+import RegisterForm from '../../components/registerForm/registerForm'
 
 
 const RegisterPage = () => {
@@ -13,6 +14,10 @@ const RegisterPage = () => {
             <div className={styles.container}>
                 <div className={styles.formContainer}> 
                     <img className={styles.logo} src={logo} alt="logo"  />
+                    <h3>Create a new account</h3>
+                    <RegisterForm/>
+                    <OrDivider></OrDivider>
+                    <button className={styles.signInButton}>Sign In</button>
                 </div>
                 <figure>
                     <img className={styles.image} src={image} alt="zina"/>

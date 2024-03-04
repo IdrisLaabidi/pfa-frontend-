@@ -14,12 +14,12 @@ const LoginPage = () => {
             <div className={styles.container}>
                 <div className={styles.formContainer}> 
                     <img className={styles.logo} src={logo} alt="logo"  />
-                    <h3>Login into your account</h3>
+                    <h3 className={styles.title}>Login into your account</h3>
                     <LoginForm/>
                     <OrDivider/>
                     <button className={styles.signUpButton}>Sign up now</button>
                 </div>
-                <figure>
+                <figure className={styles.imageCont}>
                     <img className={styles.image} src={image} alt="zina"/>
                 </figure>
             </div>
