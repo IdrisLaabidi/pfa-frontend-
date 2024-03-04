@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './Chat.module.css';
+import './Chat.css';
 import { io } from 'socket.io-client';
 import { useRef, useState, useEffect, useMemo } from 'react';
 
@@ -38,10 +38,10 @@ const Chat = () => {
     },[messages]
     )
     return (
-        <div className={styles.chatContainer}>
-            <div className={styles.messagesArea}>
+        <div className='chatContainer'>
+            <div className='messagesArea'>
             </div>
-            <div className={styles.sendMessageContainer}>
+            <div className='sendMessageContainer'>
                 <input 
                     id='inputMessage'
                     type='text' 
