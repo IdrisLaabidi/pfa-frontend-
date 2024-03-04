@@ -1,7 +1,7 @@
 const themes = {
   colors: {
   chat: '#FFFFFF',
-  priamryBlue:'#08639C',
+  primaryBlue:'#08639C',
   buttons:'#1F2733',
   notif:'#D9E9F0',
   create:'#E1DEDE',
@@ -12,7 +12,9 @@ const themes = {
   documentAttach:'#0974C6',
   acceptReq:'#63BA71',
   refuseReq:'#EE0C0C',
-  inputBg:'#F1F3F6'
+  inputBg:'#F1F3F6',
+  placeholder : '#555555',
+  divider : '#C2C2C2',
   },
   fonts: {
   primary: 'marrywether sans,poppins,calibri,Arial, sans-serif',
