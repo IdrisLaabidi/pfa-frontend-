@@ -3,6 +3,7 @@ import HomePage from "./pages/dashboard/dashboardPage";
 import LoginPage from "./pages/login/loginPage";
 import Chat from "./pages/Chat/Chat";
 import "./Themes/Themes";
+import './App.css'
 
 
 function App() {
