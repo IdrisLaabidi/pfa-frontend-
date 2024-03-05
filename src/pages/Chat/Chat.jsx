@@ -13,22 +13,34 @@ const socket = io(SERVER_URL);
 const Chat = () => {
     const [message , setMessage] = useState('');
     const [messages , setMessages] = useState([]);
+    const messageAreaRef = useRef();
     const sendMessage = ()=>{
         if(message!== ''){
-            const messageObj = {text : message , sender : 'self' , id : socket.id}
+            const messageObj = {
+                content : message,
+                sender : socket.id,
+                sentTo : [{}],
+                sentAt : Date.now()
+            }
             socket.emit('chat message',messageObj);
             setMessage('');
         }
     }
+    const scrollToBottom = () => {
+        if (messageAreaRef.current) {
+          messageAreaRef.current.scrollTop = messageAreaRef.current.scrollHeight;
+        }
+      };
     useEffect(()=>{
+        scrollToBottom();
         socket.on('chat message',(newMessage)=>{
-            if(newMessage.id === socket.id){
+            if(newMessage.sender === socket.id){
                 newMessage.sender = 'self'
             }else{
                 newMessage.sender = 'other'
             }
             setMessages(messages =>[...messages,newMessage]);
-            console.log(messages)
+            
         })
         const handleEnterKeyUp =  (e)=>{
             if(e.keyCode===13){
@@ -47,12 +59,12 @@ const Chat = () => {
             <div className='headerContainer'>
                     Group Chat
             </div>
-            <div className='messagesArea'>
+            <div className='messagesArea' ref={messageAreaRef}>
                 
                 {messages.map((mssg,index)=>{
                     return(
                     <div key={index} className={`${mssg.sender === 'self'?'selfMessage':'otherMessage'}`}>
-                        {mssg.text}
+                        {mssg.content}
                     </div>)
                 })}
             </div>

@@ -9,7 +9,7 @@ const themes = {
     gradient:'linear-gradient(to bottom , #08639C,#9FD4FA)',
     streamControls:'#000000',
     sentMessage:'#97C8FF',
-    reveivedMessage:'#C6C2C2',
+    receivedMessage:'#C6C2C2',
     links:'#1E2772',
     documentAttach:'#0974C6',
     acceptReq:'#63BA71',
