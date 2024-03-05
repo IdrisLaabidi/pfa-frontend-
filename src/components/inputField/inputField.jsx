@@ -7,7 +7,21 @@ import PropTypes from 'prop-types'
 const InputField = (props) => {
     return ( 
         <div className={styles.container}>
-            <input className={styles.input} type={props.type} placeholder={props.placeholder} onChange={props.onChange} value={props.value}></input>
+            {props.required && <input 
+                className={styles.input} 
+                type={props.type} 
+                placeholder={props.placeholder} 
+                onChange={props.onChange} 
+                value={props.value}
+                required
+            />}
+            {!props.required && <input 
+                className={styles.input} 
+                type={props.type} 
+                placeholder={props.placeholder} 
+                onChange={props.onChange} 
+                value={props.value}
+            />}
             <div className={styles.iconContainer}>
                 <img className={styles.image} src={props.icon} alt='icon'></img>
             </div>
@@ -17,9 +31,9 @@ const InputField = (props) => {
 InputField.propTypes= {
     type: PropTypes.string,
     placeholder : PropTypes.string,
-    icon : PropTypes.object.isRequired,
     onChange : PropTypes.func,
-    value : PropTypes.string
+    value : PropTypes.string,
+    required : PropTypes.bool
 };
  
 export default InputField;

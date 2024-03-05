@@ -33,4 +33,5 @@ a{
     border : none;
     font-size: 16px;
     font-weight: bold;
+    cursor: pointer;
 }
