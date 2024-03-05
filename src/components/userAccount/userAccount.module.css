@@ -1,0 +1,31 @@
+.UserAcc {
+    width: 190px;
+    height: 62px;
+}
+
+.MainDiv {
+    display: flex;
+    align-items: center;
+    background-color: #F5F7FA;
+    border-radius: 25px;
+    padding: 10px;
+}
+
+.ProfileImage {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.Username {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.UserRole {
+    font-size: 14px;
+    color: #888;
+    margin: 0;
+}

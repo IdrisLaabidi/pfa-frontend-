@@ -1,0 +1,13 @@
+.menuItem {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    margin-bottom: 6.2px;
+    border-radius: 10px;
+    color: #333;
+    text-decoration: none;
+}
+
+.menuItem a {
+    margin-left: 10px;
+}

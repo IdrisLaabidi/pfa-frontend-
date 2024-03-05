@@ -1,5 +1,7 @@
 .SideMenu {
-  width: 270px;
+  display: flex;
+  flex-direction: column;
+  width: 230px;
   height: 94vh;
   background-color: #f1f1f1;
   padding: 20px;
@@ -16,9 +18,24 @@ img{
   margin-bottom: 15px;
 }
 
+.icone{
+  width: 25px;
+  height: 25px;
+  border-radius: 50px;
+  margin-right: 5px;
+}
+
+.texte{
+  width: 90%;
+  margin-left: 5px;
+}
+
 .CreateMenuButton, .logoutButton{
-  width: 100%;
-  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
   margin-top: 15px;
   margin-bottom: 20px;
   border-radius: 24px;
@@ -26,25 +43,22 @@ img{
 }
 
 .CreateMenuButton{
-    background-color: var(--color-create);
+  height: 48px;
+  width: 184px;
+  background-color: var(--color-create);
+  text-align: left;
+}
+
+.CreateMenuButton p{
+  margin-left: 55px;
 }
 
 .logoutButton{
+  margin: 75px auto 0;
+  width: 153px;
   margin-top: 75px;
-    background-color: var(--color-buttons);
-    color: #f1f1f1;
-}
-
-.menu {
-    list-style-type: none;
-    padding-left: 0;
-}
-  
-.menu li {
-    margin-bottom: 10px;
-}
-  
-.menu li a {
-    color: #333;
-    text-decoration: none;
+  background-color: var(--color-buttons);
+  color: #f1f1f1;
+  align-items: center;
+  height: 48px;
 }
