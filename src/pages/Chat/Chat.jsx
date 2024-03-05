@@ -19,7 +19,7 @@ const Chat = () => {
             const messageObj = {
                 content : message,
                 sender : socket.id,
-                sentTo : [{}],
+                sentTo : [],
                 sentAt : Date.now()
             }
             socket.emit('chat message',messageObj);
@@ -33,6 +33,9 @@ const Chat = () => {
       };
     useEffect(()=>{
         scrollToBottom();
+        socket.on('allMessage',(allMessages)=>{
+            console.log(allMessages);
+        })
         socket.on('chat message',(newMessage)=>{
             if(newMessage.sender === socket.id){
                 newMessage.sender = 'self'
