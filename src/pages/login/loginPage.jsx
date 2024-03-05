@@ -5,10 +5,11 @@ import image from '../../assets/loginPageImage.jpg'
 //import components
 import LoginForm from '../../components/loginForm/loginForm'
 import OrDivider from '../../components/orDivider/orDivider'
+import { useNavigate } from 'react-router'
 
 
 const LoginPage = () => {
-
+    const navigator = useNavigate()
     return (  
         <>
             <div className={styles.container}>
@@ -17,7 +18,7 @@ const LoginPage = () => {
                     <h3 className={styles.title}>Login into your account</h3>
                     <LoginForm/>
                     <OrDivider/>
-                    <button className={styles.signUpButton}>Sign up now</button>
+                    <button className={styles.signUpButton} onClick={()=>navigator('/register')}>Sign up now</button>
                 </div>
                 <figure className={styles.imageCont}>
                     <img className={styles.image} src={image} alt="zina"/>

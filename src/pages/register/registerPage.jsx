@@ -6,9 +6,11 @@ import image from '../../assets/loginPageImage.jpg'
 import OrDivider from '../../components/orDivider/orDivider'
 import RegisterForm from '../../components/registerForm/registerForm'
 
+import {useNavigate} from 'react-router-dom'
+
 
 const RegisterPage = () => {
-
+    const navigator = useNavigate()
     return (  
         <>
             <div className={styles.container}>
@@ -17,7 +19,10 @@ const RegisterPage = () => {
                     <h3>Create a new account</h3>
                     <RegisterForm/>
                     <OrDivider></OrDivider>
-                    <button className={styles.signInButton}>Sign In</button>
+                    <button 
+                        className={styles.signInButton}
+                        onClick={()=>navigator('/')}
+                    >Sign In</button>
                 </div>
                 <figure>
                     <img className={styles.image} src={image} alt="zina"/>

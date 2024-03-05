@@ -41,4 +41,5 @@ figure{
     background-color: var(--color-primary);
     font-weight: bold;
     font-size: 16px;
+    cursor: pointer;
 }
