@@ -1,26 +1,30 @@
-import styles from './login.module.css' //import the css module 
+import styles from './register.module.css' //import the css module 
 //import images 
 import logo from '../../assets/logo.png'
 import image from '../../assets/loginPageImage.jpg'
 //import components
-import LoginForm from '../../components/loginForm/loginForm'
 import OrDivider from '../../components/orDivider/orDivider'
-import { useNavigate } from 'react-router'
+import RegisterForm from '../../components/registerForm/registerForm'
+
+import {useNavigate} from 'react-router-dom'
 
 
-const LoginPage = () => {
+const RegisterPage = () => {
     const navigator = useNavigate()
     return (  
         <>
             <div className={styles.container}>
                 <div className={styles.formContainer}> 
                     <img className={styles.logo} src={logo} alt="logo"  />
-                    <h3 className={styles.title}>Login into your account</h3>
-                    <LoginForm/>
-                    <OrDivider/>
-                    <button className={styles.signUpButton} onClick={()=>navigator('/register')}>Sign up now</button>
+                    <h3>Create a new account</h3>
+                    <RegisterForm/>
+                    <OrDivider></OrDivider>
+                    <button 
+                        className={styles.signInButton}
+                        onClick={()=>navigator('/')}
+                    >Sign In</button>
                 </div>
-                <figure className={styles.imageCont}>
+                <figure>
                     <img className={styles.image} src={image} alt="zina"/>
                 </figure>
             </div>
@@ -28,4 +32,4 @@ const LoginPage = () => {
     );
 }
  
-export default LoginPage;
+export default RegisterPage;

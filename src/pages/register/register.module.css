@@ -13,7 +13,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 25px;
+    gap: 10px;
 }
 .image{
     width: 925px;
@@ -26,16 +26,13 @@
     border-radius: 20px;
     box-shadow: 5px 5px 5px grey;
 }
-.title{
-    color: var(--color-placeholder);
-}
-.imageCont{
+figure{
     display: flex;
     align-items: center;
     justify-content: center;
     margin: auto;
 }
-.signUpButton{
+.signInButton{
     height: 50px;
     width: 90%;
     border : solid 1px var(--color-buttons);

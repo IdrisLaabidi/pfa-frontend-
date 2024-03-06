@@ -1,0 +1,33 @@
+.navbar {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 50px;
+}
+  
+.navbarItem {
+    margin-left: 1px;
+    color: #ffffff;
+    font-size: 30px;
+}
+  
+input[type="text"]{
+    width: 255px;
+    height: 50px;
+    padding: 5px;
+    margin-left: 200px;
+    border: 1px solid #ccc;
+    border-radius: 40px;
+}
+  
+.profile {
+    width: 190px;
+    height: 62px;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+}
+  

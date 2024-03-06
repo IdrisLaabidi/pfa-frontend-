@@ -1,0 +1,16 @@
+*{
+    font-family: var(--fonts-primary);
+}
+.dividerContainer{
+    width : 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color : var(--color-divider);
+}
+hr{
+    height: 1px;
+    width : 150px;
+    border : none;
+    background-color: var(--color-divider);
+}
