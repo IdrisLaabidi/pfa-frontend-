@@ -32,7 +32,7 @@ const SideMenu = ( {path} ) => {
         <aside className={styles.SideMenu}>
             <img className={styles.logo} src={logo} alt="logo"  />
             <CreateButton/>
-            {menuItems.map(item => <ListItem icon={item.icon} text={item.text} active={'/'+item.text === path} onClick={()=>navigate(item.path)} /> )} 
+            {menuItems.map(item => <ListItem icon={item.icon} text={item.text} active={item.path === path} onClick={()=>navigate(item.path)} /> )} 
             <button className={styles.logoutButton} onClick={()=>navigate('/')}>
                 <img className={styles.icone} src={logout} alt='icon2'/>
                 <span className={styles.texte}>Logout</span>

@@ -1,13 +1,13 @@
 import Logo from '../../assets/logo.png'
 import styles from './userAccount.module.css'
 
-const UserAccount = ({username, userrole}) => {
+const UserAccount = ({user}) => {
     return ( 
             <div className={styles.MainDiv}>
                 <img className={styles.ProfileImage} src={Logo} alt='profile img'/>
                 <div>
-                    <p className={styles.Username}>{username}</p>
-                    <p className={styles.UserRole}>{userrole}</p>
+                    <p className={styles.Username}>{user.userName}</p>
+                    <p className={styles.UserRole}>{user.role}</p>
                 </div>
             </div>
         

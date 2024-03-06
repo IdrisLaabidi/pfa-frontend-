@@ -31,8 +31,8 @@ const LoginForm = () => {
             }
             if(response.ok){
                 console.log("user logged in" , json)
-                localStorage.setItem("token",json)
-                navigate('/test', { state: { user: json } })
+                localStorage.setItem("token",json.token)
+                navigate('/Home',{state : {auth : json}})
             }
         }catch(err){
             alert('oops faild to connect to the api')

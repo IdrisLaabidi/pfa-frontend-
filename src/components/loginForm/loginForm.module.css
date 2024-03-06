@@ -1,6 +1,3 @@
-*{
-    font-family: var(--fonts-primary);
-}
 .formContainer{
     display: flex;
     flex-direction: column;
