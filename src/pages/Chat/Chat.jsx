@@ -1,18 +1,18 @@
 import React from 'react'
-import './Chat.css';
 import { io } from 'socket.io-client';
 import { useRef, useState, useEffect, useMemo } from 'react';
 import attach from '../../assets/attach.png';
 import sendImage from '../../assets/sendImage.png';
 import send from '../../assets/send.png';
-
-
+import MessageObject from '../../components/message/messageObject';
+import './Chat.css';
 const SERVER_URL = 'http://localhost:4000';
 const socket = io(SERVER_URL);
 
 const Chat = () => {
     const [message , setMessage] = useState('');
     const [messages , setMessages] = useState([]);
+    const [messagesObjects,setMessagesObjects] = useState([]);
     const messageAreaRef = useRef();
     const sendMessage = ()=>{
         if(message!== ''){
@@ -33,6 +33,7 @@ const Chat = () => {
       };
     useEffect(()=>{
         scrollToBottom();
+        console.log('Chat Token',localStorage.getItem("token"));
         socket.on('allMessage',(allMessages)=>{
             allMessages.map((mssg)=>{
                 setMessages(messages=>[...messages,mssg])
@@ -68,17 +69,15 @@ const Chat = () => {
                 
                 {messages.map((mssg,index)=>{
                     return(
-                    <div key={index} className={`${mssg.sender === 'self'?'selfMessage':'otherMessage'}`}>
-                        {mssg.content}
-                    </div>)
+                        <MessageObject key={index} message={mssg} />
+                    )
                 })}
             </div>
-            <div id='sendMessageContainer'>
-                
+            <div id='sendMessageContainer'>    
                 <input 
                     id='inputMessage'
                     type='text' 
-                    placeholder='Type your message here ...' 
+                    placeholder='Type your message here ...'
                     value={message}
                     onChange={(e)=>setMessage(e.target.value)}
                 />

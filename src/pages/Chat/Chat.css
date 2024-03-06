@@ -1,108 +1,88 @@
 .chatContainer {
-  display: flex;
-  flex-direction: column;
-  height: 90vh; 
-  margin-left: 50px;
-  margin-right: 50px;
-  margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    height: 90vh; 
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 50px;
+    
+    overflow: hidden;
+    background-color: var(--color-primary);
+    border-radius: 10px;
+  }
+  .messagesArea {
+    display: flex;
+    flex-direction: column;
+    height: 74vh;
+    overflow-y: scroll;
+    background-color: var(--color-primary);
+    padding: 10px;
+    border-top-left-radius:10px ;
+    border-top-right-radius:10px ;
+  }
   
-  overflow: hidden;
-  background-color: var(--color-primary);
-  border-radius: 10px;
-}
-
-.messagesArea {
-  display: flex;
-  flex-direction: column;
-  height: 74vh;
-  overflow-y: scroll;
-  background-color: var(--color-primary);
-  padding: 10px;
-  border-top-left-radius:10px ;
-  border-top-right-radius:10px ;
-}
-
-#sendMessageContainer {
-  display: flex;
-  padding: 8px;
-  margin: 10px;
-  height: 38px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 16px;
- 
-}
-
-#inputMessage {
-  flex-grow: 1;
-  padding: 10px;
-  margin-right: 10px;
-  border: none;
-  font-size: 14px;
-  outline: none;
-  background: none;
-}
-#sendMessageButton {
-  display: flex;
-  padding: 10px 20px;
-  background-color: var(--color-buttons);
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: medium;
-}
-
-.selfMessage {
-  margin-bottom: 10px;
-  padding: 10px;
-  background-color: var(--color-sentMessage);
-  border-radius: 10px;
-  max-width: 70%;
-  align-self: flex-end;
-}
-
-.otherMessage {
-  margin-bottom: 10px;
-  padding: 10px;
-  background-color: var(--color-receivedMessage);
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  max-width: 70%;
-  align-self: flex-start;
-}
-
-.headerContainer{
-  text-align: center;
-  height: 50px;
-  margin: 15px;
-  border-radius: 10px;
-  box-shadow: 2px 2px 2px grey;
-  font-weight:bold;
-  font-size: 21px;
-}
-
-.attach{
-  height: 25px;
-  width: 25px;
+  #sendMessageContainer {
+    display: flex;
+    padding: 8px;
+    margin: 10px;
+    height: 38px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 16px;
+   
+  }
+  
+  #inputMessage {
+    flex-grow: 1;
+    padding: 10px;
+    margin-right: 10px;
+    border: none;
+    font-size: 14px;
+    outline: none;
+    background: none;
+  }
+  #sendMessageButton {
+    display: flex;
+    padding: 10px 20px;
+    background-color: var(--color-buttons);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: medium;
+  }
+  .headerContainer{
+    text-align: center;
+    height: 50px;
+    margin: 15px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px grey;
+    font-weight:bold;
+    font-size: 21px;
+  }
+  
+  .attach{
+    height: 25px;
+    width: 25px;
+    align-self: center;
+  }
+  .sendMessage{
+    height: 25px;
+    width: 25px;
+    padding-right:5px ;
+    align-self: center;
+  }
+  .sendImage{
+  height: 35px;
+  width: 35px;
   align-self: center;
-}
-.sendMessage{
-  height: 25px;
-  width: 25px;
-  padding-right:5px ;
-  align-self: center;
-}
-.sendImage{
-height: 35px;
-width: 35px;
-align-self: center;
-
-}
-
-.sendImageButton , .attachButton{
-  background: none;
-  border: none;
-  cursor: pointer;
-}
+  
+  }
+  
+  .sendImageButton , .attachButton{
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
