@@ -7,7 +7,7 @@ import sendImage from '../../assets/sendImage.png';
 import send from '../../assets/send.png';
 
 
-const SERVER_URL = 'http://localhost:8080';
+const SERVER_URL = 'http://localhost:4000';
 const socket = io(SERVER_URL);
 
 const Chat = () => {
@@ -34,7 +34,9 @@ const Chat = () => {
     useEffect(()=>{
         scrollToBottom();
         socket.on('allMessage',(allMessages)=>{
-            console.log(allMessages);
+            allMessages.map((mssg)=>{
+                setMessages(messages=>[...messages,mssg])
+            })
         })
         socket.on('chat message',(newMessage)=>{
             if(newMessage.sender === socket.id){
