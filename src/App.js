@@ -12,9 +12,10 @@ function App() {
 
   return (
     <div className="App">
+      
       <BrowserRouter>
         <Routes>
-          <Route index element={<LoginPage />}/>
+        <Route index element={<LoginPage/>}/>
           <Route path="/Register" element={<RegisterPage />}/>
           <Route path="/Home" element={ <HomePage/> } />
           <Route path="/test" element={ <Test/>}/>
