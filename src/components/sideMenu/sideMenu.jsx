@@ -1,22 +1,41 @@
 import styles from './sidemenu.module.css'
-import logo from '../../assets/logo.png'
+//importing components 
 import ListItem from "../listItem/listItem";
+import CreateButton from '../createButton/createButton';
+//importing icons
+import logo from '../../assets/logo.png'
+import logout from '../../assets/logout-icon.svg'
+import project from '../../assets/project-icon.svg'
+import setting from '../../assets/settings-icon.svg'
+import leave from '../../assets/leave-icon.svg'
+import tasks from '../../assets/tasks-icon.svg'
+import meet from '../../assets/meet-icon.svg'
+import profile from '../../assets/profile-icon.svg'
+import chat from '../../assets/chat-icon.svg'
 
-const SideMenu = () => {
+import { useNavigate } from 'react-router-dom'
 
-    const menuItems = ["Projects", "Tasks", "Chat", "Meet", "Profile", "Leave", "Settings"];
+const SideMenu = ( {path} ) => {
+
+    const navigate = useNavigate()
+
+    const menuItems = [
+        {text : "Projects" , icon: project , path:"/projects"},
+        {text : "Tasks", icon: tasks, path:"/tasks"},
+        {text :  "Chat", icon: chat, path:"/chat"},
+        {text :  "Meet", icon: meet, path:"/meet"},
+        {text : "Profile" , icon: profile, path:"/profile"},
+        {text :  "Leave", icon: leave, path:"/leave"},
+        {text :  "Settings", icon: setting, path:"/setting"} ];
 
     return ( 
         <aside className={styles.SideMenu}>
-            <img src={logo} alt="logo"  />
-            <button className={styles.CreateMenuButton}>
-                <img className={styles.icone} src={logo} alt='icon'/>
-                <p className={styles.texte}>Create new project</p>
-            </button>
-            {menuItems.map(item => <ListItem key={item} item={item} />)} 
-            <button className={styles.logoutButton}>
-                <img className={styles.icone} src={logo} alt='icon2'/>
-                <p className={styles.texte}>Logout</p>
+            <img className={styles.logo} src={logo} alt="logo"  />
+            <CreateButton/>
+            {menuItems.map(item => <ListItem icon={item.icon} text={item.text} active={'/'+item.text === path} onClick={()=>navigate(item.path)} /> )} 
+            <button className={styles.logoutButton} onClick={()=>navigate('/')}>
+                <img className={styles.icone} src={logout} alt='icon2'/>
+                <span className={styles.texte}>Logout</span>
             </button>
         </aside>
      );

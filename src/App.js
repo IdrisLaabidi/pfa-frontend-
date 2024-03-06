@@ -32,7 +32,7 @@ const MainApp = () => {
   return ( 
     <div style={{display: 'flex',alignItems: 'flex-start'}}>
       <SideMenu/>
-      <NavBar/>
+      <NavBar title='navbar'/>
     </div>
    );
 }

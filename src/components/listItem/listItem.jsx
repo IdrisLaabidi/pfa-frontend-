@@ -1,11 +1,12 @@
-import { Link } from "react-router-dom";
+
 import styles from './listItem.module.css';
 
-const ListItem = ({ item }) => {
+const ListItem = ({ icon ,text ,active }) => {
     return (
-        <div className={styles.menuItem}>
-            <Link to="#">{item}</Link>
-        </div>
+        <button className={`${active ? `${styles.containerActive}` :`${styles.container}` }`}>
+            <img src={icon} alt='icon' className={styles.icon}></img>
+            <span className={styles.text}>{text}</span>
+        </button>
     );
 }
 
