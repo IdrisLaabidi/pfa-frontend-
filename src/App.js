@@ -15,7 +15,7 @@ function App() {
       
       <BrowserRouter>
         <Routes>
-        <Route index element={<MainApp/>}/>
+        <Route index element={<LoginPage/>}/>
           <Route path="/Register" element={<RegisterPage />}/>
           <Route path="/Home" element={ <HomePage/> } />
           <Route path="/test" element={ <Test/>}/>
@@ -26,15 +26,3 @@ function App() {
 }
 
 export default App;
-
-const MainApp = () => {
-  return ( 
-    <div style={{display: 'flex',alignItems: 'flex-start'}}>
-      <SideMenu/>
-      <NavBar title='navbar'/>
-    </div>
-   );
-}
-
-//<Route index element={<LoginPage />}/>
-//
