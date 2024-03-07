@@ -1,11 +1,7 @@
 .chatContainer {
     display: flex;
     flex-direction: column;
-    height: 90vh; 
-    margin-left: 50px;
-    margin-right: 50px;
-    margin-top: 50px;
-    
+    height: 88vh; 
     overflow: hidden;
     background-color: var(--color-primary);
     border-radius: 10px;
@@ -32,7 +28,7 @@
    
   }
   
-  #inputMessage {
+  .inputMessage {
     flex-grow: 1;
     padding: 10px;
     margin-right: 10px;
@@ -41,7 +37,7 @@
     outline: none;
     background: none;
   }
-  #sendMessageButton {
+  .sendMessageButton {
     display: flex;
     padding: 10px 20px;
     background-color: var(--color-buttons);

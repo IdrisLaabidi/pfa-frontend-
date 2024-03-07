@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 const HomePage = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = Cookies.get('token');
     if (!token) {
-      window.location.reload();
+      navigate('/login')
     } else {
       validateTokenAndGetUser(token);
     }
@@ -36,10 +37,10 @@ const HomePage = () => {
     return <div>Loading...</div>; // Or some loading spinner
   }
   const logout =()=> {
-    localStorage.removeItem("token") ;
-    
+    Cookies.remove("token") ;
     navigate('/Login');
     window.location.reload();
+    
   }
   return (
     <div>

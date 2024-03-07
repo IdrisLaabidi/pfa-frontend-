@@ -43,11 +43,11 @@ const RegisterForm = () => {
             const json = await response.json()
 
             if(!response.ok){
-                alert('Registration unsuccessful!please try again')
+                alert('Something wrong registration unsuccessful!please try again')
             }
             if(response.ok){
                 console.log("user added" , json)
-                navigate('/test', { state: { user: json } })
+                navigate('/Home', { state: { user: json } })
             }
         }catch(err){
             alert('oops faild to connect to the api')

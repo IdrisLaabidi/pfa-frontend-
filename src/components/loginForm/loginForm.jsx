@@ -4,6 +4,7 @@ import emailIcon from '../../assets/email-icon.svg';
 import pwdIcon from '../../assets/password-icon.svg';
 import styles from './loginForm.module.css';
 import { useNavigate } from "react-router";
+import Cookies from 'js-cookie';
 
 const LoginForm = () => {
     const navigate = useNavigate();
@@ -23,22 +24,24 @@ const LoginForm = () => {
                 }
             });
             const json = await response.json();
+            
             if (!response.ok) {
                 
                 const errorMessage = json.message || 'Login failed! Please try again.';
                 alert(errorMessage);
                 return;
             }
-
-            localStorage.setItem("token", json.token);
-            localStorage.setItem("userName",json.user.userName);
-            localStorage.setItem("FirstName",json.user.FirstName);
-            localStorage.setItem("lastName",json.user.lastName);
-            localStorage.setItem("email",json.user.email);
-            localStorage.setItem("role",json.user.role);
-            localStorage.setItem("isActive",json.user.isActive);
-            console.log(localStorage.getItem("token"));
+        
+            Cookies.set('token', json.token);
+            Cookies.set('userName', json.user.userName);
+            Cookies.set('FirstName', json.user.FirstName);
+            Cookies.set('lastName', json.user.lastName);
+            Cookies.set('email', json.user.email);
+            Cookies.set('role', json.user.role);
+            Cookies.set('isActive', json.user.isActive);
+            Cookies.set('id', json.user._id);
             window.location.reload();
+            
         } catch (err) {
             alert('Oops! Failed to connect to the API.');
         }
