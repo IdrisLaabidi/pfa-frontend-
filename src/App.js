@@ -5,6 +5,10 @@ import './Themes/Themes'
 import HomePage from "./pages/dashboard/dashboardPage";
 import LoginPage from "./pages/login/loginPage";
 import RegisterPage from "./pages/register/registerPage";
+import Test from "./test";
+import Layout from "./components/layout/layout";
+
+
 import Chat from "./pages/Chat/Chat";
 
 function App() {

@@ -1,6 +1,4 @@
-*{
-    font-family: var(--fonts-primary);
-}
+
 .dividerContainer{
     width : 90%;
     display: flex;

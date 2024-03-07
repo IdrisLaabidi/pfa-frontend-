@@ -1,6 +1,7 @@
 const themes = {
   colors: {
-  chat: '#FFFFFF',
+  background: '#08639C',
+  primary: '#FFFFFF',
   primaryBlue:'#08639C',
   primary : '#FFFFFF',
   buttons:'#1F2733',
@@ -33,4 +34,4 @@ function setCSSVariables(theme) {
   });
 }
 
-export default setCSSVariables(themes);
+setCSSVariables(themes);
