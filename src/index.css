@@ -8,3 +8,7 @@ body{
 *{
   font-family: var(--fonts-primary);
 }
+.App{
+  padding: 0px;
+  margin: 0px;
+}

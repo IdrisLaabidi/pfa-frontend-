@@ -13,7 +13,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 25px;
+    gap: 10px;
 }
 .image{
     width: 925px;
@@ -31,4 +31,15 @@ figure{
     align-items: center;
     justify-content: center;
     margin: auto;
+}
+.signInButton{
+    height: 50px;
+    width: 90%;
+    border : solid 1px var(--color-buttons);
+    color : var(--color-buttons);
+    border-radius: 8px;
+    background-color: var(--color-primary);
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
 }
