@@ -19,6 +19,7 @@ function App() {
           <Route index element={<LoginPage/>}/>
           <Route path="/Register" element={<RegisterPage />}/>
           <Route path="/Home" element={ <Layout path={'/projects'} children={<HomePage/>} title={'home page'} /> } />
+          <Route path="/Tasks" element={ <Layout path={'/tasks'} children={<HomePage/>} title={'tasks'} /> } />
           <Route path="/test" element={ <Test/>}/>
         </Routes>
       </BrowserRouter>
