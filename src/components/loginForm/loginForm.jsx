@@ -35,7 +35,8 @@ const LoginForm = () => {
                 navigate('/Home',{state : {auth : json}})
             }
         }catch(err){
-            alert('oops faild to connect to the api')
+            
+            console.log(err)
         }
     }
 
