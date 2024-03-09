@@ -9,50 +9,23 @@ import pwdIcon from '../../assets/password-icon.svg'
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router'
+import useRegister from '../../hooks/useRegister'
 
 
 const RegisterForm = () => {
 
     const navigate = useNavigate()
-
     const[email,setEmail] = useState("")
     const[password,setPassword] = useState("")
-    const[confirmPwd,setConfirmPdw] = useState("") //for password confirmation field
-    const[fname,setFname] = useState("") //first name
-    const[lname,setLname] = useState("") //first name
+    const[confirmPwd,setConfirmPdw] = useState("") 
+    const[fname,setFname] = useState("") 
+    const[lname,setLname] = useState("") 
     const[role,setRole] = useState("member")
+    const {register,error} = useRegister();
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        let userName = fname +'_'+lname
-        let firstName = fname
-        let lastName = lname
-        const user = {email ,userName ,firstName , lastName,password ,role}
-
-        if(password !== confirmPwd){
-            alert('confirm password')
-        }
-        try{
-            const response = await fetch('http://localhost:4000/api/auth/createuser',{
-                method : 'POST',
-                body : JSON.stringify(user),
-                headers : {
-                    'Content-Type' : 'application/json'
-                }
-            })
-            const json = await response.json()
-
-            if(!response.ok){
-                alert('Something wrong registration unsuccessful!please try again')
-            }
-            if(response.ok){
-                console.log("user added" , json)
-                navigate('/Home', { state: { user: json } })
-            }
-        }catch(err){
-            alert('oops faild to connect to the api')
-        }
-
+        register(fname, lname, email, role, password, confirmPwd);
     }
 
     return ( 

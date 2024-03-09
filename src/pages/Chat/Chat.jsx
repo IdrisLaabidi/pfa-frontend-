@@ -14,7 +14,7 @@ const Chat = () => {
     const [message , setMessage] = useState('');
     const [messages , setMessages] = useState([]);
     const messageAreaRef = useRef();
-    const userId = Cookies.get('id');
+    const userId = Cookies.get('user_id');
     const sendMessage = ()=>{
         if(message!== ''){
             const messageObj = {

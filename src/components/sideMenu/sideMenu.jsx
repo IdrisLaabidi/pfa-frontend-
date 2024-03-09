@@ -14,26 +14,33 @@ import profile from '../../assets/profile-icon.svg'
 import chat from '../../assets/chat-icon.svg'
 
 import { useNavigate } from 'react-router-dom'
+import Cookies from 'js-cookie';
 
-const SideMenu = ( {path} ) => {
+const SideMenu = ( {path,user} ) => {
 
     const navigate = useNavigate()
 
+    const handleLogOut = () => {
+        Cookies.remove("token")
+        localStorage.removeItem("user_id")
+        navigate('/login')
+    }
+
     const menuItems = [
-        {text : "Projects" , icon: project , path:"/projects"},
-        {text : "Tasks", icon: tasks, path:"/tasks"},
-        {text :  "Chat", icon: chat, path:"/chat"},
-        {text :  "Meet", icon: meet, path:"/meet"},
-        {text : "Profile" , icon: profile, path:"/profile"},
-        {text :  "Leave", icon: leave, path:"/leave"},
-        {text :  "Settings", icon: setting, path:"/setting"} ];
+        {key: 1 ,text : "Projects" , icon: project , path:"/projects"},
+        {key: 2 ,text : "Tasks", icon: tasks, path:"/tasks"},
+        {key: 3 ,text :  "Chat", icon: chat, path:"/chat"},
+        {key: 4 ,text :  "Meet", icon: meet, path:"/meet"},
+        {key: 5 ,text : "Profile" , icon: profile, path:"/profile"},
+        {key: 6 ,text :  "Leave", icon: leave, path:"/leave"},
+        {key: 7 ,text :  "Settings", icon: setting, path:"/setting"} ];
 
     return ( 
         <aside className={styles.SideMenu}>
             <img className={styles.logo} src={logo} alt="logo"  />
             <CreateButton/>
-            {menuItems.map((item,index) => <ListItem key={index} icon={item.icon} text={item.text} active={item.path === path} onClick={()=>{navigate(item.path);window.location.reload()}} /> )} 
-            <button className={styles.logoutButton} onClick={()=>navigate('/')}>
+            {menuItems.map(item => <ListItem icon={item.icon} text={item.text} active={item.path === path} key={item.key} onClick={()=>navigate(item.path,{state:{user:user}})} /> )} 
+            <button className={styles.logoutButton} onClick={handleLogOut}>
                 <img className={styles.icone} src={logout} alt='icon2'/>
                 <span className={styles.texte}>Logout</span>
             </button>
