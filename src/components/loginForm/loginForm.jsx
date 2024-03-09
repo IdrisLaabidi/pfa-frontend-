@@ -34,6 +34,7 @@ const LoginForm = () => {
                 console.log("user logged in" , json)
                 localStorage.setItem("user_id",json.user._id)
                 navigate('/Home', { state: { user: json } })
+                //navigate('/Home')
             }
             
         } catch (err) {

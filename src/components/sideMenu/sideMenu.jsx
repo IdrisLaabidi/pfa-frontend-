@@ -14,10 +14,17 @@ import profile from '../../assets/profile-icon.svg'
 import chat from '../../assets/chat-icon.svg'
 
 import { useNavigate } from 'react-router-dom'
+import Cookies from 'js-cookie';
 
 const SideMenu = ( {path} ) => {
 
     const navigate = useNavigate()
+
+    const handleLogOut = () => {
+        Cookies.remove("token")
+        localStorage.removeItem("user_id")
+        navigate('/login')
+    }
 
     const menuItems = [
         {key: 1 ,text : "Projects" , icon: project , path:"/projects"},
@@ -33,7 +40,7 @@ const SideMenu = ( {path} ) => {
             <img className={styles.logo} src={logo} alt="logo"  />
             <CreateButton/>
             {menuItems.map(item => <ListItem icon={item.icon} text={item.text} active={item.path === path} key={item.key} onClick={()=>navigate(item.path)} /> )} 
-            <button className={styles.logoutButton} onClick={()=>navigate('/')}>
+            <button className={styles.logoutButton} onClick={handleLogOut}>
                 <img className={styles.icone} src={logout} alt='icon2'/>
                 <span className={styles.texte}>Logout</span>
             </button>
