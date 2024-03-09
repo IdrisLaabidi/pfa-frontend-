@@ -18,9 +18,9 @@ function App() {
         <Routes>
           <Route path="/login" element={<LoginPage/>}/>
           <Route path="/Register" element={<RegisterPage />}/>
-          <Route index path="/Home" element={ <Layout path={'/projects'} children={<HomePage/>} title={'home page'} /> } />
+          <Route index  element={ <Layout path={'/projects'} children={<HomePage/>} title={'home page'} /> } />
           <Route path="/Tasks" element={ <Layout path={'/tasks'} children={<HomePage/>} title={'tasks'} /> } />
-          <Route path="/test" element={ <Test/>}/>
+          <Route path="/chat" element={ <Layout path={'/chat'} children={<Test/>} title={'Chat'} />}/>
         </Routes>
       </BrowserRouter>
     </div>
