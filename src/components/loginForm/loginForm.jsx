@@ -4,8 +4,7 @@ import emailIcon from '../../assets/email-icon.svg'
 import pwdIcon from '../../assets/password-icon.svg'
 import styles from './loginForm.module.css'
 import { useNavigate } from "react-router"
-import Cookies from 'js-cookie'
-import axios from "axios"
+
 
 const LoginForm = () => {
 
@@ -23,20 +22,19 @@ const LoginForm = () => {
                 body: JSON.stringify(user),
                 headers: {
                     'Content-Type': 'application/json'
-                }
+                },
+                credentials : "include"
             });
             const json = await response.json();
             
-            if (!response.ok) {
-                
-                const errorMessage = json.message || 'Login failed! Please try again.';
-                alert(errorMessage);
-                return;
+            if(!response.ok){
+                alert('Login failed !please try again')
             }
-        
-            Cookies.set('token', json.token);
-            Cookies.set('id', json.user._id);
-            navigate('/home')
+            if(response.ok){
+                console.log("user logged in" , json)
+                localStorage.setItem("user_id",json.user._id)
+                navigate('/Home', { state: { user: json } })
+            }
             
         } catch (err) {
             alert('Oops! Failed to connect to the API.');
