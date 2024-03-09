@@ -19,6 +19,7 @@ const LoginForm = () => {
         try{
             const response = await fetch('http://localhost:4000/api/auth/login',{
                 method : 'POST',
+                credentials: 'include',
                 body : JSON.stringify(user),
                 headers : {
                     'Content-Type' : 'application/json'
@@ -32,6 +33,7 @@ const LoginForm = () => {
             if(response.ok){
                 console.log("user logged in" , json)
                 localStorage.setItem("token",json.token)
+                console.log(json.token)
                 navigate('/Home',{state : {auth : json}})
             }
         }catch(err){
