@@ -44,6 +44,7 @@ const RegisterForm = () => {
             const json = await response.json()
 
             if(!response.ok){
+                console.log(response)
                 alert('Registration unsuccessful!please try again')
             }
             if(response.ok){
