@@ -5,6 +5,7 @@ import pwdIcon from '../../assets/password-icon.svg'
 import styles from './loginForm.module.css'
 import { useNavigate } from "react-router"
 
+
 const LoginForm = () => {
 
     const navigate = useNavigate()
@@ -15,28 +16,31 @@ const LoginForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const user = {email ,password }
-
-        try{
+        try {
             const response = await fetch('http://localhost:4000/api/auth/login',{
-                method : 'POST',
-                body : JSON.stringify(user),
-                headers : {
-                    'Content-Type' : 'application/json'
-                }
-            })
-            const json = await response.json()
-
+                method: 'POST',
+                body: JSON.stringify(user),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials : "include"
+            });
+            const json = await response.json();
+            
             if(!response.ok){
                 alert('Login failed !please try again')
             }
             if(response.ok){
                 console.log("user logged in" , json)
-                localStorage.setItem("token",json.token)
-                navigate('/Home',{state : {auth : json}})
+                localStorage.setItem("user_id",json.user._id)
+                navigate('/', { state: { user: json.user } })
+                //navigate('/Home')
             }
-        }catch(err){
-            alert('oops faild to connect to the api')
+            
+        } catch (err) {
+            alert('Oops! Failed to connect to the API.');
         }
+          
     }
 
     return ( 
