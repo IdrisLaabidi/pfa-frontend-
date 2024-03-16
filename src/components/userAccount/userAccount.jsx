@@ -6,7 +6,7 @@ const UserAccount = ({user}) => {
             <div className={styles.MainDiv}>
                 <img className={styles.ProfileImage} src={Logo} alt='profile img'/>
                 <div>
-                    <p className={styles.Username}>{user.userName}</p>
+                    <p className={styles.Username}>{user.firstName +' '+ user.lastName}</p>
                     <p className={styles.UserRole}>{user.role}</p>
                 </div>
             </div>

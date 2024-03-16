@@ -1,3 +1,4 @@
+//imports
 import { useState,useEffect } from "react"
 import { useLocation,useNavigate } from "react-router"
 import Cookies from "js-cookie"
@@ -7,10 +8,16 @@ const useConnect = () => {
     const {state} = useLocation()
     const navigate = useNavigate()
     const [user, setUser] = useState("")
+<<<<<<< HEAD
     const [error,setError] = useState(null)
     const [isPending,setIsPending] = useState(true)
     const [token,setToken]=useState("")
+=======
+    const [error,setError] = useState(null)//used to set the error text on the page
+    const [isPending,setIsPending] = useState(true)//used to set the loading animation
+>>>>>>> idris
 
+   //a function to fetch the user from the db using an id and a token 
    const getUser = async (id,token) => {
      try {
         const response = await fetch(
@@ -41,21 +48,29 @@ const useConnect = () => {
 
   useEffect(() => {
     try {
+      //check if we got a user object from an other route buy using navigate
       const user_data = state.user
       if(user_data){
+        setIsPending(false)
         setUser(user_data)
         setToken(Cookies.get("token"))
         console.log(user_data)
       }
       setToken(Cookies.get("token"))
     } catch (error) {
+<<<<<<< HEAD
       setToken(Cookies.get("token"))
+=======
+      //if there is no user recieved in this route we fetch the user from the db using the cookie and the stored id
+      const token = Cookies.get("token")
+>>>>>>> idris
       const id = localStorage.getItem("user_id")
       if (token && id){
         console.log("token",token ,"id", id)
         getUser(id,token)
       }
       if (!token || !id){
+        //if the cookie expired or the id is unavailable we quit the route to the login 
         alert("session expired")
         Cookies.remove(token)
         localStorage.removeItem("user_id")

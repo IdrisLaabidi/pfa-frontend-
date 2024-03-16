@@ -21,7 +21,7 @@ const RegisterPage = () => {
                     <OrDivider></OrDivider>
                     <button 
                         className={styles.signInButton}
-                        onClick={()=>navigator('/')}
+                        onClick={()=>navigator('/login')}
                     >Sign In</button>
                 </div>
                 <figure>
