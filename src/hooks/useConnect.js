@@ -8,14 +8,8 @@ const useConnect = () => {
     const {state} = useLocation()
     const navigate = useNavigate()
     const [user, setUser] = useState("")
-<<<<<<< HEAD
-    const [error,setError] = useState(null)
-    const [isPending,setIsPending] = useState(true)
-    const [token,setToken]=useState("")
-=======
     const [error,setError] = useState(null)//used to set the error text on the page
     const [isPending,setIsPending] = useState(true)//used to set the loading animation
->>>>>>> idris
 
    //a function to fetch the user from the db using an id and a token 
    const getUser = async (id,token) => {
@@ -58,12 +52,8 @@ const useConnect = () => {
       }
       setToken(Cookies.get("token"))
     } catch (error) {
-<<<<<<< HEAD
-      setToken(Cookies.get("token"))
-=======
       //if there is no user recieved in this route we fetch the user from the db using the cookie and the stored id
       const token = Cookies.get("token")
->>>>>>> idris
       const id = localStorage.getItem("user_id")
       if (token && id){
         console.log("token",token ,"id", id)
