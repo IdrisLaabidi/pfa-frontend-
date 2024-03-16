@@ -9,6 +9,7 @@ const useConnect = () => {
     const [user, setUser] = useState("")
     const [error,setError] = useState(null)
     const [isPending,setIsPending] = useState(true)
+    const [token,setToken]=useState("")
 
    const getUser = async (id,token) => {
      try {
@@ -43,10 +44,12 @@ const useConnect = () => {
       const user_data = state.user
       if(user_data){
         setUser(user_data)
+        setToken(Cookies.get("token"))
         console.log(user_data)
       }
+      setToken(Cookies.get("token"))
     } catch (error) {
-      const token = Cookies.get("token")
+      setToken(Cookies.get("token"))
       const id = localStorage.getItem("user_id")
       if (token && id){
         console.log("token",token ,"id", id)
@@ -58,10 +61,9 @@ const useConnect = () => {
         localStorage.removeItem("user_id")
         navigate('/login')
       }
-      
     }
   }, []);
-  return [user, isPending,error]
+  return [user, isPending,error,token]
 }
 
 export default useConnect;
