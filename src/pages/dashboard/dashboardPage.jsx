@@ -18,6 +18,3 @@ const HomePage = ({ token }) => {
 }
 
 export default HomePage;
-
-/*<Project children={[project.name, project.startDate, project.dueDate]}/> 
-<div>{project.name}</div>*/

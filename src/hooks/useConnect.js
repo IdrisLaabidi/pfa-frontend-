@@ -47,10 +47,8 @@ const useConnect = () => {
       if(user_data){
         setIsPending(false)
         setUser(user_data)
-        setToken(Cookies.get("token"))
         console.log(user_data)
       }
-      setToken(Cookies.get("token"))
     } catch (error) {
       //if there is no user recieved in this route we fetch the user from the db using the cookie and the stored id
       const token = Cookies.get("token")
@@ -68,7 +66,7 @@ const useConnect = () => {
       }
     }
   }, []);
-  return [user, isPending,error,token]
+  return [user, isPending,error]
 }
 
 export default useConnect;

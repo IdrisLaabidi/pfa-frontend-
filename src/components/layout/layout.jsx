@@ -15,12 +15,11 @@ import useConnect from "../../hooks/useConnect";
         <div className={styles.layout}>
             <SideMenu path={path} user={user}></SideMenu>
             <div className={styles.content}>
-                <NavBar title={title} user={user}></NavBar>
+                <NavBar title={title} user={{userName : user['userName'] ,role : user['role']}}></NavBar>
                 <div>{children} </div>
                 { isPending && <div>Loading...</div>}
                 { error && <div>{error}</div>}
             </div>
-            {console.log(user)}
         </div>
      );
   }
