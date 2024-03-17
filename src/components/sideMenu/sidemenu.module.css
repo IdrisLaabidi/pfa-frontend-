@@ -1,6 +1,3 @@
-*{
-  font-family: var(--fonts-primary);
-}
 .SideMenu {
   display: flex;
   flex-direction: column;

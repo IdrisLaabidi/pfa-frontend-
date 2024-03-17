@@ -1,15 +1,12 @@
-import { useLocation} from "react-router";
+import Header from "./components/projectHeader/projectHeader";
+
 
 
 const Test = () => {
-    const {state} = useLocation()
-
-    const fonc = () => {
-        console.log(state.user)
-    }
-    return ( 
-        <button onClick={fonc}>test</button>
-     );
+    <div>this is a test</div>
 }
  
 export default Test;
+
+/*<button onClick={fonc}>test</button>
+<NewTask />*/

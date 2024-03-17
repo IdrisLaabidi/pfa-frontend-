@@ -38,7 +38,8 @@ const RegisterForm = () => {
                 body : JSON.stringify(user),
                 headers : {
                     'Content-Type' : 'application/json'
-                }
+                },
+                credentials : "include"
             })
             const json = await response.json()
 
@@ -47,7 +48,8 @@ const RegisterForm = () => {
             }
             if(response.ok){
                 console.log("user added" , json)
-                navigate('/test', { state: { user: json } })
+                localStorage.setItem("user_id",json._id)
+                navigate('/', { state: { user: json } })
             }
         }catch(err){
             alert('oops faild to connect to the api')

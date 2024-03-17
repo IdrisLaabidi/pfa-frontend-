@@ -39,7 +39,12 @@ const SideMenu = ( {path,user} ) => {
         <aside className={styles.SideMenu}>
             <img className={styles.logo} src={logo} alt="logo"  />
             <CreateButton/>
-            {menuItems.map(item => <ListItem icon={item.icon} text={item.text} active={item.path === path} key={item.key} onClick={()=>navigate(item.path,{state:{user:user}})} /> )} 
+            {menuItems.map(item => <ListItem icon={item.icon} 
+                text={item.text} 
+                active={item.path === path} 
+                key={item.key} 
+                onClick={()=>navigate(item.path,{state:{user:user}})} 
+            /> )} 
             <button className={styles.logoutButton} onClick={handleLogOut}>
                 <img className={styles.icone} src={logout} alt='icon2'/>
                 <span className={styles.texte}>Logout</span>
