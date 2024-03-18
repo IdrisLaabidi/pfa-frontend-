@@ -4,7 +4,7 @@ import Project from '../../components/project/project';
 import styles from './dashboardPage.module.css'
 
 const ProjectPage = ({ token }) => {
-  const { data: projects, isPending, error } = useFetch('http://localhost:4000/api/projects', token);
+  const { data: projects, isPending, error } = useFetch('http://localhost:4000/api/project', token);
 
   return (
     <div className={styles.allProjects}>

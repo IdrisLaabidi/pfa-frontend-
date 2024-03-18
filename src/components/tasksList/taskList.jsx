@@ -19,12 +19,14 @@ const TaskList = ( {title,type,tasks} ) => {
         <div className={styles.container}>
             <ListHeader title={title} handleClick={hideTasks} />
             {toggleTasks && <div className={styles.list}>
-                <TaskCard task={{title : "create the front en design ",dueDate:"22/10/2024" ,priority : "low"}} />
-                <TaskCard task={{title : "create the front en design ",dueDate:"22/10/2024" ,priority : "high"}} />
-                <TaskCard task={{title : "create the front en design ",dueDate:"22/10/2024" ,priority : "medium"}} />
-            </div>}      
+                {tasks.filter((task) => task.status === type).map(task => (<TaskCard task={task} key={task._id}/>))}
+            </div>}  
         </div>
      );
 }
  
 export default TaskList
+
+/*<TaskCard task={{title : "create the front en design ",dueDate:"22/10/2024" ,priority : "low"}} />
+                <TaskCard task={{title : "create the front en design ",dueDate:"22/10/2024" ,priority : "high"}} />
+                <TaskCard task={{title : "create the front en design ",dueDate:"22/10/2024" ,priority : "medium"}} />*/

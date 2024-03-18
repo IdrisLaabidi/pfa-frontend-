@@ -8,7 +8,7 @@ const Header = ({project}) => {
 
     const [showDetails,setShowDetails]=useState(false)
 
-    const handleClick = (status) => {
+    /*const handleClick = (status) => {
         setShowDetails(status)
         const element = document.querySelector('.tasksList_list__xcqmU'); // Replace with your actual class name
         if (element) {
@@ -24,7 +24,7 @@ const Header = ({project}) => {
         } else {
             console.error('Element not found. Check if the class name is correct.');
         }
-    }
+    }*/
 
     return ( <>
         
@@ -34,7 +34,7 @@ const Header = ({project}) => {
                 <div className={styles.flex2}>
                     <span className={styles.text2}>{project.name}</span>
                     <button className={styles.dropDown} onClick={() => {setShowDetails(true)}}>
-                        <img src={dropDown} className={styles.icon}/>
+                        <img src={dropDown} className={styles.icon} alt='icon' />
                     </button>
                 </div>
                 <NewTask />
@@ -47,7 +47,7 @@ const Header = ({project}) => {
                 <div className={styles.flex2}>
                     <span className={styles.text2}>{project.name}</span>
                     <button className={styles.dropDown} onClick={() => {setShowDetails(false)}}>
-                        <img src={dropDown} className={`${styles.icon} ${styles.iconFlipped}`} />
+                        <img src={dropDown} className={`${styles.icon} ${styles.iconFlipped}`}  alt='icon' />
                     </button>
                 </div>
                 <NewTask />

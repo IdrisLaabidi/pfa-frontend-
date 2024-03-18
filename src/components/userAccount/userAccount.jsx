@@ -10,7 +10,7 @@ const UserAccount = ({user}) => {
                     <p className={styles.UserRole}>{user.role}</p>
                 </div>
             </div>
-        
+       
      );
 }
  
