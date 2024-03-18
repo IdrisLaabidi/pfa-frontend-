@@ -1,0 +1,21 @@
+.Projet {
+    background-color: #ffffff; /* Changez la couleur de fond en blanc */
+    border: 1px solid #e0e0e0; /* Ajoutez une bordure grise claire */
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 90%; /* Changez la largeur en auto pour s'adapter au contenu */
+    box-shadow: none; /* Supprimez l'ombre de la boîte */
+}
+
+.Name {
+    font-size: 18px; /* Réduisez la taille de la police */
+    color: #333333;
+    margin-bottom: 10px;
+}
+
+.Details {
+    font-size: 14px; /* Réduisez la taille de la police des détails */
+    color: #666666;
+    margin-bottom: 5px;
+}

@@ -64,7 +64,6 @@ const useConnect = () => {
         localStorage.removeItem("user_id")
         navigate('/login')
       }
-      
     }
   }, []);
   return [user, isPending,error]
