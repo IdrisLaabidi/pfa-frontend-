@@ -27,8 +27,8 @@
   }
   
   .messageContent {
-    font-size: 1em;
-    color: #333; /* Dark color for message text */
+    font-size: 20px;
+    color: #333; 
   }
   
   .sentAt {

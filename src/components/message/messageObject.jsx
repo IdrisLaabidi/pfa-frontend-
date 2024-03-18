@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import styles from './messageObject.module.css'
 const MessageObject = ({message}) => {
   const formattedTime = new Date(message.sentAt).toLocaleTimeString([], {
@@ -8,7 +7,7 @@ const MessageObject = ({message}) => {
     hour12 : true,
 
   });
-  if(message.sender == 'self' ){
+  if(message.sender === 'self' ){
   return (
     
     <div 

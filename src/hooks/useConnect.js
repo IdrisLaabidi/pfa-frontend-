@@ -44,7 +44,7 @@ const useConnect = () => {
       if(user_data){
         setIsPending(false)
         setUser(user_data)
-        console.log(user_data)
+        
       }
     } catch (error) {
       const token = Cookies.get("token")

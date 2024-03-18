@@ -10,10 +10,8 @@ const HomePage = () => {
 
   
   const logout =()=> {
-    Cookies.remove("toke0n") ;
+    Cookies.remove("token") ;
     navigate('/Login');
-    window.location.reload();
-    
   }
   return (
     <div>

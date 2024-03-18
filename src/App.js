@@ -10,7 +10,7 @@ import Layout from "./components/layout/layout";
 import Chat from './pages/Chat/Chat'
 import Cookies from "js-cookie";
 import ErrorPage from './pages/Error/errorPage';
-
+import ProfilePage from "./pages/profile/profilePage";
 
 function App() {
   const token = Cookies.get('token');
@@ -24,6 +24,7 @@ function App() {
             <Route path="/regsiter" element={ <Layout path={'/home'} children={<HomePage/>} title={'home page'} /> } />
             <Route path="/Home" element={ <Layout path={'/projects'} children={<HomePage/>} title={'home page'} /> } />
             <Route path="/chat" element={ <Layout path={'/chat'} children={<Chat/>} title={'test'} /> } />
+            <Route path="/profile" element={ <Layout path={'/profile'} children={<ProfilePage/>} title={'profile'} /> } />
             <Route path="*" element={<ErrorPage />} />
           </Routes>
         ):(
