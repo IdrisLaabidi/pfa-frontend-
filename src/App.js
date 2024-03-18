@@ -2,7 +2,7 @@ import { BrowserRouter , Routes, Route, json } from "react-router-dom"; // impor
 //import the theme variables 
 import './Themes/Themes'
 //import pages 
-import HomePage from "./pages/dashboard/dashboardPage";
+import ProjectPage from "./pages/dashboard/dashboardPage";
 import LoginPage from "./pages/login/loginPage";
 import RegisterPage from "./pages/register/registerPage";
 import Test from "./test";
@@ -20,7 +20,7 @@ function App() {
           
           <Route path="/login" element={<LoginPage/>}/>
           <Route path="/Register" element={<RegisterPage />}/>
-          <Route index  element={ <Layout path={'/projects'} children={<HomePage/>} title={'home page'} /> } />
+          <Route index  element={ <Layout path={'/projects'} children={<ProjectPage/>} title={'home page'} /> } />
           <Route path="/Tasks" element={ <Layout path={'/tasks'} children={<Tasks/>} title={'tasks'} /> } />
           <Route path="/chat" element={ <Layout path={'/chat'} children={<Test/>} title={'Chat'} />}/>
         </Routes>

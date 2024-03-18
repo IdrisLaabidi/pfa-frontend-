@@ -1,20 +1,21 @@
 .Projet {
-    background-color: #f0f0f0; /* Couleur de fond du projet */
-    border-radius: 10px; /* Bord arrondi */
-    padding: 20px; /* Espace intérieur */
-    margin-bottom: 20px; /* Espace extérieur */
-    width: 400px; /* Largeur du projet */
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Ombre autour du projet */
+    background-color: #ffffff; /* Changez la couleur de fond en blanc */
+    border: 1px solid #e0e0e0; /* Ajoutez une bordure grise claire */
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 90%; /* Changez la largeur en auto pour s'adapter au contenu */
+    box-shadow: none; /* Supprimez l'ombre de la boîte */
 }
 
 .Name {
-    font-size: 24px; /* Taille de la police du nom du projet */
-    color: #333333; /* Couleur du nom du projet */
-    margin-bottom: 10px; /* Espace sous le nom du projet */
+    font-size: 18px; /* Réduisez la taille de la police */
+    color: #333333;
+    margin-bottom: 10px;
 }
 
 .Details {
-    font-size: 16px; /* Taille de la police des détails */
-    color: #666666; /* Couleur des détails */
-    margin-bottom: 5px; /* Espace sous chaque détail */
+    font-size: 14px; /* Réduisez la taille de la police des détails */
+    color: #666666;
+    margin-bottom: 5px;
 }
