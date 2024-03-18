@@ -8,6 +8,24 @@ const Header = ({project}) => {
 
     const [showDetails,setShowDetails]=useState(false)
 
+    const handleClick = (status) => {
+        setShowDetails(status)
+        const element = document.querySelector('.tasksList_list__xcqmU'); // Replace with your actual class name
+        if (element) {
+            // Add or remove classes as needed
+            if(status){
+                element.classList.remove('TaskListHeight2'); // Remove the old class// Add a new class
+                element.classList.add('TaskListHeight1'); 
+            }else{
+                element.classList.remove('TaskListHeight'); // Remove the old class// Add a new class
+                element.classList.add('TaskListHeight2'); // Add a new class
+            }
+            
+        } else {
+            console.error('Element not found. Check if the class name is correct.');
+        }
+    }
+
     return ( <>
         
         {!showDetails && <div className={styles.container}>

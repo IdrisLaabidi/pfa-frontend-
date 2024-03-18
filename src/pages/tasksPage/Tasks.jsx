@@ -10,7 +10,7 @@ const Tasks = () => {
     }
 
     return ( 
-        <>
+        <div className={styles.taskpage}>
             <Header project={project}/>
             <div className={styles.taskContainer}> 
                 <TaskList title="Todo" type="pending"/>
@@ -18,7 +18,7 @@ const Tasks = () => {
                 <TaskList title="Completed" type="completed"/>
                 <TaskList title="Overdue" type="overdue"/>
             </div>
-        </>
+        </div>
      );
 }
  

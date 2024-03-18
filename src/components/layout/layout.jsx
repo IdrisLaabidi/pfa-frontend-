@@ -20,7 +20,6 @@ import useConnect from "../../hooks/useConnect";
                 { isPending && <div>Loading...</div>}
                 { error && <div>{error}</div>}
             </div>
-            {console.log(user)}
         </div>
      );
   }
