@@ -13,11 +13,9 @@ const ProjectPage = ({ token }) => {
       {projects && projects.map(project => (
         <Project children={project}/>
       ))}
+      {console.log(token)}
     </div>
   );
 }
 
 export default ProjectPage;
-
-/*<Project children={[project.name, project.startDate, project.dueDate]}/> 
-<div>{project.name}</div>*/

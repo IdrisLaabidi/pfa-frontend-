@@ -17,7 +17,6 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          
           <Route path="/login" element={<LoginPage/>}/>
           <Route path="/Register" element={<RegisterPage />}/>
           <Route index  element={ <Layout path={'/projects'} children={<ProjectPage/>} title={'home page'} /> } />
