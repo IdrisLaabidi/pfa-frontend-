@@ -24,10 +24,9 @@ const RegisterForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        let userName = fname +'_'+lname
         let firstName = fname
         let lastName = lname
-        const user = {email ,userName ,firstName , lastName,password ,role}
+        const user = {email ,firstName, lastName, password ,role}
 
         if(password !== confirmPwd){
             alert('confirm password')

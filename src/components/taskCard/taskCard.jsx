@@ -3,6 +3,7 @@ import icon from '../../assets/up-arrow-icon.svg'
 import {format} from 'date-fns';
 import { useState } from 'react';
 import Modal from '../modal/Modal'
+import TaskDetails from '../taskDetails/taskDetails';
 
 const TaskCard = ({task}) => {
 
@@ -47,7 +48,7 @@ const TaskCard = ({task}) => {
             </div>}
 
             <Modal open={isOpen} onClose={() => setIsOpen(false)} title={task.title}>
-                Fancy Modal
+                <TaskDetails task={task}/>
             </Modal>
     </>);
 }
