@@ -8,6 +8,7 @@ import RegisterPage from "./pages/register/registerPage";
 import Test from "./test";
 import Layout from "./components/layout/layout";
 import Cookies from "js-cookie";
+import LeavePage from "./pages/leave/LeavePage";
 
 
 
@@ -22,6 +23,7 @@ function App() {
           <Route index  element={ <Layout path={'/projects'} children={<HomePage/>} title={'Projects'} /> } />
           <Route path="/Tasks" element={ <Layout path={'/tasks'} children={<HomePage token={Cookies.get('token')}/>} title={'Tasks'} /> } />
           <Route path="/chat" element={ <Layout path={'/chat'} children={<Test/>} title={'Chat'} />}/>
+          <Route path="/leave" element={ <Layout path={'/leave'} children={<LeavePage/>} title={'Leave'} />}/>
         </Routes>
       </BrowserRouter>
     </div>
