@@ -1,5 +1,6 @@
 import InputField from '../../components/inputField/inputField'
 import DropDownList from '../../components/dropDownList/DropDownList'; 
+import Spinner from '../../components/spinner/spinner';
 import emailIcon from '../../assets/email-icon.svg';
 import styles from './profilePage.module.css';
 import { useEffect, useState  } from 'react';
@@ -10,7 +11,6 @@ import useFetch from '../../hooks/useFetch';
 const ProfilePage = () => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
-    const [userName, setUserName] = useState("");
     const [email, setEmail] = useState("");
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
@@ -19,8 +19,20 @@ const ProfilePage = () => {
 
     const Navigate = useNavigate();
     const userId = localStorage.getItem('user_id');
-    const token = Cookies.get('token')
-    const {data:user,isPending,error} = useFetch(`http://localhost:4000/api/auth/users/${userId}`,token);    
+    const {data:user,isPending,error} = useFetch(`http://localhost:4000/api/auth/users/${userId}`);
+    if (error){
+        throw new Error(error);
+    }
+    //fill the inputs with users data after fetching them
+    useEffect(()=>{
+        if(!isPending && user){
+            const userData = user.user
+            setFirstName(userData.firstName || "");
+            setLastName(userData.lastName || "");
+            setEmail(userData.email || "");
+        }
+        
+    },[user,isPending])
     const handleProfilePictureChange = (e) => {
         /*  This function handles the change event of a file input field and updates
             the profilePicture state with the selected file's data URL
@@ -37,28 +49,28 @@ const ProfilePage = () => {
 
     const saveChangesHandler = async () => {
         try {
-            // Retrieve userId from localStorage
             const userId = localStorage.getItem('user_id');
     
-            // Check if userId is valid
             if (!userId) {
-                throw new Error('User ID is not found');
+                throw new Error('User ID is not found . Please log in again');
             }
-    
+            if (newPassword!== confirmNewPassword){
+                throw new Error('New password does not match . Please check your password again');
+            }
             const token = Cookies.get('token');
+            if (!token){
+                throw new Error('You are not logged in . Please log in again');
+            }
             const updatedUserData = {
                 firstName: firstName !== ''? firstName:user.firstName,
                 lastName: lastName !== '' ? lastName:user.lastName,
-                userName: userName !== '' ? userName:user.userName,
                 email: email !== '' ? email : user.email,
-                
             };
             if (newPassword) {
                 updatedUserData.currentPassword = currentPassword;
                 updatedUserData.password = newPassword;
             }
             const url = `http://localhost:4000/api/auth/users/${userId}`;
-    
             const response = await fetch(url,{
                 method : 'PUT',
                 headers : {
@@ -69,22 +81,32 @@ const ProfilePage = () => {
             });
     
             if (!response.ok) {
-                throw new Error('Failed to update profile');
+                //handle all different server errors based on scenarios status
+                if(response.status === 400){
+                    throw new Error('Invalid request . Please check your informations again');
+                }else if (response.status === 401){
+                    throw new Error('You are not authorized');
+                }else if (response.status === 404){
+                    throw new Error('User not found');
+                }else{
+                    throw new Error('An expected error occured');
+                }
             }
-            console.log('Profile updated successfully');
             // Redirect the user after saving changes
             Cookies.remove('token');
             Navigate('/login');
         } catch (error) {
             // Log and handle the error
-            console.error('Error while saving changes:', error);
-            // Optionally, show an error message to the user
+            alert(error.message);
+            
         }
     };
-    
+   
     return (
+    
         <div className={styles.profilePageContainer}>
-           <div className={styles.profilePictureContainer}>
+            {isPending&& (<Spinner/>)}
+            <div className={styles.profilePictureContainer}>
                 {/* Display profile picture fl mosta9bel */}
                 {profilePicture ? (
                     <img src={profilePicture} alt="Profile" className={styles.profilePicture} />
@@ -119,16 +141,7 @@ const ProfilePage = () => {
                     />
                 </div>
             </div>
-            <div className={styles.inputRow}>
-                <div className={styles.inputContainer}>
-                    <span className={styles.label}>USERNAME</span>
-                    <InputField 
-                        icon={emailIcon} 
-                        type="text"
-                        value={userName}
-                        onChange={(e) => setUserName(e.target.value)}
-                    />
-                </div>
+            <div className={styles.inputRow}> 
                 <div className={styles.inputContainer}>
                     <span className={styles.label}>EMAIL</span>
                     <InputField 
@@ -137,6 +150,9 @@ const ProfilePage = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
+                </div>
+                <div className={styles.inputContainer}>
+                    &nbsp;
                 </div>
             </div>
             <div className={styles.inputContainer}>

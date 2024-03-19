@@ -12,32 +12,21 @@ import Cookies from "js-cookie";
 import ErrorPage from './pages/Error/errorPage';
 import ProfilePage from "./pages/profile/profilePage";
 
+
+
 function App() {
-  const token = Cookies.get('token');
+
   return (
     <div className="App">
       <BrowserRouter>
-        {token? (
-          <Routes>
+        <Routes>
             <Route path="/" element={ <Layout path={'/projects'} children={<HomePage/>} title={'home page'} /> } />
-            <Route path="/login" element={ <Layout path={'/home'} children={<HomePage/>} title={'home page'} /> } />
-            <Route path="/regsiter" element={ <Layout path={'/home'} children={<HomePage/>} title={'home page'} /> } />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
             <Route path="/Home" element={ <Layout path={'/projects'} children={<HomePage/>} title={'home page'} /> } />
             <Route path="/chat" element={ <Layout path={'/chat'} children={<Chat/>} title={'test'} /> } />
             <Route path="/profile" element={ <Layout path={'/profile'} children={<ProfilePage/>} title={'profile'} /> } />
-            <Route path="*" element={<ErrorPage />} />
-          </Routes>
-        ):(
-          <Routes>
-            <Route path="/" element={<LoginPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="*" element={<ErrorPage />} />
-          </Routes>
-        )
-        
-        }
-        
+        </Routes>
       </BrowserRouter>
     </div>
   );
