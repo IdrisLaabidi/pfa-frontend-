@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './project.module.css';
 import {format} from 'date-fns';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 const Project = ({ data }) => {
 
@@ -10,7 +10,7 @@ const Project = ({ data }) => {
     return (
         <div className={styles.Projet} 
         onClick={() => {
-            navigate('/tasks', {state: {Project: data}});
+            navigate('/tasks', { state : { project : data}});
             console.log(data);}}>
             <h2 className={styles.Name}>{data.name}</h2>
             <p className={styles.Details}>{data.description}</p>

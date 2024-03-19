@@ -54,7 +54,6 @@ const useConnect = () => {
       const token = Cookies.get("token")
       const id = localStorage.getItem("user_id")
       if (token && id){
-        console.log("token",token ,"id", id)
         getUser(id,token)
       }
       if (!token || !id){

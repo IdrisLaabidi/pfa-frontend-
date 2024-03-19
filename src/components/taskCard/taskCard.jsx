@@ -47,7 +47,7 @@ const TaskCard = ({task}) => {
                 <span className={styles.text2}>Due date: {format(new Date(task.dueDate), 'dd/MM/yyyy')}</span>
             </div>}
 
-            <Modal open={isOpen} onClose={() => setIsOpen(false)} title={task.title}>
+            <Modal open={isOpen} onClose={() => setIsOpen(false)} title="Details">
                 <TaskDetails task={task}/>
             </Modal>
     </>);

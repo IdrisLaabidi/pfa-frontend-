@@ -2,6 +2,7 @@ import styles from './projectHeader.module.css'
 import dropDown from '../../assets/arrow-drop-down-icon.svg'
 import NewTask from '../newTaskButton/newTask';
 import { useState } from 'react';
+import {format} from 'date-fns'
 
 
 const Header = ({project}) => {
@@ -54,7 +55,7 @@ const Header = ({project}) => {
             </div>
             <div className={styles.flex3}>
                 <span className={styles.text1}> { "Status : " + project.status}</span>
-                <span className={styles.text1}> { "Due Date : " + project.dueDate}</span>
+                <span className={styles.text1}> Due Date :  {format(new Date(project.dueDate), 'dd/MM/yyyy')}</span>
                 <span className={styles.text1}> { "Assigned to : idris laabidi , fathallah youssef , Miri riri ..."} </span>
             </div>
         </div> }

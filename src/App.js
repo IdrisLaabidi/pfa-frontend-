@@ -19,7 +19,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<LoginPage/>}/>
           <Route path="/Register" element={<RegisterPage />}/>
-          <Route index element={ <Layout path={'/project'} children={<ProjectPage/>} title={'projects'} /> } />
+          <Route index element={ <Layout path={'/'} children={<ProjectPage/>} title={'projects'} /> } />
           <Route path="/newProject" element={<Layout path={'/newProject'} children={<NewProjectPage/>} />} />
           <Route path="/Tasks" element={ <Layout path={'/tasks'} children={<Tasks/>} title={'tasks'} /> } />
           <Route path="/chat" element={ <Layout path={'/chat'} children={<Test/>} title={'Chat'} />}/>

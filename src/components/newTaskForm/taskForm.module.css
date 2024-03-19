@@ -1,0 +1,21 @@
+.container{
+    width: 900px;
+    padding: 10px;
+}
+.form{
+    width: inherit;
+    display: flex;
+}
+.divider{
+    width: 1px;
+    height: 500px;
+    background-color: gray;
+}
+.fields{
+   border: 2px solid black;
+    width: 60%;
+}
+.users{
+    border: 2px solid black;
+    width: 40%;
+}

@@ -27,3 +27,8 @@
 .text{
     color: #9095A0;
 }
+.flex2{
+    display: flex;
+    flex-direction: column;
+    
+}
