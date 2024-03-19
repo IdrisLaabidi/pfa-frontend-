@@ -20,3 +20,10 @@
     background: transparent;
     cursor: pointer;
 }
+.title{
+    font-size: 27px;
+    font-weight: bold;
+}
+.text{
+    color: #9095A0;
+}

@@ -12,27 +12,31 @@ import modifyIcon from '../../assets/edit-icon.svg'
 const TaskDetails = ({task}) => {
     return ( <div className={styles.container}>
         <div className={styles.flex}>
-            <span>{task.title}</span>
+            <span className={styles.title}>{task.title}</span>
             <button className={styles.bttn}><img alt='modify' src={modifyIcon} className={styles.icon}/></button>
             <button className={styles.bttn}><img alt='delete' src={deleteIcon} className={styles.icon}/></button>
         </div>
         <div className={styles.flex}>
             <img alt='icon' className={styles.icon} src={priorityIcon} />
-            <span>priority</span>
+            <span className={styles.text}>priority</span>
             <Status status={task.priority}/>
         </div>
         <div className={styles.flex}>
             <img alt='icon' className={styles.icon} src={statusIcon} />
-            <span>status</span>
+            <span className={styles.text}>status</span>
             <Status status={task.status}/>
         </div>
         <div className={styles.flex}>
             <img alt='icon' className={styles.icon} src={dateIcon} />
-            <span>Due date : {format(new Date(task.dueDate), 'dd/MM/yyyy')}</span>
+            <span className={styles.text}>Due date : </span><span>{format(new Date(task.dueDate), 'dd/MM/yyyy')}</span>
         </div>
         <div className={styles.flex}>
             <img alt='icon' className={styles.icon} src={userIcon} />
-            <span>assigned to : idris laabidi , fathallah youssef , Miri riri ...</span>
+            <span className={styles.text}>assigned to : </span><span>idris laabidi , fathallah youssef , Miri riri ...</span>
+        </div>
+        <div>
+            <span className={styles.title}>Description</span>
+            <span>{task.description}</span>
         </div>
     </div> );
 }
