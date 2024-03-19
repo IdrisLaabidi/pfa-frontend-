@@ -1,3 +1,4 @@
+//importing libraries and components
 import React, { useState } from 'react';
 import styles from './newProjectForm.module.css'
 import useFetch from '../../hooks/useFetch';
@@ -11,17 +12,24 @@ import Submit from '../submitButton/submitButton';
 
 
 const NewProjectForm = ({token}) => {
+    
+    //initializing navigate
+    const navigate = useNavigate();
+
     //send form to db
     const [form, setForm] = useState({
-        title: '',
+        name: '',
         description: '',
         startDate: '',
         dueDate: '',
-        collaborators: [],
+        team: [],
+        manager: localStorage.getItem("user_id"),
+
     })
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log('Token: ', token)
         try {
             const response = await fetch('http://localhost:4000/api/projects',{
                 method: 'POST',
@@ -32,28 +40,33 @@ const NewProjectForm = ({token}) => {
                 body: JSON.stringify(form)
             });
             const data = await response.json();
-            console.log(data);
+            if(!response.ok){
+                alert('Registration unsuccessful!please try again')
+            }
+            if(response.ok){
+                console.log("project added" , data)
+                navigate('/')
+            }
         } catch (error) {
             console.error(error);
         }
     }
-    const handleChange = (e) => {
-        setForm({...form, [e.target.name]: e.target.value});
-    }
+
     const handleSelectChange = (selectedOption) => {
-        setForm({...form, collaborators: selectedOption.map(option => option.value)});
+        setForm({...form, team: selectedOption.map(option => option.value)});
     }
-
-
 
     //fetch users from db
     const {data: users, isPending, error} = useFetch('http://localhost:4000/api/auth/users', token)
+
     //store users in an array
     const userlist = users? users.map(user => (
        {value:user, label: `${user.firstName} ${user.lastName}`}
     )) : [];
-    console.log(users)
-    //custom style for <Select/>
+    /*console.log all users fetched from db
+    console.log(users)*/
+
+    //custom style for <Select/> component
     const customStyles = {
         control: (provided) => ({
             ...provided,
@@ -62,11 +75,12 @@ const NewProjectForm = ({token}) => {
             cursor: 'pointer',
         }),
     }
+    
     //project form
     return (
         <div className={styles.maindiv}>
             <h2 className={styles.divhead}>New Project</h2>
-            <div className={styles.middlediv}>
+            <form className={styles.middlediv}>
                 <div className={styles.submiddlediv}>
                     <div className={styles.projectinfo}>
                         <label className={styles.inputtitle}>Title</label>
@@ -76,11 +90,15 @@ const NewProjectForm = ({token}) => {
                             placeholder='Title...'
                             required
                             icon = {titleIcon}
-                            onChange={handleChange}
+                            value={form.name}
+                            onChange={(e) => {setForm({...form, name: e.target.value})}}
                         />
                         
                         <label className={styles.inputtitle}>Description</label>
-                        <textarea className={styles.grandentree} placeholder="Description..." onChange={handleChange}></textarea>
+                        <textarea className={styles.grandentree} 
+                            placeholder="Description..." 
+                            value={form.description}
+                            onChange={(e) => {setForm({...form, description: e.target.value})}}/>
 
                         <label className={styles.inputtitle}>Start Date</label>
                         <InputField
@@ -89,7 +107,8 @@ const NewProjectForm = ({token}) => {
                             placeholder={Date.now}
                             required
                             icon = {whiteDateIcon}
-                            onChange={handleChange}
+                            value={form.startDate}
+                            onChange={(e) => {setForm({...form, startDate: e.target.value})}}
                         />
                         <label className={styles.inputtitle}>Due Date</label>
                         <InputField
@@ -98,7 +117,8 @@ const NewProjectForm = ({token}) => {
                             placeholder={Date.now.toString}
                             required
                             icon = {whiteDateIcon}
-                            onChange={handleChange}
+                            value={form.dueDate}
+                            onChange={(e) => {setForm({...form, dueDate: e.target.value})}}
                         />                    
                     </div>
                     <div className={styles.projectcollaborators}>
