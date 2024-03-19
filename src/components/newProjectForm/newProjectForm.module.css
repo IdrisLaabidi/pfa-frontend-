@@ -1,0 +1,73 @@
+.maindiv{
+    background-color: var(--color-primary);
+    border-radius: 30px;
+}
+
+.middlediv{
+    display: flex;
+    flex-direction: column;
+}
+
+.submitbutton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-buttons);
+    color: white;
+    border-radius: 15px;
+    width: 100px;
+    height: 40px;
+    align-self: flex-end;
+    margin-right: 7%;
+    margin-bottom: 3%;
+    cursor: pointer;
+}
+
+.submiddlediv{
+    display: flex;
+    flex-direction: row;
+}
+
+.divhead{
+    font-size: 32px;
+    margin-left: 2%;
+}
+
+.projectinfo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 5%;
+    width: 50%;
+}
+
+.inputtitle{
+    margin-top: 15px;
+    align-self: flex-start;
+    margin-left: 2%;
+    font-size: 24px;
+}
+
+.entree, .grandentree{
+    width: 95%;
+    height: 35px;
+    border: solid var(--color-background);
+    border-radius: 10px;
+}
+
+.entree::placeholder, .grandentree::placeholder{
+    color: #9c9696;
+    font-size: 22px;
+}
+
+.grandentree{
+    height: 65px;
+}
+
+.projectcollaborators{
+    margin-left: 5%;
+}
+
+.collab{
+    width: 95%;
+}

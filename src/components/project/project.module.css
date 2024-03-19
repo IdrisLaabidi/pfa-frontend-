@@ -6,6 +6,7 @@
     margin-bottom: 20px;
     width: 90%; /* Changez la largeur en auto pour s'adapter au contenu */
     box-shadow: none; /* Supprimez l'ombre de la boîte */
+    cursor: pointer;
 }
 
 .Name {
