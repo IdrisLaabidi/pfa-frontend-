@@ -8,6 +8,7 @@ import InputField from '../inputField/inputField';
 import titleIcon from '../../assets/title-icon.svg'
 import whiteDateIcon from '../../assets/date-icon-white.svg'
 import Submit from '../submitButton/submitButton';
+import { useNavigate } from 'react-router';
 
 
 
@@ -134,10 +135,9 @@ const NewProjectForm = ({token}) => {
                             
                     </div>
                 </div>
-                <Submit></Submit>
-            </div>
-            
-        </div>
+                <Submit handleSubmit={e => {handleSubmit(e)}}></Submit>
+            </form>
+         </div>
         
      );
 }
