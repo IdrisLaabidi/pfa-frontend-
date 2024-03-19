@@ -15,5 +15,3 @@ const UserAccount = ({user}) => {
 }
  
 export default UserAccount;
-
-//        <button className={styles.UserAcc}>
