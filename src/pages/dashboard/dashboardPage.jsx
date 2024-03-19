@@ -11,7 +11,7 @@ const ProjectPage = ({ token }) => {
       {error && <div>{error}</div>}
       {isPending && <div>Loading...</div>}
       {projects && projects.map(project => (
-        <Project children={project}/>
+        <Project data={project}/>
       ))}
       {console.log(token)}
     </div>
