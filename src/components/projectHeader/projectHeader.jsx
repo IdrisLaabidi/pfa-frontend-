@@ -38,7 +38,7 @@ const Header = ({project}) => {
                         <img src={dropDown} className={styles.icon} alt='icon' />
                     </button>
                 </div>
-                <NewTask />
+                <NewTask project={project}/>
             </div>
         </div> }
         
@@ -51,7 +51,7 @@ const Header = ({project}) => {
                         <img src={dropDown} className={`${styles.icon} ${styles.iconFlipped}`}  alt='icon' />
                     </button>
                 </div>
-                <NewTask />
+                <NewTask  project={project}/>
             </div>
             <div className={styles.flex3}>
                 <span className={styles.text1}> { "Status : " + project.status}</span>

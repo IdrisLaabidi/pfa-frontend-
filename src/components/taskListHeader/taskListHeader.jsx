@@ -6,7 +6,7 @@ const ListHeader = ({title,handleClick}) => {
         <div className={styles.container}>
             <span>{title}</span>
             <button className={styles.plus} onClick={handleClick}>
-                <img className={styles.icon} src={plusIcon}></img>
+                <img className={styles.icon} src={plusIcon} alt='icon'></img>
             </button>
         </div>
      );

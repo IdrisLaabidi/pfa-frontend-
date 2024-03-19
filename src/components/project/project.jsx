@@ -10,7 +10,8 @@ const Project = ({ data }) => {
     return (
         <div className={styles.Projet} 
         onClick={() => {
-            navigate('/tasks', { state : { project : data}});
+            sessionStorage.setItem("project",JSON.stringify(data))
+            navigate('/tasks');
             console.log(data);}}>
             <h2 className={styles.Name}>{data.name}</h2>
             <p className={styles.Details}>{data.description}</p>

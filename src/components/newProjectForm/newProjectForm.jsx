@@ -6,6 +6,9 @@ import InputField from '../inputField/inputField';
 //importing icons
 import titleIcon from '../../assets/title-icon.svg'
 import whiteDateIcon from '../../assets/date-icon-white.svg'
+import Submit from '../submitButton/submitButton';
+
+
 
 const NewProjectForm = ({token}) => {
     //send form to db
@@ -111,7 +114,7 @@ const NewProjectForm = ({token}) => {
                             
                     </div>
                 </div>
-                <div className={styles.submitbutton}>Submit</div>
+                <Submit></Submit>
             </div>
             
         </div>

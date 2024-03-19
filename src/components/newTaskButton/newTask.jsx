@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Modal from '../modal/Modal';
 import TaskForm from '../newTaskForm/taskForm';
 
-const NewTask = () => {
+const NewTask = ({project}) => {
 
     const [isOpen,setIsOpen] = useState(false)
 
@@ -21,7 +21,7 @@ const NewTask = () => {
             onClose={() => {setIsOpen(false)}}
             title="Add a new task"
             >
-            <TaskForm/>
+            <TaskForm project={project} onSubmit={() => {setIsOpen(false);}}/>
         </Modal>
     </>);
 }
