@@ -31,6 +31,7 @@
 .divhead{
     font-size: 32px;
     margin-left: 2%;
+    padding-top: 5%;
 }
 
 .projectinfo{
@@ -44,12 +45,14 @@
 .inputtitle{
     margin-top: 15px;
     align-self: flex-start;
-    margin-left: 2%;
+    margin-left: 5%;
     font-size: 24px;
 }
 
 .entree, .grandentree{
-    width: 95%;
+    background-color: #F1F3F6;
+    margin-left: 5%;
+    width: 90%;
     height: 35px;
     border: solid var(--color-background);
     border-radius: 10px;
@@ -57,11 +60,13 @@
 
 .entree::placeholder, .grandentree::placeholder{
     color: #9c9696;
-    font-size: 22px;
+    font-size: 16px;
 }
 
 .grandentree{
-    height: 65px;
+    height: 95px;
+    margin-left: 0%;
+    border: none;
 }
 
 .projectcollaborators{
