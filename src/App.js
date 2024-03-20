@@ -9,6 +9,7 @@ import Test from "./test";
 import Layout from "./components/layout/layout";
 import Tasks from "./pages/tasksPage/Tasks";
 import NewProjectPage from "./pages/newProject/newProjectPage";
+import Profile from "./pages/profile/profilePage";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/newProject" element={<Layout path={'/newProject'} children={<NewProjectPage/>} />} />
           <Route path="/Tasks" element={ <Layout path={'/tasks'} children={<Tasks/>} title={'tasks'} /> } />
           <Route path="/chat" element={ <Layout path={'/chat'} children={<Test/>} title={'Chat'} />}/>
+          <Route path="/profile" element={<Layout path={'/profile'} children={<Profile/>}   />} />
         </Routes>
       </BrowserRouter>
     </div>
