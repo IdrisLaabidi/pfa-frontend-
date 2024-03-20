@@ -1,6 +1,7 @@
 import React from 'react';
 import useFetch from '../../hooks/useFetch';
 import Project from '../../components/project/project';
+import Spinner from '../../components/spinner/spinner';
 import styles from './dashboardPage.module.css'
 
 const ProjectPage = ({ token }) => {
@@ -9,7 +10,7 @@ const ProjectPage = ({ token }) => {
   return (
     <div className={styles.allProjects}>
       {error && <div>{error}</div>}
-      {isPending && <div>Loading...</div>}
+      {isPending && <Spinner/>}
       {projects && projects.map(project => (
         <Project data={project} key={project._id}/>
       ))}

@@ -25,7 +25,7 @@ const useLogin = () => {
 
       console.log("User logged in", json);
       localStorage.setItem("user_id", json.user._id);
-      navigate('/home', { state: { user: json.user } });
+      navigate('/', { state: { user: json.user } });
 
     } catch (err) {
       setError('Oops! Failed to connect to the API.');

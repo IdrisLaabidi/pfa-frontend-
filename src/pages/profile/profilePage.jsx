@@ -2,6 +2,8 @@ import InputField from '../../components/inputField/inputField'
 import DropDownList from '../../components/dropDownList/DropDownList'; 
 import Spinner from '../../components/spinner/spinner';
 import emailIcon from '../../assets/email-icon.svg';
+import userIcon from '../../assets/user-icon.svg';
+import pwdIcon from '../../assets/password-icon.svg'
 import styles from './profilePage.module.css';
 import { useEffect, useState  } from 'react';
 import { useNavigate } from 'react-router';
@@ -125,7 +127,7 @@ const ProfilePage = () => {
                 <div className={styles.inputContainer}>
                     <span className={styles.label}>FIRST NAME</span>
                     <InputField 
-                        icon={emailIcon} 
+                        icon={userIcon} 
                         type="text"
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
@@ -134,7 +136,7 @@ const ProfilePage = () => {
                 <div className={styles.inputContainer}>
                     <span className={styles.label}>LAST NAME</span>
                     <InputField 
-                        icon={emailIcon} 
+                        icon={userIcon} 
                         type="text"
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
@@ -167,7 +169,7 @@ const ProfilePage = () => {
                 <div className={styles.inputContainer} >
                     <span className={styles.label}>CURRENT PASSWORD</span>
                     <InputField 
-                        icon={emailIcon} 
+                        icon={pwdIcon} 
                         type="password"
                         value={currentPassword}
                         onChange={(e) => setCurrentPassword(e.target.value)}
@@ -183,7 +185,7 @@ const ProfilePage = () => {
                 <div className={styles.inputContainer}>
                     <span className={styles.label}>NEW PASSWORD</span>
                     <InputField 
-                        icon={emailIcon} 
+                        icon={pwdIcon} 
                         type="password"
                         value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)}
@@ -192,7 +194,7 @@ const ProfilePage = () => {
                 <div className={styles.inputContainer}>
                     <span className={styles.label}>CONFIRM NEW PASSWORD</span>
                     <InputField 
-                        icon={emailIcon} 
+                        icon={pwdIcon} 
                         type="password"
                         value={confirmNewPassword}
                         onChange={(e) => setConfirmNewPassword(e.target.value)}
