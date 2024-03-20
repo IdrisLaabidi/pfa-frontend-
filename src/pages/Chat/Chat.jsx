@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { useRef, useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
-import { useRef, useState, useEffect, useMemo } from 'react';
 import attach from '../../assets/attach.png';
 import sendImage from '../../assets/sendImage.png';
 import send from '../../assets/send.png';
@@ -12,102 +11,84 @@ const SERVER_URL = 'http://localhost:4000';
 const socket = io(SERVER_URL);
 
 const Chat = () => {
-    const [message , setMessage] = useState('');
-    const [messages , setMessages] = useState([]);
-    const [selectedProject , setSelectedProject] = useState(null)
-    const [projects , setProjects] = useState([]);
+    const [message, setMessage] = useState('');
+    const [messages, setMessages] = useState([]);
+    const [selectedProject, setSelectedProject] = useState(null);
+    const [projects, setProjects] = useState([]);
+    const [usersProject, setUsersProject] = useState([]);
     const messageAreaRef = useRef();
     const userId = localStorage.getItem('user_id');
-    const {data:projectsData,isPending1,error1} = useFetch(`http://localhost:4000/api/projects/myprojects/${userId}`);
 
-    useEffect(()=>{
-        if(!isPending&&projectsData){
-            setProjects(projectsData)
+    const { data: projectsData, isPending: isPendingProjects } = useFetch(`http://localhost:4000/api/projects/myprojects/${userId}`);
+
+    useEffect(() => {
+        if (!isPendingProjects && projectsData) {
+            setProjects(projectsData);
         }
-        
-    },[projectsData])
-    
+    }, [projectsData, isPendingProjects]);
+
     const handleSelectedProject = (projectId) => {
         setSelectedProject(projectId);
-        console.log(projectId)
-    }
-    useEffect(()=>{
-        if(selectedProject){
+    };
 
+    const { data: UsersAssignedToaProject, isPending: isPendingUsers } = useFetch(`http://localhost:4000/api/projects/projusers/${selectedProject}`);
+
+    useEffect(() => {
+        if (!isPendingUsers && UsersAssignedToaProject) {
+            const newUsersProject = UsersAssignedToaProject.map(user => user._id);
+            setUsersProject(newUsersProject);
         }
-    },[selectedProject])
-    //creating a message object for messages display 
-    const sendMessage = ()=>{
-        if(message!== ''){
-            console.log('here')
+    }, [UsersAssignedToaProject, isPendingUsers]);
+
+    const sendMessage = () => {
+        if (message !== '' && selectedProject) {
             const messageObj = {
-                content : message,
-                sender :userId,
-                sentTo : [],
-                project : selectedProject,
-                sentAt : Date.now(),
-                who : ''
-            }
-            socket.emit('chat message',messageObj);
+                content: message,
+                sender: userId,
+                sentTo: usersProject, 
+                project: selectedProject,
+                sentAt: Date.now(),
+                who: ''
+            };
+            socket.emit('chat message', messageObj);
             setMessage('');
         }
-    }
-    //when a message sent this function will scroll you down when rending new message (typical chat thing)
-    const scrollToBottom = () => {
-        if (messageAreaRef.current) {
-          messageAreaRef.current.scrollTop = messageAreaRef.current.scrollHeight;
-        }
     };
-    
-    const { data:allMessagesData, isPending, error } = useFetch(`http://localhost:4000/api/messages/allMessage/${selectedProject}`)
 
-    
-    //just to know who's the sender to display message either blue or grey 
+    const { data: allMessagesData, isPending: isPendingMessages } = useFetch(`http://localhost:4000/api/messages/allMessage/${selectedProject}`);
+
     useEffect(() => {
-        if(!isPending&&allMessagesData){
-            const formattedMessages = allMessagesData.map((mssg) => ({
+        if (!isPendingMessages && allMessagesData) {
+            const formattedMessages = allMessagesData.map(mssg => ({
                 ...mssg,
                 sender: mssg.sender === userId ? 'self' : 'other'
-    
             }));
             setMessages(formattedMessages);
-            console.log(messages)
         }
-        //when sending message and event will trigger the server to create a message in the db
-        socket.on('chat message', (newMessage) => {
-            setMessages((prevMessages) => [
+    }, [allMessagesData, isPendingMessages, userId]);
+
+    useEffect(() => {
+        const newMessageHandler = (newMessage) => {
+            setMessages(prevMessages => [
                 ...prevMessages,
                 { ...newMessage, sender: newMessage.sender === userId ? 'self' : 'other' }
             ]);
-        });
+        };
+
+        socket.on('chat message', newMessageHandler);
 
         return () => {
-            socket.off('allMessage');
-            socket.off('chat message');
+            socket.off('chat message', newMessageHandler);
         };
-    },[allMessagesData,userId]);
-    
-    
-    useEffect(()=>{
+    }, [userId]);
+
+    useEffect(() => {
         scrollToBottom();
-        socket.on('chat message',(newMessage)=>{
-            if(newMessage.sender === userId){
-                newMessage.sender = 'self'
-            }else{
-                newMessage.sender = 'other'
-            }
-            setMessages(messages =>[...messages,newMessage]);
-        })
-        return ()=>{
-            socket.off('chat message')
-        }
-    },[messages]
-    );
+    }, [messages]);
 
     useEffect(() => {
         const handleEnterKeyUp = (e) => {
             if (e.keyCode === 13) {
-                console.log('ggg')
                 sendMessage();
             }
         };
@@ -116,7 +97,14 @@ const Chat = () => {
         return () => {
             inputElement.removeEventListener('keyup', handleEnterKeyUp);
         };
-    }, [message]);
+    }, [sendMessage]);
+
+    const scrollToBottom = () => {
+        if (messageAreaRef.current) {
+            messageAreaRef.current.scrollTop = messageAreaRef.current.scrollHeight;
+        }
+    };
+
     return (
         <div className={styles.chatContainer}>
             <aside className={styles.userProjectsGroupsContainer}>
