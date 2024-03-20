@@ -2,16 +2,13 @@ import { BrowserRouter , Routes, Route } from "react-router-dom"; // import reac
 //import the theme variables 
 import './Themes/Themes'
 //import pages 
-import HomePage from "./pages/dashboard/dashboardPage";
+import ProjectPage from "./pages/dashboard/dashboardPage";
 import LoginPage from "./pages/login/loginPage";
 import RegisterPage from "./pages/register/registerPage";
 import Test from "./test";
 import Layout from "./components/layout/layout";
-import Chat from './pages/Chat/Chat'
-import Cookies from "js-cookie";
-import ErrorPage from './pages/Error/errorPage';
-import ProfilePage from "./pages/profile/profilePage";
-
+import Tasks from "./pages/tasksPage/Tasks";
+import NewProjectPage from "./pages/newProject/newProjectPage";
 
 
 function App() {
@@ -20,12 +17,12 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-            <Route path="/" element={ <Layout path={'/projects'} children={<HomePage/>} title={'home page'} /> } />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/Home" element={ <Layout path={'/projects'} children={<HomePage/>} title={'home page'} /> } />
-            <Route path="/chat" element={ <Layout path={'/chat'} children={<Chat/>} title={'test'} /> } />
-            <Route path="/profile" element={ <Layout path={'/profile'} children={<ProfilePage/>} title={'profile'} /> } />
+          <Route path="/login" element={<LoginPage/>}/>
+          <Route path="/Register" element={<RegisterPage />}/>
+          <Route index element={ <Layout path={'/'} children={<ProjectPage/>} title={'projects'} /> } />
+          <Route path="/newProject" element={<Layout path={'/newProject'} children={<NewProjectPage/>} />} />
+          <Route path="/Tasks" element={ <Layout path={'/tasks'} children={<Tasks/>} title={'tasks'} /> } />
+          <Route path="/chat" element={ <Layout path={'/chat'} children={<Test/>} title={'Chat'} />}/>
         </Routes>
       </BrowserRouter>
     </div>

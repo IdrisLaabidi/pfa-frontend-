@@ -1,26 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import {useNavigate,useLocation } from 'react-router-dom';
-import Cookies from 'js-cookie';
+import React from 'react';
+import useFetch from '../../hooks/useFetch';
+import Project from '../../components/project/project';
+import styles from './dashboardPage.module.css'
 
+const ProjectPage = ({ token }) => {
+  const { data: projects, isPending, error } = useFetch('http://localhost:4000/api/projects', token);
 
-const HomePage = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  //const [user, setUser] = useState(null);
-
-  
-  const logout =()=> {
-    Cookies.remove("token") ;
-    navigate('/Login');
-  }
   return (
-    <div>
-      <h1>te5dem welweeeeey and Welcome si user with ID !</h1>
-      <button onClick={logout}>
-        logout
-      </button>
+    <div className={styles.allProjects}>
+      {error && <div>{error}</div>}
+      {isPending && <div>Loading...</div>}
+      {projects && projects.map(project => (
+        <Project data={project} key={project._id}/>
+      ))}
     </div>
   );
-};
+}
 
-export default HomePage;
+export default ProjectPage;

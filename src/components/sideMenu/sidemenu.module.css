@@ -1,18 +1,14 @@
-*{
-  font-family: var(--fonts-primary);
-}
 .SideMenu {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 15%;
+  width: 12%;
   height: 90vh;
   background-color: var(--color-primary);
   padding: 20px;
   border-radius: 30px;
   margin: 15px 10px;
-  position: sticky; 
-  top: 0; 
+  flex-grow: 0.05;
 }
 
 .logo{
