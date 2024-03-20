@@ -31,6 +31,7 @@
 .closeButtn{
     border: none;
     background: transparent;
+    cursor: pointer;
 }
 .icon{
     width: 30px;

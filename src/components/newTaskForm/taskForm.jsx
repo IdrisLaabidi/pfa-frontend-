@@ -77,7 +77,7 @@ const TaskForm = ({project ,onSubmit}) => {
         dueDate: '',
         assignedTo: [],
         priority : 'medium',
-        createdBy : project.manager
+        project : project._id
 
     })
 
@@ -94,7 +94,6 @@ const TaskForm = ({project ,onSubmit}) => {
     )) : [];
 
     const handleSubmit = (e) => {
-        console.log(form)
         e.preventDefault()
         fetch('http://localhost:4000/api/task/createtask/',{
            headers :{ 
@@ -109,6 +108,7 @@ const TaskForm = ({project ,onSubmit}) => {
             }
             if(response.ok){
                 console.log('task created :',response.json)
+                onSubmit(); navigate(0);
             }
         }).catch(error => {
             alert('oops faild to connect to the api')
@@ -193,7 +193,7 @@ const TaskForm = ({project ,onSubmit}) => {
                             priority : 'medium' 
                         })
                     }}/>
-                    <Submit handleSubmit={(e) => {handleSubmit(e); onSubmit(); navigate(0)} }/>
+                    <Submit handleSubmit={(e) => {handleSubmit(e);} }/>
                 </div>
             </div>
         </form>

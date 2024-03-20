@@ -11,7 +11,6 @@ const TaskCard = ({task}) => {
 
     const handleClick = () => {
         setIsOpen(true)
-        console.log(task)
     }
 
     return ( 
@@ -48,7 +47,7 @@ const TaskCard = ({task}) => {
             </div>}
 
             <Modal open={isOpen} onClose={() => setIsOpen(false)} title="Details">
-                <TaskDetails task={task}/>
+                <TaskDetails task={task} onDelete={() => setIsOpen(false)} onUpdate={() => setIsOpen(false)}/>
             </Modal>
     </>);
 }

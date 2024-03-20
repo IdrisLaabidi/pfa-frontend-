@@ -30,10 +30,10 @@ const Header = ({project}) => {
     return ( <>
         
         {!showDetails && <div className={styles.container}>
-            <span className={styles.text1}>{"Projects/"+project.name}</span>
+            <span className={styles.text1}>{"Projects/"+project?.name}</span>
             <div className={styles.flex1}>
                 <div className={styles.flex2}>
-                    <span className={styles.text2}>{project.name}</span>
+                    <span className={styles.text2}>{project?.name}</span>
                     <button className={styles.dropDown} onClick={() => {setShowDetails(true)}}>
                         <img src={dropDown} className={styles.icon} alt='icon' />
                     </button>
@@ -43,10 +43,10 @@ const Header = ({project}) => {
         </div> }
         
         {showDetails && <div className={`${styles.container} ${styles.containerDetails}`}>
-            <span className={styles.text1}>{"Projects/"+project.name}</span>
+            <span className={styles.text1}>{"Projects/"+project?.name}</span>
             <div className={styles.flex1}>
                 <div className={styles.flex2}>
-                    <span className={styles.text2}>{project.name}</span>
+                    <span className={styles.text2}>{project?.name}</span>
                     <button className={styles.dropDown} onClick={() => {setShowDetails(false)}}>
                         <img src={dropDown} className={`${styles.icon} ${styles.iconFlipped}`}  alt='icon' />
                     </button>
@@ -54,8 +54,8 @@ const Header = ({project}) => {
                 <NewTask  project={project}/>
             </div>
             <div className={styles.flex3}>
-                <span className={styles.text1}> { "Status : " + project.status}</span>
-                <span className={styles.text1}> Due Date :  {format(new Date(project.dueDate), 'dd/MM/yyyy')}</span>
+                <span className={styles.text1}> { "Status : " + project?.status}</span>
+                <span className={styles.text1}> Due Date :  {format(new Date(project?.dueDate), 'dd/MM/yyyy')}</span>
                 <span className={styles.text1}> { "Assigned to : idris laabidi , fathallah youssef , Miri riri ..."} </span>
             </div>
         </div> }

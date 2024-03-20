@@ -32,3 +32,36 @@
     flex-direction: column;
     
 }
+.editForm{
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    padding: 10px ;
+}
+.textArea{
+    background-color: #F1F3F6;
+    margin-left: 5%;
+    width: 90%;
+    height: 35px;
+    border: solid var(--color-background);
+    border-radius: 10px;
+    height: 95px;
+    margin-left: 0%;
+    border: none;
+}
+.formButtns{
+    display: flex;
+    justify-content: flex-end;
+}
+.select{
+    width: 90%;
+    height: 45px;
+    font-size: 20px;
+    border-radius: 10px;
+    background-color: #F1F3F6;
+    border: #9095A0;
+}
+.label{
+    font-size: 22px;
+    font-weight: bold
+}

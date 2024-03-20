@@ -5,6 +5,7 @@ import SideMenu from "../sideMenu/sideMenu"
 import styles from './layout.module.css'
 //import custom hook
 import useConnect from "../../hooks/useConnect";
+import Spinner from "../spinner/spinner";
 
   const Layout = ({children ,title ,path}) => {
 
@@ -15,9 +16,8 @@ import useConnect from "../../hooks/useConnect";
         <div className={styles.layout}>
             <SideMenu path={path} user={user}></SideMenu>
             <div className={styles.content}>
-                <NavBar title={title} user={user}></NavBar>
+                <NavBar title={title} user={user} isLoading={isPending}></NavBar>
                 <div>{children} </div>
-                { isPending && <div>Loading...</div>}
                 { error && <div>{error}</div>}
             </div>
         </div>
