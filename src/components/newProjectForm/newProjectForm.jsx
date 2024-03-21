@@ -61,7 +61,8 @@ const NewProjectForm = ({token}) => {
     const {data: users, isPending, error} = useFetch('http://localhost:4000/api/auth/users', token)
 
     //store users in an array
-    const userlist = users? users.map(user => (
+    const members = users?.filter(user => user.role === 'member')
+    const userlist = members? members?.map(user => (
        {value:user, label: `${user.firstName} ${user.lastName}`}
     )) : [];
     /*console.log all users fetched from db

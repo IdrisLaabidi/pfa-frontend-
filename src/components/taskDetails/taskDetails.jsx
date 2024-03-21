@@ -32,7 +32,7 @@ const TaskDetails = ({task,onDelete,onUpdate}) => {
         status : task.status,
         priority : task.priority,
         assignedTo : task.assignedTo,
-        dueDate : format(new Date(task.dueDate), 'dd-MM-yyyy')
+        dueDate : task.dueDate
     })
 
     const handleDelete = () => {
@@ -44,7 +44,7 @@ const TaskDetails = ({task,onDelete,onUpdate}) => {
             }
         ).then( result => {
             if (result){
-                handleDelete()
+                onDelete()
                 navigate(0)
             }
         }).catch(error => {
@@ -64,7 +64,7 @@ const TaskDetails = ({task,onDelete,onUpdate}) => {
         ).then( result => {
             if (result){
                console.log('task updated')
-               handleUpdate()
+               onUpdate()
                navigate(0)
             }
         }).catch(error => {
@@ -148,8 +148,7 @@ const TaskDetails = ({task,onDelete,onUpdate}) => {
                 <InputField
                     icon={date}
                     type='date'
-                    de
-                    value={newTask.dueDate}
+                    //value={newTask.dueDate}
                     onChange={(e) => {setNewTask({...newTask , dueDate : e.target.value})}}
                 />
                 <label className={styles.label}>Description</label>
@@ -204,6 +203,7 @@ const TaskDetails = ({task,onDelete,onUpdate}) => {
                         let arr2 = arr.filter((item,
                             index) => arr.indexOf(item) === index)
                         setNewTask({...newTask, assignedTo: arr2})
+                        console.log(newTask)
                         handleUpdate()
                     }}></Submit>  
                 </div>
