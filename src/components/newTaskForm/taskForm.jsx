@@ -77,7 +77,7 @@ const TaskForm = ({project ,onSubmit}) => {
         dueDate: '',
         assignedTo: [],
         priority : 'medium',
-        createdBy : project.manager
+        project : project._id
 
     })
 
@@ -89,13 +89,18 @@ const TaskForm = ({project ,onSubmit}) => {
     //fetch users from db
     const {data: users, isPending, error} = useFetch('http://localhost:4000/api/auth/users', token)
     //store users in an array
-    const userlist = users? users.map(user => (
+    const members = users?.filter(user => user.role === 'member')
+    const userlist = members? members?.map(user => (
        {value:user, label: `${user.firstName} ${user.lastName}`}
     )) : [];
 
     const handleSubmit = (e) => {
-        console.log(form)
         e.preventDefault()
+        // Verify wether the task's dueDate is posterior to the project's dueDate
+        if (new Date(form.dueDate) > new Date(project.dueDate)) {
+            alert("Choose a date before the project's due date");
+            return;
+        }
         fetch('http://localhost:4000/api/task/createtask/',{
            headers :{ 
                 Authorization: `Bearer ${token}`,
@@ -109,6 +114,7 @@ const TaskForm = ({project ,onSubmit}) => {
             }
             if(response.ok){
                 console.log('task created :',response.json)
+                onSubmit(); navigate(0);
             }
         }).catch(error => {
             alert('oops faild to connect to the api')
@@ -193,7 +199,7 @@ const TaskForm = ({project ,onSubmit}) => {
                             priority : 'medium' 
                         })
                     }}/>
-                    <Submit handleSubmit={(e) => {handleSubmit(e); onSubmit(); navigate(0)} }/>
+                    <Submit handleSubmit={(e) => {handleSubmit(e);} }/>
                 </div>
             </div>
         </form>

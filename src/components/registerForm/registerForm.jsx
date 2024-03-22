@@ -1,5 +1,6 @@
 //import components
 import InputField from '../inputField/inputField'
+import Modal from '../modal/Modal'
 //import css styles
 import styles from './registerForm.module.css'
 //import icons
@@ -21,11 +22,45 @@ const RegisterForm = () => {
     const[fname,setFname] = useState("") 
     const[lname,setLname] = useState("") 
     const[role,setRole] = useState("member")
-    const {register,error} = useRegister();
+    const[error,setError] = useState(null)
+    const[isOpen,setIsOpen] = useState(false)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        register(fname, lname, email, role, password, confirmPwd);
+        let firstName = fname
+        let lastName = lname
+        const user = {email ,firstName, lastName, password ,role}
+
+        if(password !== confirmPwd){
+            setError("Password does not match")
+            setIsOpen(true)
+        }else{
+            try{
+                const response = await fetch('http://localhost:4000/api/auth/createuser',{
+                    method : 'POST',
+                    body : JSON.stringify(user),
+                    headers : {
+                        'Content-Type' : 'application/json'
+                    },
+                    credentials : "include"
+                })
+                const json = await response.json()
+
+                if(!response.ok){
+                    setError(json.message)
+                    setIsOpen(true)
+                }
+                if(response.ok){
+                    console.log("user added" , json)
+                    localStorage.setItem("user_id",json._id)
+                    sessionStorage.setItem("user",JSON.stringify(json))
+                    navigate('/')
+                }
+            }catch(err){
+                setError("Failed to connect to the api")
+                setIsOpen(true)
+            }
+        }
     }
 
     return ( 
@@ -92,6 +127,10 @@ const RegisterForm = () => {
                 </div>
                 <button className={styles.registerButton}>Register</button>
             </form>
+            <Modal title='Warning' open={isOpen} onClose={()=>{
+            setError(null)
+            setIsOpen(false)
+            }}><span className={styles.error}>Failed to Register : {error}</span></Modal>
         </div>
      );
 }

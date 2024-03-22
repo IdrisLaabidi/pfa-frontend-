@@ -7,6 +7,10 @@ import LoginPage from "./pages/login/loginPage";
 import RegisterPage from "./pages/register/registerPage";
 import Test from "./test";
 import Layout from "./components/layout/layout";
+import Cookies from "js-cookie";
+import LeavePage from "./pages/leave/LeavePage";
+
+
 import Tasks from "./pages/tasksPage/Tasks";
 import NewProjectPage from "./pages/newProject/newProjectPage";
 import Profile from "./pages/profile/profilePage";

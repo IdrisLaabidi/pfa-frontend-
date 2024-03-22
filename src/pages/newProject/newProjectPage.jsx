@@ -4,7 +4,6 @@ import Cookies from "js-cookie";
 
 const NewProjectPage = () => {
     const token = Cookies.get("token")
-    console.log('newprojectpage token: ',token)
     return ( 
         <NewProjectForm token={token}/>
      );

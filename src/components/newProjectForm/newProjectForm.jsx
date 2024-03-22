@@ -61,7 +61,8 @@ const NewProjectForm = ({token}) => {
     const {data: users, isPending, error} = useFetch('http://localhost:4000/api/auth/users', token)
 
     //store users in an array
-    const userlist = users? users.map(user => (
+    const members = users?.filter(user => user.role === 'member')
+    const userlist = members? members?.map(user => (
        {value:user, label: `${user.firstName} ${user.lastName}`}
     )) : [];
     /*console.log all users fetched from db
@@ -71,9 +72,9 @@ const NewProjectForm = ({token}) => {
     const customStyles = {
         control: (provided) => ({
             ...provided,
-            maxWidth: '270px',
             marginTop: '5%',
             cursor: 'pointer',
+            width : '90%'
         }),
     }
     
@@ -122,20 +123,26 @@ const NewProjectForm = ({token}) => {
                             onChange={(e) => {setForm({...form, dueDate: e.target.value})}}
                         />                    
                     </div>
+                    <div className={styles.divider}></div>
                     <div className={styles.projectcollaborators}>
-                        <label className={styles.inputtitle}>Project collaborators</label>
-                        {error && <div>{error}, please try again later!</div>}
-                        {users && <Select
-                            options={userlist}
-                            placeholder='Select collaborators...'
-                            isMulti
-                            styles={customStyles}
-                            onChange={handleSelectChange}
-                        />}   
-                            
+                        <div className={styles.subsubdiv}>
+                            <label styles={{
+                                 marginTop: '15px',
+                                 alignSelf: 'flex-start',
+                                 fontSize: '30px',
+                            }}>Project collaborators</label>
+                            {error && <div>{error}, please try again later!</div>}
+                            {users && <Select
+                                options={userlist}
+                                placeholder='Select collaborators...'
+                                isMulti
+                                styles={customStyles}
+                                onChange={handleSelectChange}
+                            />} 
+                        </div>  
+                        <Submit handleSubmit={e => {handleSubmit(e)}}></Submit> 
                     </div>
                 </div>
-                <Submit handleSubmit={e => {handleSubmit(e)}}></Submit>
             </form>
          </div>
         

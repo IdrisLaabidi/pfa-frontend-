@@ -1,6 +1,7 @@
+
 import InputField from '../../components/inputField/inputField'
 import DropDownList from '../../components/dropDownList/DropDownList'; 
-import Spinner from '../../components/spinner/spinner';
+import LoadingModal from '../../components/loadingModal/LoadingModal'
 import emailIcon from '../../assets/email-icon.svg';
 import userIcon from '../../assets/user-icon.svg';
 import pwdIcon from '../../assets/password-icon.svg'
@@ -8,7 +9,8 @@ import styles from './profilePage.module.css';
 import { useEffect, useState  } from 'react';
 import { useNavigate } from 'react-router';
 import Cookies from 'js-cookie';
-import useFetch from '../../hooks/useFetch';
+import useConnect from '../../hooks/useConnect';
+
 
 const ProfilePage = () => {
     const [firstName, setFirstName] = useState("");
@@ -20,15 +22,16 @@ const ProfilePage = () => {
     const [profilePicture, setProfilePicture] = useState("");
 
     const Navigate = useNavigate();
-    const userId = localStorage.getItem('user_id');
-    const {data:user,isPending,error} = useFetch(`http://localhost:4000/api/auth/users/${userId}`);
+
+    /*const {data:user,isPending,error} = useFetch(`http://localhost:4000/api/auth/users/${userId}`);*/
+    const [user,isPending,error] = useConnect()
     if (error){
         throw new Error(error);
     }
     //fill the inputs with users data after fetching them
     useEffect(()=>{
         if(!isPending && user){
-            const userData = user.user
+            const userData = user
             setFirstName(userData.firstName || "");
             setLastName(userData.lastName || "");
             setEmail(userData.email || "");
@@ -107,7 +110,7 @@ const ProfilePage = () => {
     return (
     
         <div className={styles.profilePageContainer}>
-            {isPending&& (<Spinner/>)}
+            <LoadingModal open={isPending}></LoadingModal>
             <div className={styles.profilePictureContainer}>
                 {/* Display profile picture fl mosta9bel */}
                 {profilePicture ? (
