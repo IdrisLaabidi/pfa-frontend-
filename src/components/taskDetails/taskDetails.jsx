@@ -186,7 +186,7 @@ const TaskDetails = ({task,onDelete,onUpdate}) => {
                 <InputField
                     icon={date}
                     type='date'
-                    //value={newTask.dueDate}
+                    value={task.dueDate}
                     onChange={(e) => {setNewTask({...newTask , dueDate : e.target.value})}}
                 />
                 <label className={styles.label}>Description</label>

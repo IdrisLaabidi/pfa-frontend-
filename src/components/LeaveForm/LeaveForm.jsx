@@ -2,16 +2,21 @@ import styles from './leave.module.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import Submit from '../submitButton/submitButton';
+import Modal from '../modal/Modal'
 
 
 
 const LeavePage = ({token}) => {
+
+  const navigate = useNavigate()
 
   const [leaveType, setLeaveType] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [reason, setReason] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
+  const [error,setError] = useState(null)
+  const [isOpen,setIsOpen] = useState(false)
 
   const handleFileInputChange = (event) => {
     const file = event.target.files[0];
@@ -24,52 +29,50 @@ const LeavePage = ({token}) => {
     }
   };
   const isFormValid = () => {
-    return leaveType && startDate && endDate && reason && selectedFile;
+    return leaveType && startDate && endDate && reason ;
   };
   
    
     const handleSubmit =async (e) => {
       e.preventDefault();
       if (!isFormValid()) {
-        alert('All fields must be filled in.');
+        setError('All fields must be filled')
+        setIsOpen(true)
         return;
       }
-      console.log('Token: ', token);
     
       const form = {
         leaveType: leaveType,
         startDate: startDate,
         endDate: endDate,
         reason: reason,
-        file: selectedFile
+        //file: selectedFile
       };
-    
-      const formData = new FormData();
-      formData.append('leaveType', leaveType);
-      formData.append('startDate', startDate);
-      formData.append('endDate', endDate);
-      formData.append('reason', reason);
-      formData.append('file', selectedFile);
+
     
       try {
-        const response = await fetch('http://localhost:4000/api/leave', {
+        const response = await fetch('http://localhost:4000/api/leave/createleave', {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
-          body: formData
+          body: JSON.stringify(form)
         });
     
         if (!response.ok) {
-          alert('Submission unsuccessful. Please try again.');
+          setError('Submission unsuccessful. Please try again.')
+          setIsOpen(true)
         } else {
           const data = await response.json();
           console.log('Form submitted successfully:', data);
+          setError('Form submitted successfully')
+          setIsOpen(true)
           // Redirect or perform other actions upon successful submission
         }
       } catch (error) {
-        console.error('Error submitting form:', error);
+        setError('Failed to connect to the api')
+        setIsOpen(true)
         // Handle error accordingly
       }
     };
@@ -82,7 +85,6 @@ const LeavePage = ({token}) => {
         <h1>Leave Application Form</h1>
         <h3>Please provide information about your leave</h3>
         <form>
-          
             <label htmlFor="leaveType" className={styles.label}>Leave Type:</label>
             <select
               className={styles.input}
@@ -122,7 +124,7 @@ const LeavePage = ({token}) => {
               onChange={(e) => setReason(e.target.value)}
             />
         
-        <div className={styles.container}>
+            <div className={styles.container}>
               <input
                 type="file"
                 id="fileInput"
@@ -142,9 +144,12 @@ const LeavePage = ({token}) => {
                   {selectedFile ? selectedFile.name : 'Attach Pdf, Png, Jpg files:'}
               </div>
           </div>
-        
-         <Submit handleSubmit={handleSubmit}></Submit>
+         
         </form>
+        <Submit handleSubmit={handleSubmit} className={styles.buttn} center={true}></Submit>
+        <Modal title='warning' open={isOpen} onClose={() => {setIsOpen(false)}}>
+          <span>{error}</span>
+        </Modal>
     </div>
    
   );
