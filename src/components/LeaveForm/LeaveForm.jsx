@@ -24,7 +24,7 @@ const LeavePage = ({token}) => {
     }
   };
   const isFormValid = () => {
-    return leaveType && startDate && endDate && reason && selectedFile;
+    return leaveType && startDate && endDate && reason ;
   };
   
    
@@ -34,31 +34,25 @@ const LeavePage = ({token}) => {
         alert('All fields must be filled in.');
         return;
       }
-      console.log('Token: ', token);
+     
     
       const form = {
         leaveType: leaveType,
         startDate: startDate,
         endDate: endDate,
         reason: reason,
-        file: selectedFile
+        /*file: selectedFile*/
       };
     
-      const formData = new FormData();
-      formData.append('leaveType', leaveType);
-      formData.append('startDate', startDate);
-      formData.append('endDate', endDate);
-      formData.append('reason', reason);
-      formData.append('file', selectedFile);
     
       try {
-        const response = await fetch('http://localhost:4000/api/leave', {
+        const response = await fetch('http://localhost:4000/api/leave/createleave', {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
-          body: formData
+          body:     JSON.stringify(form)
         });
     
         if (!response.ok) {
@@ -143,7 +137,7 @@ const LeavePage = ({token}) => {
               </div>
           </div>
         
-         <Submit handleSubmit={handleSubmit}></Submit>
+         <Submit handleSubmit={handleSubmit}  className={styles.customButton}></Submit>
         </form>
     </div>
    

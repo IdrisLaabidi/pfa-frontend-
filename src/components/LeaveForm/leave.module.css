@@ -69,12 +69,14 @@
     width: 100%;
     height: 50px;
     border: 1px solid #ddd;
+    border-radius: 15px;
   }
   
   .customButton {
     position: absolute;
     top: 0;
     right: 0;
+    margin: 0 auto;
     padding: 0 10px;
     height: 100%;
     background-color: #151418;
