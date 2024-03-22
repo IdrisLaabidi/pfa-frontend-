@@ -10,7 +10,6 @@ import Modal from '../modal/Modal'
 const LoginForm = () => {
 
     const navigate = useNavigate()
-
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")
     const [isOpen,setIsOpen] = useState(false)

@@ -10,17 +10,17 @@ import pwdIcon from '../../assets/password-icon.svg'
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router'
+import useRegister from '../../hooks/useRegister'
 
 
 const RegisterForm = () => {
 
     const navigate = useNavigate()
-
     const[email,setEmail] = useState("")
     const[password,setPassword] = useState("")
-    const[confirmPwd,setConfirmPdw] = useState("") //for password confirmation field
-    const[fname,setFname] = useState("") //first name
-    const[lname,setLname] = useState("") //first name
+    const[confirmPwd,setConfirmPdw] = useState("") 
+    const[fname,setFname] = useState("") 
+    const[lname,setLname] = useState("") 
     const[role,setRole] = useState("member")
     const[error,setError] = useState(null)
     const[isOpen,setIsOpen] = useState(false)

@@ -5,16 +5,13 @@ import './Themes/Themes'
 import ProjectPage from "./pages/dashboard/dashboardPage";
 import LoginPage from "./pages/login/loginPage";
 import RegisterPage from "./pages/register/registerPage";
-import Test from "./test";
 import Layout from "./components/layout/layout";
-import Cookies from "js-cookie";
 import LeavePage from "./pages/leave/LeavePage";
-
-
 import Tasks from "./pages/tasksPage/Tasks";
 import NewProjectPage from "./pages/newProject/newProjectPage";
 import Profile from "./pages/profile/profilePage";
-import Error from "./pages/Error/errorPage"
+import Chat from "./pages/Chat/Chat";
+import Error from "./pages/Error/errorPage";
 
 function App() {
 
@@ -27,9 +24,9 @@ function App() {
           <Route index element={ <Layout path={'/'} children={<ProjectPage/>} title={'projects'} /> } />
           <Route path="/newProject" element={<Layout path={'/newProject'} children={<NewProjectPage/>} />} />
           <Route path="/Tasks" element={ <Layout path={'/tasks'} children={<Tasks/>} title={'tasks'} /> } />
-          <Route path="/chat" element={ <Layout path={'/chat'} children={<Test/>} title={'Chat'} />}/>
-          <Route path="/leave" element={ <Layout path={'/leave'} children={<LeavePage/>} title={'Leave'} />}/>
+          <Route path="/chat" element={ <Layout path={'/chat'} children={<Chat/>} title={'Chat'} />}/>
           <Route path="/profile" element={<Layout path={'/profile'} children={<Profile/>}   />} />
+          <Route path="/leave" element={ <Layout path={'/leave'} children={<LeavePage/>} title={'Leave'} />}/>
           <Route path="*" element={<Error/>}/>
         </Routes>
       </BrowserRouter>
