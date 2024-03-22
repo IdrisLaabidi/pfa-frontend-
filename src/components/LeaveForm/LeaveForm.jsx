@@ -35,6 +35,12 @@ const LeavePage = ({token}) => {
    
     const handleSubmit =async (e) => {
       e.preventDefault();
+
+      if(new Date(endDate) < new Date(startDate)){
+        setError('Invalid End Date')
+        setIsOpen(true)
+        return;
+      }
       if (!isFormValid()) {
         setError('All fields must be filled')
         setIsOpen(true)
@@ -42,7 +48,7 @@ const LeavePage = ({token}) => {
       }
     
       const form = {
-        leaveType: leaveType,
+        type: leaveType,
         startDate: startDate,
         endDate: endDate,
         reason: reason,
@@ -93,7 +99,7 @@ const LeavePage = ({token}) => {
               onChange={(e) => setLeaveType(e.target.value)}
             >
               <option value="">Choose leave type...</option>
-              <option value="sick">Sick Leave</option>
+              <option value="sick leave">Sick Leave</option>
               <option value="annual">Annual Leave</option>
               <option value="normal">Normal Leave</option>
             </select>
