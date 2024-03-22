@@ -9,6 +9,7 @@ const TaskCard = ({task}) => {
 
     const [isOpen,setIsOpen] = useState(false)
 
+
     const handleClick = () => {
         setIsOpen(true)
     }

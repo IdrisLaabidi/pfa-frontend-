@@ -3,6 +3,8 @@ import dropDown from '../../assets/arrow-drop-down-icon.svg'
 import NewTask from '../newTaskButton/newTask';
 import { useState } from 'react';
 import {format} from 'date-fns'
+import useFetch from '../../hooks/useFetch';
+import UserTag from '../userTag/userTag';
 
 
 const Header = ({project}) => {
@@ -12,23 +14,7 @@ const Header = ({project}) => {
     //get user from session storage
     const user = JSON.parse(sessionStorage.getItem("user"))
 
-    /*const handleClick = (status) => {
-        setShowDetails(status)
-        const element = document.querySelector('.tasksList_list__xcqmU'); // Replace with your actual class name
-        if (element) {
-            // Add or remove classes as needed
-            if(status){
-                element.classList.remove('TaskListHeight2'); // Remove the old class// Add a new class
-                element.classList.add('TaskListHeight1'); 
-            }else{
-                element.classList.remove('TaskListHeight'); // Remove the old class// Add a new class
-                element.classList.add('TaskListHeight2'); // Add a new class
-            }
-            
-        } else {
-            console.error('Element not found. Check if the class name is correct.');
-        }
-    }*/
+    const {data : users , isPending,error} = useFetch("http://localhost:4000/api/projects/projusers/"+project._id)
 
     return ( <>
         
@@ -59,7 +45,8 @@ const Header = ({project}) => {
             <div className={styles.flex3}>
                 <span className={styles.text1}> { "Status : " + project?.status}</span>
                 <span className={styles.text1}> Due Date :  {format(new Date(project?.dueDate), 'dd/MM/yyyy')}</span>
-                <span className={styles.text1}> { "Assigned to : idris laabidi , fathallah youssef , Miri riri ..."} </span>
+                <span className={styles.text1}> Assigned to : </span>
+                <div className={styles.users}>{users.map(user => <UserTag user={user}></UserTag>)}</div>
             </div>
         </div> }
         

@@ -48,3 +48,7 @@
   -o-transform: scaleY(-1);
   transform: scaleY(-1);
 }
+.users{
+    display: flex;
+    gap: 10px;
+}
