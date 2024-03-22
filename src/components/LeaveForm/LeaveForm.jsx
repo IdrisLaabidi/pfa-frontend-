@@ -30,7 +30,7 @@ const LeavePage = ({token}) => {
   };
   const isFormValid = () => {
     return leaveType && startDate && endDate && reason ;
-    return leaveType && startDate && endDate && reason ;
+    
   };
   
    
@@ -43,7 +43,7 @@ const LeavePage = ({token}) => {
       }
     
       const form = {
-        leaveType: leaveType,
+        type: leaveType,
         startDate: startDate,
         endDate: endDate,
         reason: reason,
@@ -88,16 +88,17 @@ const LeavePage = ({token}) => {
         <form>
             <label htmlFor="leaveType" className={styles.label}>Leave Type:</label>
             <select
-              className={styles.input}
-              id="leaveType"
-              value={leaveType}
-              onChange={(e) => setLeaveType(e.target.value)}
-            >
-              <option value="">Choose leave type...</option>
-              <option value="sick">Sick Leave</option>
-              <option value="annual">Annual Leave</option>
-              <option value="normal">Normal Leave</option>
+                className={styles.input}
+                id="leaveType"
+                value={leaveType}
+                onChange={(e) => setLeaveType(e.target.value)}
+                >
+                <option value="">Choose leave type...</option>
+                <option value="sick leave">Sick Leave</option>
+                <option value="annual">Annual Leave</option>
+                <option value="normal">Normal Leave</option>
             </select>
+
           
           
             <label htmlFor="startDate" className={styles.label}>Start Date:</label>
