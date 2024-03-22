@@ -22,6 +22,7 @@ import Status from '../statusLabel/statusLabel';
 import Select from 'react-select';
 import Submit from '../submitButton/submitButton';
 import Reset from '../restButton/resetButton'
+import UserTag from '../userTag/userTag';
 
 const TaskDetails = ({task,onDelete,onUpdate}) => {
 
@@ -102,7 +103,9 @@ const TaskDetails = ({task,onDelete,onUpdate}) => {
         setNewTask({...newTask, assignedTo: selectedOption.map(option => option.value._id)});
     }
     
-   
+    //get users assigned to
+    const {data : taskMembers} = useFetch("http://localhost:4000/api/task/taskusers/"+task._id)
+    console.log(taskMembers)
     
     //fetch users from db
     const {data: users, isPending, error} = useFetch('http://localhost:4000/api/auth/users')
@@ -161,7 +164,10 @@ const TaskDetails = ({task,onDelete,onUpdate}) => {
             </div>
             <div className={styles.flex}>
                 <img alt='icon' className={styles.icon} src={userIcon} />
-                <span className={styles.text}>assigned to : </span><span>idris laabidi , fathallah youssef , Miri riri ...</span>
+                <span className={styles.text}>assigned to : </span>
+                <div className={styles.assignedTo}>
+                    {taskMembers?.map(user => <UserTag user={user}/>)}
+                </div>
             </div>
             <div className={styles.flex2}>
                 <span className={styles.title}>Description</span>
@@ -180,7 +186,7 @@ const TaskDetails = ({task,onDelete,onUpdate}) => {
                 <InputField
                     icon={date}
                     type='date'
-                    //value={newTask.dueDate}
+                    value={task.dueDate}
                     onChange={(e) => {setNewTask({...newTask , dueDate : e.target.value})}}
                 />
                 <label className={styles.label}>Description</label>
