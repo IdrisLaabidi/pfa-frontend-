@@ -6,6 +6,9 @@ import send from '../../assets/send.png';
 import MessageObject from '../../components/message/messageObject';
 import styles from './Chat.module.css';
 import useFetch from '../../hooks/useFetch';
+import useConnect from '../../hooks/useConnect';
+import { MoonLoader } from 'react-spinners';
+
 
 const SERVER_URL = 'http://localhost:4000';
 const socket = io(SERVER_URL);
@@ -16,30 +19,15 @@ const Chat = () => {
     const [selectedProject, setSelectedProject] = useState(null);
     const [projects, setProjects] = useState([]);
     const [usersProject, setUsersProject] = useState([]);
+    const [userName , setUserName] = useState('');
     const messageAreaRef = useRef();
+    const {user, isPending,error} = useConnect();
     const userId = localStorage.getItem('user_id');
-
-    const { data: projectsData, isPending: isPendingProjects } = useFetch(`http://localhost:4000/api/projects/myprojects/${userId}`);
-
-    useEffect(() => {
-        if (!isPendingProjects && projectsData) {
-            setProjects(projectsData);
-        }
-    }, [projectsData, isPendingProjects]);
-
-    const handleSelectedProject = (projectId) => {
-        setSelectedProject(projectId);
-    };
-
-    const { data: UsersAssignedToaProject, isPending: isPendingUsers } = useFetch(`http://localhost:4000/api/projects/projusers/${selectedProject}`);
-
-    useEffect(() => {
-        if (!isPendingUsers && UsersAssignedToaProject) {
-            const newUsersProject = UsersAssignedToaProject.map(user => user._id);
-            setUsersProject(newUsersProject);
-        }
-    }, [UsersAssignedToaProject, isPendingUsers]);
-
+    const userNameinSession = JSON.parse((sessionStorage.getItem('user')));
+    const { data: projectsData, isPending: isPendingProjects ,error:errorProjects } = useFetch(`http://localhost:4000/api/projects/myprojects/${userId}`);
+    const { data: UsersAssignedToaProject, isPending: isPendingUsers , error:errorUsers } = useFetch(`http://localhost:4000/api/projects/projusers/${selectedProject}`);
+    const { data: allMessagesData, isPending: isPendingMessages , error : errorMessages} = useFetch(`http://localhost:4000/api/messages/allMessage/${selectedProject}`);
+    
     const sendMessage = () => {
         if (message !== '' && selectedProject) {
             const messageObj = {
@@ -48,20 +36,49 @@ const Chat = () => {
                 sentTo: usersProject, 
                 project: selectedProject,
                 sentAt: Date.now(),
-                who: ''
+                who: userName
             };
             socket.emit('chat message', messageObj);
             setMessage('');
         }
     };
 
-    const { data: allMessagesData, isPending: isPendingMessages } = useFetch(`http://localhost:4000/api/messages/allMessage/${selectedProject}`);
+    const scrollToBottom = () => {
+        if (messageAreaRef.current) {
+            messageAreaRef.current.scrollTop = messageAreaRef.current.scrollHeight;
+        }
+    };
+
+    const handleSelectedProject = (projectId) => {
+        setSelectedProject(projectId);
+    };
+
+    useEffect(()=>{
+        if(!isPending){
+          setUserName(userNameinSession.firstName + ' ' +userNameinSession.lastName)
+        }
+      },[user , isPending])
+
+    useEffect(() => {
+        if (!isPendingProjects && projectsData) {
+            setProjects(projectsData);
+            
+        }
+    }, [projectsData, isPendingProjects]);
+
+    useEffect(() => {
+        if (!isPendingUsers && UsersAssignedToaProject) {
+            const newUsersProject = UsersAssignedToaProject.map(user => user._id);
+            setUsersProject(newUsersProject);
+        }
+    }, [UsersAssignedToaProject, isPendingUsers]);
 
     useEffect(() => {
         if (!isPendingMessages && allMessagesData) {
             const formattedMessages = allMessagesData.map(mssg => ({
                 ...mssg,
-                sender: mssg.sender === userId ? 'self' : 'other'
+                sender: mssg.sender === userId ? 'self' : 'other',
+                who : mssg.who
             }));
             setMessages(formattedMessages);
         }
@@ -99,12 +116,13 @@ const Chat = () => {
         };
     }, [sendMessage]);
 
-    const scrollToBottom = () => {
-        if (messageAreaRef.current) {
-            messageAreaRef.current.scrollTop = messageAreaRef.current.scrollHeight;
+    useEffect(() => {
+        if (projectsData && projectsData.length > 0 && !selectedProject) {
+            setSelectedProject(projectsData[0]._id);
+            setProjects(projectsData);
         }
-    };
-
+    }, [projectsData, selectedProject]);
+    
     return (
         <div className={styles.chatContainer}>
             <aside className={styles.userProjectsGroupsContainer}>
@@ -114,45 +132,50 @@ const Chat = () => {
                 <ul>
                     {projects.map((project)=>{
                         return(
-                            <li className={styles.project} key = {project._id} onClick={()=>{handleSelectedProject(project._id)}}>
+                            <li className={`${project._id !== selectedProject ? styles.project : styles.selectedProject}`} key = {project._id} onClick={()=>{handleSelectedProject(project._id)}}>
                                 {project.name}
                             </li>
                         )
                     })}
                 </ul>
             </aside>
-            <div className={styles.headerContainer}>
-                    Group Chat
-            </div>
-            <div className={styles.messagesArea} ref={messageAreaRef}>
-                
-                {messages.map((mssg,index)=>{
-                    return(
-                        <MessageObject key={index} message={mssg} />
-                    )
-                })}
-            </div>
-            <div id={styles.sendMessageContainer}>    
-                <input 
-                    id='inputMessage'
-                    className={styles.inputMessage}
-                    type='text' 
-                    placeholder='Type your message here ...'
-                    value={message}
-                    onChange={(e)=>setMessage(e.target.value)}
-                />
-               <button className={styles.attachButton}> <img src={attach} className={styles.attach}/></button>
-               <button className={styles.sendImageButton}><img src={sendImage} className={styles.sendImage}/></button>
-                <button 
-                id='sendMessageButton'
-                className={styles.sendMessageButton}
-                onClick={sendMessage}
-                type='submit'
-                >
-                    <img src={send} className={styles.sendMessage}/>
-                    Send message
-                </button>
-            </div>
+            <section className={styles.messagesSection}>
+                <div className={styles.headerContainer}>
+                        Group Chat
+                </div>
+                <div className={styles.messagesArea} ref={messageAreaRef}>
+                {(isPendingMessages||isPendingUsers)&&(
+                    <div className={styles.loaderContainer}> <MoonLoader size={50}/> </div>
+                    
+                )}
+                    {messages.map((mssg,index)=>{
+                        return(
+                            <MessageObject key={index} message={mssg} />
+                        )
+                    })}
+                </div>
+                <div id={styles.sendMessageContainer}>    
+                    <input 
+                        id='inputMessage'
+                        className={styles.inputMessage}
+                        type='text' 
+                        placeholder='Type your message here ...'
+                        value={message}
+                        onChange={(e)=>setMessage(e.target.value)}
+                    />
+                <button className={styles.attachButton}> <img src={attach} className={styles.attach}/></button>
+                <button className={styles.sendImageButton}><img src={sendImage} className={styles.sendImage}/></button>
+                    <button 
+                    id='sendMessageButton'
+                    className={styles.sendMessageButton}
+                    onClick={sendMessage}
+                    type='submit'
+                    >
+                        <img src={send} className={styles.sendMessage}/>
+                        Send message
+                    </button>
+                </div>
+            </section>
         </div>
   )
 }

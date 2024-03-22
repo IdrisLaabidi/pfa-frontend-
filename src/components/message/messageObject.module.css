@@ -28,12 +28,17 @@
   
   .messageContent {
     font-size: 20px;
-    color: #333; 
+    color: #000000; 
   }
   
-  .sentAt {
-    font-size: 0.75em;
+  .sendAt {
+    font-size:0.9em;
     color: #6c757d; /* Dark grey color for timestamp */
     text-align: right;
     margin-top: 5px;
+  }
+  .senderIdentity{
+    height: 0px;
+    width: 0px;
+    opacity: 0%;
   }
