@@ -38,7 +38,7 @@ const SideMenu = ( {path,user} ) => {
     return ( 
         <aside className={styles.SideMenu}>
             <img className={styles.logo} src={logo} alt="logo"  />
-            <CreateButton/>
+            {user.role === 'leader' && <CreateButton/>}
             {menuItems.map(item => <ListItem icon={item.icon} 
                 text={item.text} 
                 active={item.path === path} 

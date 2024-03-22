@@ -9,6 +9,9 @@ const Header = ({project}) => {
 
     const [showDetails,setShowDetails]=useState(false)
 
+    //get user from session storage
+    const user = JSON.parse(sessionStorage.getItem("user"))
+
     /*const handleClick = (status) => {
         setShowDetails(status)
         const element = document.querySelector('.tasksList_list__xcqmU'); // Replace with your actual class name
@@ -38,7 +41,7 @@ const Header = ({project}) => {
                         <img src={dropDown} className={styles.icon} alt='icon' />
                     </button>
                 </div>
-                <NewTask project={project}/>
+                { user.role==="leader" && <NewTask project={project}/>}
             </div>
         </div> }
         
@@ -51,7 +54,7 @@ const Header = ({project}) => {
                         <img src={dropDown} className={`${styles.icon} ${styles.iconFlipped}`}  alt='icon' />
                     </button>
                 </div>
-                <NewTask  project={project}/>
+                { user.role==="leader" && <NewTask project={project}/>}
             </div>
             <div className={styles.flex3}>
                 <span className={styles.text1}> { "Status : " + project?.status}</span>

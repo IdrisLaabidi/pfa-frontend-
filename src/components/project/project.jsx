@@ -24,6 +24,9 @@ const Project = ({ data }) => {
     //importing token
     const token = Cookies.get("token")
 
+    //getting user from session storage
+    const user = JSON.parse(sessionStorage.getItem("user"))
+
     //delete project
     const [isOpen1,  setIsOpen1] = useState(false)
     const [isOpen2,  setIsOpen2] = useState(false)
@@ -49,11 +52,13 @@ const Project = ({ data }) => {
     //fetch users from db
     const {data: users, isPending, error} = useFetch('http://localhost:4000/api/auth/users', token)
     const {data: projusers, isPending1, error1} = useFetch('http://localhost:4000/api/projects/projusers/'+data._id)
-
+    
     //store users in an array
-    const userlist = users? users.map(user => (
-        {value:user, label: `${user?.firstName} ${user?.lastName}`}
-     )) : [];
+    const members = users?.filter(user => user.role === 'member')
+    const userlist = members? members?.map(user => (
+       {value:user, label: `${user.firstName} ${user.lastName}`}
+    )) : [];
+
      const projuserlist = projusers? projusers.map(projuser => (
          {value:projuser, label: `${projuser?.firstName} ${projuser?.lastName}`}
      )): []; 
@@ -136,8 +141,17 @@ const Project = ({ data }) => {
         <div className={styles.Project}>
             <div className={styles.ProjectHeader}>
                 <h2 className={styles.Name}>{data.name}</h2>
-                <button className={styles.button} onClick={() => setIsOpen1(true)}><img className={styles.icon} src={editIcon}></img></button>
-                <button className={styles.button} onClick={() => setIsOpen2(true)}><img className={styles.icon} src={deleteIcon}></img></button>
+                {user.role==="leader" && <button 
+                    className={styles.button} 
+                    title='edit Project'
+                    onClick={() => setIsOpen1(true)}>
+                        <img className={styles.icon} src={editIcon} alt='icon'></img>
+                </button>}
+                {user.role==="leader" && <button 
+                    className={styles.button} 
+                    title='Delete Project'
+                    onClick={() => setIsOpen2(true)}><img className={styles.icon} src={deleteIcon} alt='icon'></img>
+                </button>}
             </div>
             <div className={styles.ProjectSeparator}></div>
             <div className={styles.ProjetInfo} 

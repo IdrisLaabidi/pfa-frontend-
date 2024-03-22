@@ -2,7 +2,7 @@ import NotifButton from '../notifButton/notifButton';
 import UserAccount from '../userAccount/userAccount';
 import styles from './navBar.module.css'
 
-const NavBar = ({title,user,isLoading}) => {
+const NavBar = ({title,user,isLoading,error}) => {
     return ( 
         <nav className={styles.navbar}>
           <div className={styles.navbarItem}>{title}</div>

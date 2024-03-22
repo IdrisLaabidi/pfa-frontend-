@@ -8,6 +8,8 @@ import deleteIcon from '../../assets/delete-icon.svg'
 import modifyIcon from '../../assets/edit-icon.svg'
 import title from '../../assets/title-icon.svg'
 import date from '../../assets/date-icon-white.svg'
+import complete from '../../assets/done-all-alt-round-icon.svg'
+import inProgress from '../../assets/in-progress-icon.svg'
 //import necessities
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router';
@@ -34,6 +36,9 @@ const TaskDetails = ({task,onDelete,onUpdate}) => {
         assignedTo : task.assignedTo,
         dueDate : task.dueDate
     })
+
+    //get user from session storage
+    const user = JSON.parse(sessionStorage.getItem("user"))
 
     const handleDelete = () => {
         fetch("http://localhost:4000/api/task/tasks/"+task._id,
@@ -72,6 +77,27 @@ const TaskDetails = ({task,onDelete,onUpdate}) => {
         })
     }
 
+    const handleUpdateStatus = (status) => {
+        fetch("http://localhost:4000/api/task/tasks/"+task._id,
+            {  method: 'PUT',
+                headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ status : status})
+            }
+        ).then( result => {
+            if (result){
+               console.log('task updated')
+               onUpdate()
+               navigate(0)
+            }
+        }).catch(error => {
+            console.log(error)
+        })
+    }
+
+
     const handleSelectChange = (selectedOption) => {
         setNewTask({...newTask, assignedTo: selectedOption.map(option => option.value._id)});
     }
@@ -106,12 +132,18 @@ const TaskDetails = ({task,onDelete,onUpdate}) => {
         {!edit && <div className={styles.container}>
             <div className={styles.flex}>
                 <span className={styles.title}>{task.title}</span>
-                <button className={styles.bttn} title='Edit Task'>
+                {user.role==="leader" && <button className={styles.bttn} title='Edit Task'>
                     <img alt='modify' src={modifyIcon} className={styles.icon} onClick={() => setEdit(true)}/>
-                </button>
-                <button className={styles.bttn}>
+                </button>}
+                {user.role==="leader" && <button className={styles.bttn}>
                     <img alt='delete' src={deleteIcon} className={styles.icon} onClick={handleDelete} title='Delete Task'/>
-                </button>
+                </button>}
+                {user.role==="member" && <button className={styles.bttn}>
+                    <img alt='complete' src={complete} className={styles.icon} onClick={() => {handleUpdateStatus('completed')}} title='mark as complete'/>
+                </button>}
+                {user.role==="member" && <button className={styles.bttn}>
+                    <img alt='in progress' src={inProgress} className={styles.icon} onClick={() => {handleUpdateStatus('in-progress')}} title='mark as in progress'/>
+                </button>}
             </div>
             <div className={styles.flex}>
                 <img alt='icon' className={styles.icon} src={priorityIcon} />
