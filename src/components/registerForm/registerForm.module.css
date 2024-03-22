@@ -57,3 +57,10 @@
     border : none;
     border-radius: 8px;
 }
+.error{
+    color: red;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+    margin-bottom: 10px;
+}

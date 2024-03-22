@@ -27,7 +27,7 @@ const SideMenu = ( {path,user} ) => {
     }
 
     const menuItems = [
-        {key: 1 ,text : "Projects" , icon: project , path:"/projects"},
+        {key: 1 ,text : "Projects" , icon: project , path:"/"},
         {key: 2 ,text : "Tasks", icon: tasks, path:"/tasks"},
         {key: 3 ,text :  "Chat", icon: chat, path:"/chat"},
         {key: 4 ,text :  "Meet", icon: meet, path:"/meet"},
@@ -38,7 +38,7 @@ const SideMenu = ( {path,user} ) => {
     return ( 
         <aside className={styles.SideMenu}>
             <img className={styles.logo} src={logo} alt="logo"  />
-            <CreateButton/>
+            {user.role === 'leader' && <CreateButton/>}
             {menuItems.map(item => <ListItem icon={item.icon} 
                 text={item.text} 
                 active={item.path === path} 

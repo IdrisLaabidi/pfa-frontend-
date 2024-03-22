@@ -1,12 +1,9 @@
 //imports
 import { useState,useEffect } from "react"
-import { useLocation,useNavigate } from "react-router"
 import Cookies from "js-cookie"
 
 
 const useConnect = () => {
-    const {state} = useLocation()
-    const navigate = useNavigate()
     const [user, setUser] = useState("")
     const [error,setError] = useState(null)//used to set the error text on the page
     const [isPending,setIsPending] = useState(true)//used to set the loading animation
@@ -25,22 +22,23 @@ const useConnect = () => {
           )
         const json = await response.json();
         if(!response.ok){
-            alert('fetching user failed !please try again')
+            console.log(json.message)
         }
         if(response.ok){
             console.log("user fetched" , json)
+            sessionStorage.setItem("user",JSON.stringify(json.user))
             setError(null)
             setIsPending(false)
             setUser(json.user)
         }
      } catch (error) {
-      alert('Oops! Failed to connect to the API.');
+      console.log(error)
       setIsPending(false)
       setError(error.message)
      }
    } 
 
-  useEffect(() => {
+  /*useEffect(() => {
     try {
       //check if we got a user object from an other route buy using navigate
       const user_data = state.user
@@ -54,19 +52,49 @@ const useConnect = () => {
       const token = Cookies.get("token")
       const id = localStorage.getItem("user_id")
       if (token && id){
-        console.log("token",token ,"id", id)
         getUser(id,token)
       }
       if (!token || !id){
         //if the cookie expired or the id is unavailable we quit the route to the login 
-        alert("session expired")
+        setIsPending(false)
+        setError("session expired")
         Cookies.remove(token)
         localStorage.removeItem("user_id")
-        navigate('/login')
+        
       }
     }
   }, []);
   return [user, isPending,error]
+}*/
+
+useEffect(() => {
+
+    //check if we got a user storerd in session storage 
+    const userData =JSON.parse(sessionStorage.getItem("user")) 
+    if(userData){
+      console.log("data from session storage", userData)
+      setUser(userData)
+      setIsPending(false)
+    }
+    if(!userData){
+        //get the token 
+        const token = Cookies.get("token")
+        //get the user id from local storage
+        const id = localStorage.getItem("user_id")
+        if (token && id){
+          getUser(id,token)
+        }
+        if (!token || !id){
+          //if the cookie expired or the id is unavailable we quit the route to the login 
+          setIsPending(false)
+          setError("session expired")
+          Cookies.remove(token)
+          localStorage.removeItem("user_id")
+            
+        }
+    }
+},[])
+return  [user, isPending,error]
 }
 
 export default useConnect;

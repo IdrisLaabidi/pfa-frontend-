@@ -1,7 +1,3 @@
-import Header from "./components/projectHeader/projectHeader";
-
-
-
 const Test = () => {
     <div>this is a test</div>
 }

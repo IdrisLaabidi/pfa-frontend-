@@ -1,0 +1,21 @@
+.spinnerContainer{
+    position: relative;
+}
+.spinner {
+    z-index: 9999; /* Set a high z-index to ensure it appears on top of other elements */
+    border: 9px solid rgb(32, 29, 29) ;
+    border-top: 9px solid blue; 
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    animation: spin 1s linear infinite; 
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

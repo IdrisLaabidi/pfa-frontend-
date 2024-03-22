@@ -4,6 +4,7 @@ import emailIcon from '../../assets/email-icon.svg'
 import pwdIcon from '../../assets/password-icon.svg'
 import styles from './loginForm.module.css'
 import { useNavigate } from "react-router"
+import Modal from '../modal/Modal'
 
 
 const LoginForm = () => {
@@ -12,6 +13,8 @@ const LoginForm = () => {
 
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")
+    const [isOpen,setIsOpen] = useState(false)
+    const [error,setError] = useState(null)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -28,22 +31,26 @@ const LoginForm = () => {
             const json = await response.json();
             
             if(!response.ok){
-                alert('Login failed !please try again')
+                console.log(json.message)
+                setError(json.message)
+                setIsOpen(true)
             }
             if(response.ok){
                 console.log("user logged in" , json)
                 localStorage.setItem("user_id",json.user._id)
-                navigate('/', { state: { user: json.user } })
-                //navigate('/Home')
+                sessionStorage.setItem("user",JSON.stringify(json.user))
+                navigate('/')
             }
             
         } catch (err) {
-            alert('Oops! Failed to connect to the API.');
+            console.log(err.message)
+            setError("Unexpected error occured")
+            setIsOpen(true)
         }
           
     }
 
-    return ( 
+    return (<>
         <div className={styles.container}>
             <form className={styles.formContainer}>
                 <span className={styles.label}>Email address</span>
@@ -51,6 +58,7 @@ const LoginForm = () => {
                     icon={emailIcon} 
                     type="email"
                     value={email}
+                    required
                     onChange={(e) => {setEmail(e.target.value)}}
                     placeholder="example@email.com"
                 />
@@ -59,6 +67,7 @@ const LoginForm = () => {
                     icon={pwdIcon} 
                     type="password"
                     value={password}
+                    required={true}
                     onChange={(e) => {setPassword(e.target.value)}}
                     placeholder="Enter your password"
                 />
@@ -66,7 +75,11 @@ const LoginForm = () => {
                 <button className={styles.loginButton} onClick={handleSubmit}>Login now</button>
             </form>
         </div>
-     );
+        <Modal title='Warning' open={isOpen} onClose={()=>{
+            setError(null)
+            setIsOpen(false)
+        }}><span className={styles.error}>Failed to Log in : {error}</span></Modal>
+    </>);
 }
  
 export default LoginForm;
