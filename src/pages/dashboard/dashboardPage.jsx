@@ -2,7 +2,6 @@ import React from 'react';
 import useFetch from '../../hooks/useFetch';
 import Project from '../../components/project/project';
 import styles from './dashboardPage.module.css'
-import Spinner from '../../components/spinner/spinner'
 import LoadingModal from '../../components/loadingModal/LoadingModal';
 
 const ProjectPage = ({ token}) => {
