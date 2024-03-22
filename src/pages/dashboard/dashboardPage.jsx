@@ -5,7 +5,7 @@ import styles from './dashboardPage.module.css'
 import Spinner from '../../components/spinner/spinner'
 import LoadingModal from '../../components/loadingModal/LoadingModal';
 
-const ProjectPage = ({ token }) => {
+const ProjectPage = ({ token}) => {
   const userId = localStorage.getItem("user_id")
   const { data: projects, isPending, error } = useFetch(`http://localhost:4000/api/projects/myprojects/${userId}`, token);
 

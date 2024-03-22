@@ -10,7 +10,7 @@ import Layout from "./components/layout/layout";
 import Tasks from "./pages/tasksPage/Tasks";
 import NewProjectPage from "./pages/newProject/newProjectPage";
 import Profile from "./pages/profile/profilePage";
-
+import Error from "./pages/Error/errorPage"
 
 function App() {
 
@@ -25,6 +25,7 @@ function App() {
           <Route path="/Tasks" element={ <Layout path={'/tasks'} children={<Tasks/>} title={'tasks'} /> } />
           <Route path="/chat" element={ <Layout path={'/chat'} children={<Test/>} title={'Chat'} />}/>
           <Route path="/profile" element={<Layout path={'/profile'} children={<Profile/>}   />} />
+          <Route path="*" element={<Error/>}/>
         </Routes>
       </BrowserRouter>
     </div>

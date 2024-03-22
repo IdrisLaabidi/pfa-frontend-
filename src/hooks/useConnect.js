@@ -25,7 +25,7 @@ const useConnect = () => {
           )
         const json = await response.json();
         if(!response.ok){
-            alert('fetching user failed !please try again')
+            console.log(json.message)
         }
         if(response.ok){
             console.log("user fetched" , json)
@@ -34,7 +34,7 @@ const useConnect = () => {
             setUser(json.user)
         }
      } catch (error) {
-      alert('Oops! Failed to connect to the API.');
+      console.log(error)
       setIsPending(false)
       setError(error.message)
      }
@@ -58,10 +58,11 @@ const useConnect = () => {
       }
       if (!token || !id){
         //if the cookie expired or the id is unavailable we quit the route to the login 
-        alert("session expired")
+        setIsPending(false)
+        setError("session expired")
         Cookies.remove(token)
         localStorage.removeItem("user_id")
-        navigate('/login')
+        
       }
     }
   }, []);
