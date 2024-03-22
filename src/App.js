@@ -5,12 +5,8 @@ import './Themes/Themes'
 import ProjectPage from "./pages/dashboard/dashboardPage";
 import LoginPage from "./pages/login/loginPage";
 import RegisterPage from "./pages/register/registerPage";
-import Test from "./test";
 import Layout from "./components/layout/layout";
-import Cookies from "js-cookie";
 import LeavePage from "./pages/leave/LeavePage";
-
-
 import Tasks from "./pages/tasksPage/Tasks";
 import NewProjectPage from "./pages/newProject/newProjectPage";
 import Profile from "./pages/profile/profilePage";
@@ -30,6 +26,7 @@ function App() {
           <Route path="/Tasks" element={ <Layout path={'/tasks'} children={<Tasks/>} title={'tasks'} /> } />
           <Route path="/chat" element={ <Layout path={'/chat'} children={<Chat/>} title={'Chat'} />}/>
           <Route path="/profile" element={<Layout path={'/profile'} children={<Profile/>}   />} />
+          <Route path="/leave" element={ <Layout path={'/leave'} children={<LeavePage/>} title={'Leave'} />}/>
           <Route path="*" element={<Error/>}/>
         </Routes>
       </BrowserRouter>
