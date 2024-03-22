@@ -58,7 +58,17 @@ const TaskDetails = ({task,onDelete,onUpdate}) => {
         })
     }
 
+    //get project
+    const project = JSON.parse(sessionStorage.getItem("project"))
+
     const handleUpdate = () => {
+
+        // Verify wether the task's dueDate is posterior to the project's dueDate
+        if (new Date(newTask.dueDate) > new Date(project.dueDate)) {
+            alert("Choose a date before the project's due date");
+            return;
+        }
+
         fetch("http://localhost:4000/api/task/tasks/"+task._id,
             {  method: 'PUT',
                 headers: {
@@ -141,10 +151,10 @@ const TaskDetails = ({task,onDelete,onUpdate}) => {
                 {user.role==="leader" && <button className={styles.bttn}>
                     <img alt='delete' src={deleteIcon} className={styles.icon} onClick={handleDelete} title='Delete Task'/>
                 </button>}
-                {user.role==="member" && <button className={styles.bttn}>
+                {user.role==="member" && taskMembers && taskMembers.find(u => u._id === user._id) && <button className={styles.bttn}>
                     <img alt='complete' src={complete} className={styles.icon} onClick={() => {handleUpdateStatus('completed')}} title='mark as complete'/>
                 </button>}
-                {user.role==="member" && <button className={styles.bttn}>
+                {user.role==="member" && taskMembers && taskMembers.find(u => u._id === user._id) && <button className={styles.bttn}>
                     <img alt='in progress' src={inProgress} className={styles.icon} onClick={() => {handleUpdateStatus('in-progress')}} title='mark as in progress'/>
                 </button>}
             </div>

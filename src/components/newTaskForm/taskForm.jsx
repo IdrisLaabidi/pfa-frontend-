@@ -96,6 +96,11 @@ const TaskForm = ({project ,onSubmit}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        // Verify wether the task's dueDate is posterior to the project's dueDate
+        if (new Date(form.dueDate) > new Date(project.dueDate)) {
+            alert("Choose a date before the project's due date");
+            return;
+        }
         fetch('http://localhost:4000/api/task/createtask/',{
            headers :{ 
                 Authorization: `Bearer ${token}`,
