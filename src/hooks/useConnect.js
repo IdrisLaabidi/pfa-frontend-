@@ -32,7 +32,6 @@ const useConnect = () => {
             setUser(json.user)
         }
      } catch (error) {
-      console.log(error)
       setIsPending(false)
       setError(error.message)
      }
@@ -72,7 +71,6 @@ useEffect(() => {
     //check if we got a user storerd in session storage 
     const userData =JSON.parse(sessionStorage.getItem("user")) 
     if(userData){
-      console.log("data from session storage", userData)
       setUser(userData)
       setIsPending(false)
     }

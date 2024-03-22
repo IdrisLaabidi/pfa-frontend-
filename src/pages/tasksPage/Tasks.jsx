@@ -14,7 +14,7 @@ const Tasks = () => {
     useEffect(() => {
         // Check if project is null or undefined
         if (!project) {
-            // Redirect to the index page (replace "index.html" with your actual index page)
+            // Redirect to the home page)
             navigate('/')
         }
     }, [project]); // Run this effect whenever project changes
