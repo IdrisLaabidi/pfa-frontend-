@@ -1,12 +1,16 @@
+//import necessities
 import React, { useEffect, useState } from 'react';
-import styles from './project.module.css';
-import styles1 from '../newProjectForm/newProjectForm.module.css'
-import {format} from 'date-fns';
 import { useNavigate } from 'react-router';
 import Cookies from 'js-cookie';
+import Select from 'react-select';
+//import styles
+import styles from './project.module.css';
+import styles1 from '../newProjectForm/newProjectForm.module.css'
+//import date format ('format' library to adjust the wierd date format in mongodb)
+import {format} from 'date-fns';
+//import custom hook & components
 import useFetch from '../../hooks/useFetch';
 import InputField from '../inputField/inputField';
-import Select from 'react-select';
 //import icons
 import deleteIcon from '../../assets/delete-icon.svg'
 import editIcon from '../../assets/edit-icon.svg'
@@ -27,7 +31,7 @@ const Project = ({ data }) => {
     //getting user from session storage
     const user = JSON.parse(sessionStorage.getItem("user"))
 
-    //delete project
+    //DELETE PROJECT
     const [isOpen1,  setIsOpen1] = useState(false)
     const [isOpen2,  setIsOpen2] = useState(false)
 
@@ -48,12 +52,12 @@ const Project = ({ data }) => {
         })
     }
     
-    //update project
-    //fetch users from db
+    //UPDATE PROJECT
+    //fetch users from db: all users & users assigned to the project
     const {data: users, isPending, error} = useFetch('http://localhost:4000/api/auth/users', token)
     const {data: projusers, isPending1, error1} = useFetch('http://localhost:4000/api/projects/projusers/'+data._id)
     
-    //store users in an array
+    //store users in arrays : userlist for all users & projuserlist for users assigned to a project
     const members = users?.filter(user => user.role === 'member')
     const userlist = members? members?.map(user => (
        {value:user, label: `${user.firstName} ${user.lastName}`}
@@ -63,7 +67,8 @@ const Project = ({ data }) => {
          {value:projuser, label: `${projuser?.firstName} ${projuser?.lastName}`}
      )): []; 
 
-    //update form to db
+    //update form to db:
+    //  initializing useState() hook for the whole form
     const [form, setForm] = useState({
         name: '',
         description: '',
@@ -73,6 +78,7 @@ const Project = ({ data }) => {
         manager: localStorage.getItem("user_id"),
     })
 
+    //  function to handle the selected changes on project collaborators
     const handleSelectChange = (selectedOption) => {
         const selectedValues = selectedOption.map((option) => option.value._id);
         setForm((prevForm) => ({
@@ -81,6 +87,7 @@ const Project = ({ data }) => {
         }));
       };
       
+      //  initializing useEffect() hook to change the default values when opening the form into those of the project
       useEffect(() => {
         if (!isPending && users) {
           setForm((prevForm) => ({
@@ -93,12 +100,13 @@ const Project = ({ data }) => {
         }
       }, [data, isPending, users]);
       
-      // Function to format the date value
+      //  function to format the date value
       const formatDate = (dateString) => {
         const date = new Date(dateString);
         return format(date, 'yyyy-MM-dd');
       };
 
+      //  function to fetch the changes to backend
       const updateHandler = async (e) => {
         e.preventDefault();
         console.log('Token: ', token)
