@@ -1,6 +1,7 @@
 //import components
 import InputField from '../inputField/inputField'
 import Modal from '../modal/Modal'
+import Error from '../Error/Error'
 //import css styles
 import styles from './registerForm.module.css'
 //import icons
@@ -10,7 +11,7 @@ import pwdIcon from '../../assets/password-icon.svg'
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router'
-import useRegister from '../../hooks/useRegister'
+
 
 
 const RegisterForm = () => {
@@ -25,8 +26,17 @@ const RegisterForm = () => {
     const[error,setError] = useState(null)
     const[isOpen,setIsOpen] = useState(false)
 
+    const validateForm = ()=>{
+        return email && password && confirmPwd && fname && lname && role
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault()
+        if(!validateForm){
+            setError('All fields must be filled in')
+            setIsOpen(true)
+        }
+
         let firstName = fname
         let lastName = lname
         const user = {email ,firstName, lastName, password ,role}
@@ -130,7 +140,9 @@ const RegisterForm = () => {
             <Modal title='Warning' open={isOpen} onClose={()=>{
             setError(null)
             setIsOpen(false)
-            }}><span className={styles.error}>Failed to Register : {error}</span></Modal>
+            }}>
+                <Error text={"Failed to Register :" +error}></Error> 
+            </Modal>
         </div>
      );
 }

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import Submit from '../submitButton/submitButton';
 import Modal from '../modal/Modal'
+import Error from '../Error/Error'
 
 
 
@@ -10,6 +11,7 @@ const LeavePage = ({token}) => {
   const userId = localStorage.getItem("user_id");
   const navigate = useNavigate()
 
+  const id = localStorage.getItem('user_id')
   const [leaveType, setLeaveType] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
@@ -156,8 +158,8 @@ const LeavePage = ({token}) => {
          
         </form>
         <Submit handleSubmit={handleSubmit} className={styles.buttn} center={true}></Submit>
-        <Modal title='warning' open={isOpen} onClose={() => {setIsOpen(false)}}>
-          <span>{error}</span>
+        <Modal title='warning' open={isOpen} onClose={() => {setIsOpen(false) ; navigate(0)}}>
+          <Error text={error}></Error>
         </Modal>
     </div>
    

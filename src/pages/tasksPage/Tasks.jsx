@@ -17,7 +17,7 @@ const Tasks = () => {
             // Redirect to the home page)
             navigate('/')
         }
-    }, [project]); // Run this effect whenever project changes
+    }, [project,navigate]); // Run this effect whenever project changes
 
     const {data : tasks , isPending, error} = useFetch('http://localhost:4000/api/task/projtasks/'+project?._id)
 
