@@ -24,9 +24,9 @@ const Chat = () => {
     const {user, isPending,error} = useConnect();
     const userId = localStorage.getItem('user_id');
     const userNameinSession = JSON.parse((sessionStorage.getItem('user')));
-    const { data: projectsData, isPending: isPendingProjects ,error:errorProjects } = useFetch(`http://localhost:4000/api/projects/myprojects/${userId}`);
-    const { data: UsersAssignedToaProject, isPending: isPendingUsers , error:errorUsers } = useFetch(`http://localhost:4000/api/projects/projusers/${selectedProject}`);
-    const { data: allMessagesData, isPending: isPendingMessages , error : errorMessages} = useFetch(`http://localhost:4000/api/messages/allMessage/${selectedProject}`);
+    const { data: projectsData, isPending: isPendingProjects  } = useFetch(`http://localhost:4000/api/projects/myprojects/${userId}`);
+    const { data: UsersAssignedToaProject, isPending: isPendingUsers } = useFetch(`http://localhost:4000/api/projects/projusers/${selectedProject}`);
+    const { data: allMessagesData, isPending: isPendingMessages } = useFetch(`http://localhost:4000/api/messages/allMessage/${selectedProject}`);
     
     const sendMessage = () => {
         if (message !== '' && selectedProject) {
@@ -125,6 +125,7 @@ const Chat = () => {
     
     return (
         <div className={styles.chatContainer}>
+            <p>{error}</p>
             <aside className={styles.userProjectsGroupsContainer}>
                 <h3>
                     Select a Project Group
