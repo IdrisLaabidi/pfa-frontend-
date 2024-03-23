@@ -33,7 +33,8 @@ const SideMenu = ( {path,user} ) => {
         {key: 4 ,text :  "Meet", icon: meet, path:"/meet"},
         {key: 5 ,text : "Profile" , icon: profile, path:"/profile"},
         {key: 6 ,text :  "Leave", icon: leave, path:"/leave"},
-        {key: 7 ,text :  "Settings", icon: setting, path:"/setting"} ];
+        {key: 7 ,text :  "Settings", icon: setting, path:"/setting"},
+    {key: 8 ,text :  "LeaveRequest", icon: setting, path:"/leaveRequest"} ];
 
     return ( 
         <aside className={styles.SideMenu}>

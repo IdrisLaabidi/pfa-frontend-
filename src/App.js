@@ -12,6 +12,7 @@ import NewProjectPage from "./pages/newProject/newProjectPage";
 import Profile from "./pages/profile/profilePage";
 import Chat from "./pages/Chat/Chat";
 import Error from "./pages/Error/errorPage";
+import LeaveRequest from "./pages/LeaveRequest/leaveRequest";
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="/chat" element={ <Layout path={'/chat'} children={<Chat/>} title={'Chat'} />}/>
           <Route path="/profile" element={<Layout path={'/profile'} children={<Profile/>}   />} />
           <Route path="/leave" element={ <Layout path={'/leave'} children={<LeavePage/>} title={'Leave'} />}/>
+          <Route path="/leaveRequest" element={ <Layout path={'/leaveRequest'} children={<LeaveRequest/>} title={'Leave Request'} />}/>
           <Route path="*" element={<Error/>}/>
         </Routes>
       </BrowserRouter>

@@ -7,7 +7,7 @@ import Modal from '../modal/Modal'
 
 
 const LeavePage = ({token}) => {
-
+  const userId = localStorage.getItem("user_id");
   const navigate = useNavigate()
 
   const [leaveType, setLeaveType] = useState('');
@@ -53,6 +53,7 @@ const LeavePage = ({token}) => {
         startDate: startDate,
         endDate: endDate,
         reason: reason,
+        concernedUser:userId,
         //file: selectedFile
       };
 
