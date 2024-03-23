@@ -67,3 +67,7 @@
     display: flex;
     justify-content: flex-end;
 }
+.err{
+    color: red;
+    font-size: 20px;
+}

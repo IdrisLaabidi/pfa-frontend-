@@ -3,8 +3,7 @@ body{
   background: var(--color-gradient);
   margin: 0;
   padding: 0;
-  /*background-repeat: no-repeat;
-  background-size: cover;*/
+
 }
 *{
   font-family: var(--fonts-primary);
@@ -13,4 +12,5 @@ body{
   padding: 0px;
   margin: 0px;
   max-height: 707px;
+  overflow-y: scroll;
 }

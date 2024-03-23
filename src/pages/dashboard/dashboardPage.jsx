@@ -1,7 +1,6 @@
 import React from 'react';
 import useFetch from '../../hooks/useFetch';
 import Project from '../../components/project/project';
-import Spinner from '../../components/spinner/spinner';
 import styles from './dashboardPage.module.css'
 import LoadingModal from '../../components/loadingModal/LoadingModal';
 
