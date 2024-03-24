@@ -45,11 +45,12 @@
     height: 32px;
     width: 32px;
     margin-left: 15px;
-    cursor: pointer;
+    
 }
 .button {/*buttons that contain icons*/
     border: none;
     background: transparent;
+    cursor: pointer;
 }
 
 

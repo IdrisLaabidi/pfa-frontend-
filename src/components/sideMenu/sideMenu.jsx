@@ -38,9 +38,9 @@ const SideMenu = ( {path,user} ) => {
         {key: 7 ,text :  "Settings", icon: setting, path:"/setting"} ]
 
     const menuItems2 = [
-        {key:1 ,text : "Profile" , icon: profile, path:"/admin/profile"},
+        {key:1 ,text : "Members" , icon:members, path:"/admin/members"},
         {key:2 ,text : "Leave requests" , icon: horn, path:"/admin/leave"},
-        {key:3 ,text : "Members" , icon:members, path:"/admin/members"},
+        {key:3 ,text : "Profile" , icon: profile, path:"/admin/profile"}, 
         {key: 4 ,text :  "Settings", icon: setting, path:"/admin/setting"}
     ]
 

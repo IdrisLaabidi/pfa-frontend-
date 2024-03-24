@@ -19,7 +19,7 @@ const LoginPage = () => {
     useEffect(() => {
         if(userId){
             if(role === 'admin'){
-                navigator('/admin/profile')
+                navigator('/admin/members')
             }else{
                 navigator('/projects')
             }
