@@ -7,7 +7,7 @@ export default function ErrorPage() {
   const role = localStorage.getItem("role")
   let path
   if (role === "admin"){
-    path = '/admin/profile'
+    path = '/admin/members'
   }else{
     path = '/projects'
   }

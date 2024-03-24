@@ -9,35 +9,36 @@ import styles from './profilePage.module.css';
 import { useEffect, useState  } from 'react';
 import { useNavigate } from 'react-router';
 import Cookies from 'js-cookie';
-import useConnect from '../../hooks/useConnect';
 
 
 const ProfilePage = () => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
-    const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmNewPassword, setConfirmNewPassword] = useState("");
     const [profilePicture, setProfilePicture] = useState("");
+    const [isPending,setIsPending] = useState(true)
 
     const Navigate = useNavigate();
 
     /*const {data:user,isPending,error} = useFetch(`http://localhost:4000/api/auth/users/${userId}`);*/
-    const [user,isPending,error] = useConnect()
-    if (error){
-        throw new Error(error);
-    }
+    const user = JSON.parse(sessionStorage.getItem("selectedUser"))
+
     //fill the inputs with users data after fetching them
     useEffect(()=>{
-        if(!isPending && user){
+        if(!user){
+            Navigate('/admin/members')
+        }
+        if(user){
             const userData = user
-            setFirstName(userData.firstName || "");
-            setLastName(userData.lastName || "");
-            setEmail(userData.email || "");
+            setFirstName(userData.firstName );
+            setLastName(userData.lastName );
+            setEmail(userData.email );
+            setIsPending(false)
         }
         
-    },[user,isPending])
+    },[])
     const handleProfilePictureChange = (e) => {
         /*  This function handles the change event of a file input field and updates
             the profilePicture state with the selected file's data URL
@@ -54,7 +55,7 @@ const ProfilePage = () => {
 
     const saveChangesHandler = async () => {
         try {
-            const userId = localStorage.getItem('user_id');
+            const userId = user._id;
     
             if (!userId) {
                 throw new Error('User ID is not found . Please log in again');
@@ -72,10 +73,10 @@ const ProfilePage = () => {
                 email: email !== '' ? email : user.email,
             };
             if (newPassword) {
-                updatedUserData.currentPassword = currentPassword;
+                updatedUserData.currentPassword = user.password;
                 updatedUserData.password = newPassword;
             }
-            const url = `http://localhost:4000/api/auth/users/${userId}`;
+            const url = `http://localhost:4000/api/auth/users/admin/${userId}`;
             const response = await fetch(url,{
                 method : 'PUT',
                 headers : {
@@ -98,15 +99,14 @@ const ProfilePage = () => {
                 }
             }
             // Redirect the user after saving changes
-            Cookies.remove('token');
-            Navigate('/');
+            Navigate('/admin/members');
         } catch (error) {
             // Log and handle the error
             alert(error.message);
             
         }
     };
-   
+    
     return (
     
         <div className={styles.profilePageContainer}>
@@ -133,7 +133,7 @@ const ProfilePage = () => {
                         icon={userIcon} 
                         type="text"
                         value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
+                        onChange={(e) => {setFirstName(e.target.value); console.log(firstName)}}
                     />
                 </div>
                 <div className={styles.inputContainer}>
@@ -160,30 +160,24 @@ const ProfilePage = () => {
                     &nbsp;
                 </div>
             </div>
-            <div className={styles.inputContainer}>
-                <span className={styles.label}>GENDER</span>
-                <DropDownList 
-                    options={[{ value: 'male', label: 'Male' },{ value: 'female', label: 'Female' }]} 
-                    placeholder='Select your gender'
-                />
-            </div>
-            <hr style={{width:'90%',margin:'30px'}}/>
-            <div className={styles.inputRow}>
-                <div className={styles.inputContainer} >
-                    <span className={styles.label}>CURRENT PASSWORD</span>
-                    <InputField 
-                        icon={pwdIcon} 
-                        type="password"
-                        value={currentPassword}
-                        onChange={(e) => setCurrentPassword(e.target.value)}
-                        
+            <div className={styles.selectContainer}>
+                <div>
+                    <span className={styles.label}>GENDER</span>
+                    <DropDownList 
+                        options={[{ value: 'male', label: 'Male' },{ value: 'female', label: 'Female' }]} 
+                        placeholder='Select your gender'
                     />
                 </div>
-                <div className={styles.inputContainer}>
-                    &nbsp;
+                <div>
+                    <span className={styles.label}>ROLE</span>
+                    <DropDownList 
+                        options={[{ value: 'leader', label: 'Leader' },{ value: 'member', label: 'Member' }]} 
+                        placeholder='Select user Role'
+                    />
                 </div>
-            </div>    
-            
+
+            </div>
+            <hr style={{width:'90%',margin:'30px'}}/>
             <div className={styles.inputRow}>
                 <div className={styles.inputContainer}>
                     <span className={styles.label}>NEW PASSWORD</span>

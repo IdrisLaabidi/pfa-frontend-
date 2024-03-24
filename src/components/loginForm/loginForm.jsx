@@ -45,7 +45,7 @@ const LoginForm = () => {
                 if(json.user.role !== 'admin' ){
                     navigate('/projects')
                 }else{
-                    navigate('/admin/profile')
+                    navigate('/admin/members')
                 }
                 
             }

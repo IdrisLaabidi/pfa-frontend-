@@ -43,7 +43,8 @@ const AdminDashboard = () => {
         }) 
         if(! response.ok ) {
             console.log(error)
-        }else{
+        }
+        if(response.ok){
             console.log('user Deleted')
             navigate(0)
         }
@@ -53,7 +54,10 @@ const AdminDashboard = () => {
         { label: 'Name', renderCell: (item) => item.firstName+' '+item.lastName },
         { label: 'Email', renderCell: (item) => item.email },
         { label: 'Role', renderCell: (item) => item.role },
-        { label : 'Edit' , renderCell : (item) => <button title="Edit user" className={styles1.button} onClick={() => console.log(item)}>
+        { label : 'Edit' , renderCell : (item) => <button title="Edit user" className={styles1.button} onClick={() => {
+            sessionStorage.setItem("selectedUser",JSON.stringify(item))
+            navigate("/admin/profile")
+        }}>
                 <img alt="icon" src={EditIcon} className={styles.icon} />
             </button>},
         { label : 'Delete' , renderCell : (item) => <button title="Delete user" className={styles1.button} onClick={() =>{setIsOpen(true) ; setSelected(item._id);}} >

@@ -14,6 +14,8 @@ import Chat from "./pages/Chat/Chat";
 import Error from "./pages/Error/errorPage";
 import NotAuthorizedPage from './pages/notAuthorized/NotAuth'
 import AdminDashboard from "./pages/adminDashbord/adminDashboard";
+import AdminProfile from './pages/profileAdmin/profileAdmin'
+import CreateUser from "./pages/createUserPage/createUser";
 
 function App() {
 
@@ -29,7 +31,8 @@ function App() {
           <Route path="/chat" element={ <Layout path={'/chat'} children={<Chat/>} title={'Chat'} />}/>
           <Route path="/profile" element={<Layout path={'/profile'} children={<Profile/>}/>} />
           <Route path="/leave" element={ <Layout path={'/leave'} children={<LeavePage/>} title={'Leave'} />}/>
-          <Route path="/admin/profile" element={ <Layout path={'/admin/profile'} children={<div>hala wallah</div>} title={'Profile'} />}/>
+          <Route path="/admin/profile" element={ <Layout path={'/admin/profile'} children={<AdminProfile/>} title={'Profile'} />}/>
+          <Route path="/admin/newUser" element={ <Layout path='/admin/newUser' title='New User'> <CreateUser /> </Layout>} />
           <Route path="/admin/members" element={ <Layout path={'/admin/members'} children={<AdminDashboard/>} title={'All users'} />}/>
           <Route path="/notAuthorized" element={<NotAuthorizedPage/>}/>
           <Route path="*" element={<Error/>}/>
