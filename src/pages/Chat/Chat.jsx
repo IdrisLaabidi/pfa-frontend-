@@ -163,15 +163,15 @@ const Chat = () => {
                         value={message}
                         onChange={(e)=>setMessage(e.target.value)}
                     />
-                <button className={styles.attachButton}> <img src={attach} className={styles.attach}/></button>
-                <button className={styles.sendImageButton}><img src={sendImage} className={styles.sendImage}/></button>
+                <button className={styles.attachButton}> <img alt='icon' src={attach} className={styles.attach}/></button>
+                <button className={styles.sendImageButton}><img alt='icon' src={sendImage} className={styles.sendImage}/></button>
                     <button 
                     id='sendMessageButton'
                     className={styles.sendMessageButton}
                     onClick={sendMessage}
                     type='submit'
                     >
-                        <img src={send} className={styles.sendMessage}/>
+                        <img alt='icon' src={send} className={styles.sendMessage}/>
                         Send message
                     </button>
                 </div>
