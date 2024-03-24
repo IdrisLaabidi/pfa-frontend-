@@ -23,6 +23,7 @@ import Select from 'react-select';
 import Submit from '../submitButton/submitButton';
 import Reset from '../restButton/resetButton'
 import UserTag from '../userTag/userTag';
+import { BeatLoader } from 'react-spinners';
 
 const TaskDetails = ({task,onDelete,onUpdate}) => {
 
@@ -113,12 +114,8 @@ const TaskDetails = ({task,onDelete,onUpdate}) => {
         setNewTask({...newTask, assignedTo: selectedOption.map(option => option.value._id)});
     }
     
-    //get users assigned to
-    const {data : taskMembers} = useFetch("http://localhost:4000/api/task/taskusers/"+task._id)
-    console.log(taskMembers)
-    
     //fetch users from db
-    const {data: users, isPending, error} = useFetch('http://localhost:4000/api/auth/users')
+    const {data: users, isPending, error} = useFetch('http://localhost:4000/api/projects/projusers/'+task.project)
 
     //store users in an array
     const userlist = users? users.map(user => (
@@ -151,10 +148,10 @@ const TaskDetails = ({task,onDelete,onUpdate}) => {
                 {user.role==="leader" && <button className={styles.bttn}>
                     <img alt='delete' src={deleteIcon} className={styles.icon} onClick={handleDelete} title='Delete Task'/>
                 </button>}
-                {user.role==="member" && taskMembers && taskMembers.find(u => u._id === user._id) && <button className={styles.bttn}>
+                {user.role==="member" && assignedTo && assignedTo.find(u => u._id === user._id) && <button className={styles.bttn}>
                     <img alt='complete' src={complete} className={styles.icon} onClick={() => {handleUpdateStatus('completed')}} title='mark as complete'/>
                 </button>}
-                {user.role==="member" && taskMembers && taskMembers.find(u => u._id === user._id) && <button className={styles.bttn}>
+                {user.role==="member" && assignedTo && assignedTo.find(u => u._id === user._id) && <button className={styles.bttn}>
                     <img alt='in progress' src={inProgress} className={styles.icon} onClick={() => {handleUpdateStatus('in-progress')}} title='mark as in progress'/>
                 </button>}
             </div>
@@ -175,9 +172,10 @@ const TaskDetails = ({task,onDelete,onUpdate}) => {
             <div className={styles.flex}>
                 <img alt='icon' className={styles.icon} src={userIcon} />
                 <span className={styles.text}>assigned to : </span>
-                <div className={styles.assignedTo}>
-                    {taskMembers?.map(user => <UserTag user={user}/>)}
-                </div>
+                {isPending && <BeatLoader color="#08639C" />}
+                {assignedTo && <div className={styles.assignedTo}>
+                    {assignedTo?.map(user => <UserTag user={user}/>)}
+                </div>}
             </div>
             <div className={styles.flex2}>
                 <span className={styles.title}>Description</span>
@@ -194,10 +192,12 @@ const TaskDetails = ({task,onDelete,onUpdate}) => {
                 />
                 <label className={styles.label}>Title</label>
                 <InputField
-                    icon={date}
+                    
                     type='date'
-                    value={task.dueDate}
+                    required
+                    value={newTask.dueDate}
                     onChange={(e) => {setNewTask({...newTask , dueDate : e.target.value})}}
+                    icon={date} 
                 />
                 <label className={styles.label}>Description</label>
                 <textarea 
@@ -227,6 +227,7 @@ const TaskDetails = ({task,onDelete,onUpdate}) => {
                 </select>
                 <label className={styles.label}>Assigned to</label>
                 {(error || error2) && <div>{error}, please try again later!</div>}
+                {isPending && isPending2 && <BeatLoader color="#08639C" />}
                 {users && defaultUsers  && <Select
                             defaultValue={defaultUsers}
                             options={userlist}
@@ -243,7 +244,7 @@ const TaskDetails = ({task,onDelete,onUpdate}) => {
                             status : task.status,
                             priority : task.priority,
                             assignedTo : task.assignedTo,
-                            dueDate : format(new Date(task.dueDate), 'dd-MM-yyyy')})
+                            dueDate : task.dueDate})
                     }}></Reset>
                     <Submit handleSubmit={(e) => {
                         e.preventDefault()

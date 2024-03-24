@@ -9,6 +9,8 @@ import titleIcon from '../../assets/title-icon.svg'
 import whiteDateIcon from '../../assets/date-icon-white.svg'
 import Submit from '../submitButton/submitButton';
 import { useNavigate } from 'react-router';
+import Modal from '../modal/Modal';
+import Error from '../Error/Error';
 
 
 
@@ -25,32 +27,45 @@ const NewProjectForm = ({token}) => {
         dueDate: '',
         team: [],
         manager: localStorage.getItem("user_id"),
-
     })
+    const [err,setErr] = useState(null)
+    const [isOpen , setIsOpen] = useState(false)
+
+    const vadidateForm = () => {
+        return form.name && form.startDate && form.dueDate && form.team
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Token: ', token)
-        try {
-            const response = await fetch('http://localhost:4000/api/projects',{
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify(form)
-            });
-            const data = await response.json();
-            if(!response.ok){
-                alert('Registration unsuccessful!please try again')
+        if(!vadidateForm){
+            setErr('All fields must be filled in')
+            setIsOpen(true)
+            return null;
+        }else{
+            try {
+                const response = await fetch('http://localhost:4000/api/projects',{
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(form)
+                });
+                const data = await response.json();
+                if(!response.ok){
+                    setErr('Registration unsuccessful!please try again')
+                    setIsOpen(true)
+                }
+                if(response.ok){
+                    console.log("project added" , data)
+                    navigate('/')
+                }
+            } catch (error) {
+                setErr(error);
+                setIsOpen(true)
             }
-            if(response.ok){
-                console.log("project added" , data)
-                navigate('/')
-            }
-        } catch (error) {
-            console.error(error);
         }
+        
     }
 
     const handleSelectChange = (selectedOption) => {
@@ -58,7 +73,7 @@ const NewProjectForm = ({token}) => {
     }
 
     //fetch users from db
-    const {data: users, isPending, error} = useFetch('http://localhost:4000/api/auth/users', token)
+    const {data: users, isPending, error} = useFetch('http://localhost:4000/api/auth/users')
 
     //store users in an array
     const members = users?.filter(user => user.role === 'member')
@@ -144,6 +159,11 @@ const NewProjectForm = ({token}) => {
                     </div>
                 </div>
             </form>
+            <Modal title="error" open={isOpen} onClose={() => {
+                setIsOpen(false);setErr(null)
+            }}>
+                <Error text={err}></Error>
+            </Modal>
          </div>
         
      );

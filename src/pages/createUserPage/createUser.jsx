@@ -1,9 +1,10 @@
 //import components
-import InputField from '../inputField/inputField'
-import Modal from '../modal/Modal'
-import Error from '../Error/Error'
+import InputField from '../../components/inputField/inputField'
+import Modal from '../../components/modal/Modal'
+import Error from '../../components/Error/Error'
 //import css styles
-import styles from './registerForm.module.css'
+import styles from '../../components/registerForm/registerForm.module.css'
+import styles1 from './createUser.module.css'
 //import icons
 import userIcon from '../../assets/user-icon.svg'
 import emailIcon from '../../assets/email-icon.svg'
@@ -14,7 +15,7 @@ import { useNavigate } from 'react-router'
 
 
 
-const RegisterForm = () => {
+const CreateUser = () => {
 
     const navigate = useNavigate()
     const[email,setEmail] = useState("")
@@ -62,9 +63,7 @@ const RegisterForm = () => {
                 }
                 if(response.ok){
                     console.log("user added" , json)
-                    localStorage.setItem("user_id",json._id)
-                    sessionStorage.setItem("user",JSON.stringify(json))
-                    navigate('/projects')
+                    navigate('/admin/members')
                 }
             }catch(err){
                 setError("Failed to connect to the api")
@@ -74,8 +73,8 @@ const RegisterForm = () => {
     }
 
     return ( 
-        <div className={styles.container}>
-            <form className={styles.formContainer} onSubmit={handleSubmit}>
+        <div className={styles1.Container}>
+            <form className={styles1.formContainer} onSubmit={handleSubmit}>
                 <span className={styles.label}>Full Name</span>
                 <div className={styles.firstLine}>
                     <InputField
@@ -134,6 +133,11 @@ const RegisterForm = () => {
                         onClick={ (e) => {e.preventDefault();
                             setRole("member");} }
                     >Member</button>
+                    <button 
+                        className={`${role === 'admin' ? `${styles.activeRoleButton}` :`${styles.roleButton}` }`}
+                        onClick={ (e) => {e.preventDefault();
+                            setRole("admin");} }
+                    >Admin</button>
                 </div>
                 <button className={styles.registerButton}>Register</button>
             </form>
@@ -147,4 +151,4 @@ const RegisterForm = () => {
      );
 }
  
-export default RegisterForm;
+export default CreateUser;

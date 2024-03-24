@@ -11,13 +11,15 @@ import {format} from 'date-fns';
 //import custom hook & components
 import useFetch from '../../hooks/useFetch';
 import InputField from '../inputField/inputField';
+import { BeatLoader } from 'react-spinners';
+import Submit from '../submitButton/submitButton';
 //import icons
 import deleteIcon from '../../assets/delete-icon.svg'
 import editIcon from '../../assets/edit-icon.svg'
 import Modal from '../modal/Modal'
 import titleIcon from '../../assets/title-icon.svg'
 import whiteDateIcon from '../../assets/date-icon-white.svg'
-import Submit from '../submitButton/submitButton';
+
 
 
 const Project = ({ data }) => {
@@ -55,7 +57,7 @@ const Project = ({ data }) => {
     //UPDATE PROJECT
     //fetch users from db: all users & users assigned to the project
     const {data: users, isPending, error} = useFetch('http://localhost:4000/api/auth/users', token)
-    const {data: projusers, isPending1, error1} = useFetch('http://localhost:4000/api/projects/projusers/'+data._id)
+    const {data: projusers} = useFetch('http://localhost:4000/api/projects/projusers/'+data._id)
     
     //store users in arrays : userlist for all users & projuserlist for users assigned to a project
     const members = users?.filter(user => user.role === 'member')
@@ -192,7 +194,6 @@ const Project = ({ data }) => {
                             value={form.name}
                             onChange={(e) => {setForm({...form, name: e.target.value})}}
                         />
-                        
                         <label className={styles1.inputtitle}>Description</label>
                         <textarea className={styles1.grandentree} 
                             value={form.description}
@@ -220,6 +221,7 @@ const Project = ({ data }) => {
                     <div className={styles1.projectcollaborators}>
                         <label className={styles1.inputtitle}>Project collaborators</label>
                         {error && <div>{error}, please try again later!</div>}
+                        {isPending && <BeatLoader color="#08639C" />}
                         {users && <Select
                             defaultValue={projuserlist}
                             options={userlist}

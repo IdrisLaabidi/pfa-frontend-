@@ -11,58 +11,29 @@ import NewProjectPage from "./pages/newProject/newProjectPage";
 import Profile from "./pages/profile/profilePage";
 import Chat from "./pages/Chat/Chat";
 import Error from "./pages/Error/errorPage";
-import MeetPage from "./pages/Meet/MeetPage";
-import Cookies from "js-cookie";
-
-// Create a wrapper component for routes that should be inaccessible with a valid token
-function PrivateRoute({ children }) {
-  const userToken = Cookies.get('token');
-  return userToken ? <Navigate to="/" replace /> : children;
-}
-function ProtectedRoute({ children }) {
-  const userToken = Cookies.get('token');
-  // If there is no token, redirect to the login page
-  return userToken ? children : <Navigate to="/login" replace />;
-}
+import NotAuthorizedPage from './pages/notAuthorized/NotAuth'
+import AdminDashboard from "./pages/adminDashbord/adminDashboard";
+import AdminProfile from './pages/profileAdmin/profileAdmin'
+import CreateUser from "./pages/createUserPage/createUser";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          {/*Wrap Private routes with PrivateRoute component */}
-          <Route path="/login" element={<PrivateRoute><LoginPage /></PrivateRoute>} />
-          <Route path="/register" element={<PrivateRoute><RegisterPage /></PrivateRoute>} />
-          {/* Wrap protected routes with ProtectedRoute component */}
-          <Route
-            index
-            element={<ProtectedRoute><Layout path={'/'} children={<ProjectPage />} title={'projects'} /></ProtectedRoute>}
-          />
-          <Route
-            path="/meet"
-            element={<ProtectedRoute><Layout path={'/meet'} children={<MeetPage/>} title={'meet'} /></ProtectedRoute>}
-          />
-          <Route
-            path="/newProject"
-            element={<ProtectedRoute><Layout path={'/newProject'} children={<NewProjectPage />} /></ProtectedRoute>}
-          />
-          <Route
-            path="/tasks"
-            element={<ProtectedRoute><Layout path={'/tasks'} children={<Tasks />} title={'tasks'} /></ProtectedRoute>}
-          />
-          <Route
-            path="/chat"
-            element={<ProtectedRoute><Layout path={'/chat'} children={<Chat />} title={'Chat'} /></ProtectedRoute>}
-          />
-          <Route
-            path="/profile"
-            element={<ProtectedRoute><Layout path={'/profile'} children={<Profile />} /></ProtectedRoute>}
-          />
-          <Route
-            path="/leave"
-            element={<ProtectedRoute><Layout path={'/leave'} children={<LeavePage />} title={'Leave'} /></ProtectedRoute>}
-          />
-          <Route path="*" element={<Error />} />
+          <Route index element={<LoginPage/>}/>
+          <Route path="/Register" element={<RegisterPage />}/>
+          <Route path="/projects" element={ <Layout path={'/projects'} children={<ProjectPage/>} title={'projects'} /> } />
+          <Route path="/newProject" element={<Layout path={'/newProject'} children={<NewProjectPage/>} />} />
+          <Route path="/Tasks" element={ <Layout path={'/tasks'} children={<Tasks/>} title={'tasks'} /> } />
+          <Route path="/chat" element={ <Layout path={'/chat'} children={<Chat/>} title={'Chat'} />}/>
+          <Route path="/profile" element={<Layout path={'/profile'} children={<Profile/>}/>} />
+          <Route path="/leave" element={ <Layout path={'/leave'} children={<LeavePage/>} title={'Leave'} />}/>
+          <Route path="/admin/profile" element={ <Layout path={'/admin/profile'} children={<AdminProfile/>} title={'Profile'} />}/>
+          <Route path="/admin/newUser" element={ <Layout path='/admin/newUser' title='New User'> <CreateUser /> </Layout>} />
+          <Route path="/admin/members" element={ <Layout path={'/admin/members'} children={<AdminDashboard/>} title={'All users'} />}/>
+          <Route path="/notAuthorized" element={<NotAuthorizedPage/>}/>
+          <Route path="*" element={<Error/>}/>
         </Routes>
       </BrowserRouter>
     </div>

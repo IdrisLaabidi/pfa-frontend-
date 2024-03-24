@@ -1,14 +1,21 @@
-import InputField from '../inputField/inputField';
+//importing styles
 import styles from './taskForm.module.css'
+//importing icons
 import titleIcon from '../../assets/title-icon.svg'
 import whiteDateIcon from '../../assets/date-icon-white.svg'
-import { useState } from 'react';
+//importing components
+import InputField from '../inputField/inputField';
 import Select from 'react-select';
-import Cookies from 'js-cookie';
-import useFetch from '../../hooks/useFetch';
 import Submit from '../submitButton/submitButton';
 import Reset from '../restButton/resetButton';
+import Modal from '../modal/Modal';
+import Error from '../Error/Error'
+import { BeatLoader } from 'react-spinners';
+
+import Cookies from 'js-cookie';
+import useFetch from '../../hooks/useFetch';
 import { useNavigate } from 'react-router';
+import { useState } from 'react';
 
 
 //handle button styles
@@ -80,6 +87,8 @@ const TaskForm = ({project ,onSubmit}) => {
         project : project._id
 
     })
+    const [err ,setErr] = useState(null)
+    const [isOpen,setIsOpen] = useState(false)
 
     const handleSelectChange = (selectedOption) => {
         setForm({...form, assignedTo: selectedOption.map(option => option.value._id)});
@@ -87,10 +96,9 @@ const TaskForm = ({project ,onSubmit}) => {
 
     const token = Cookies.get("token")
     //fetch users from db
-    const {data: users, isPending, error} = useFetch('http://localhost:4000/api/auth/users', token)
+    const {data: users,isPending, error} = useFetch('http://localhost:4000/api/projects/projusers/'+project._id, token)
     //store users in an array
-    const members = users?.filter(user => user.role === 'member')
-    const userlist = members? members?.map(user => (
+    const userlist = users? users?.map(user => (
        {value:user, label: `${user.firstName} ${user.lastName}`}
     )) : [];
 
@@ -98,7 +106,8 @@ const TaskForm = ({project ,onSubmit}) => {
         e.preventDefault()
         // Verify wether the task's dueDate is posterior to the project's dueDate
         if (new Date(form.dueDate) > new Date(project.dueDate)) {
-            alert("Choose a date before the project's due date");
+            setErr("Choose a date before the project's due date");
+            setIsOpen(true)
             return;
         }
         fetch('http://localhost:4000/api/task/createtask/',{
@@ -110,14 +119,16 @@ const TaskForm = ({project ,onSubmit}) => {
            body :JSON.stringify({task :form ,id :project._id})
         }).then(response => {
             if(!response.ok){
-                alert('creation failed !please try again')
+                setErr('creation failed !please try again')
+                setIsOpen(true)
             }
             if(response.ok){
                 console.log('task created :',response.json)
                 onSubmit(); navigate(0);
             }
         }).catch(error => {
-            alert('oops faild to connect to the api')
+            setErr('oops faild to connect to the api')
+            setIsOpen(true)
             console.log(error)
         })
         
@@ -129,7 +140,7 @@ const TaskForm = ({project ,onSubmit}) => {
                 <label className={styles.inputtitle}>Title</label>
                 <InputField type='text'
                             placeholder='Title...'
-                            required
+                            required={true}
                             icon = {titleIcon}
                             value={form.title}
                             onChange={(e) => {setForm({...form ,title : e.target.value })}}
@@ -145,7 +156,7 @@ const TaskForm = ({project ,onSubmit}) => {
                         <InputField
                             className={styles.entree}
                             type='date'
-                            required
+                            required={true}
                             icon = {whiteDateIcon}
                             value={form.dueDate}
                             onChange={(e) => {setForm({...form ,dueDate : e.target.value })}}
@@ -179,7 +190,8 @@ const TaskForm = ({project ,onSubmit}) => {
             <div className={styles.users}>
                 <div className={styles.flex}>
                     <label className={styles.inputtitle}>Assign To</label>
-                    {error && <div>{error}, please try again later!</div>}
+                    {error && <div className={styles.err}>{error}, please try again later!</div>}
+                    {isPending && <BeatLoader color="#08639C" />}
                     {users && <Select
                                 options={userlist}
                                 placeholder='Select users...'
@@ -203,6 +215,9 @@ const TaskForm = ({project ,onSubmit}) => {
                 </div>
             </div>
         </form>
+        <Modal title='Error' open={isOpen} onClose={() => {setIsOpen(false);setErr(null)}}>
+                <Error text={err}></Error>
+        </Modal>
     </div> );
 }
  

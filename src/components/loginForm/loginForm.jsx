@@ -1,10 +1,13 @@
-import InputField from "../inputField/inputField"
+import { useNavigate } from "react-router"
 import { useState } from "react"
+//importing icons
 import emailIcon from '../../assets/email-icon.svg'
 import pwdIcon from '../../assets/password-icon.svg'
 import styles from './loginForm.module.css'
-import { useNavigate } from "react-router"
+//importing components
 import Modal from '../modal/Modal'
+import Error from '../Error/Error'
+import InputField from "../inputField/inputField"
 
 
 const LoginForm = () => {
@@ -37,8 +40,14 @@ const LoginForm = () => {
             if(response.ok){
                 console.log("user logged in" , json)
                 localStorage.setItem("user_id",json.user._id)
+                localStorage.setItem("role",json.user.role)
                 sessionStorage.setItem("user",JSON.stringify(json.user))
-                navigate('/')
+                if(json.user.role !== 'admin' ){
+                    navigate('/projects')
+                }else{
+                    navigate('/admin/members')
+                }
+                
             }
             
         } catch (err) {
@@ -70,14 +79,14 @@ const LoginForm = () => {
                     onChange={(e) => {setPassword(e.target.value)}}
                     placeholder="Enter your password"
                 />
-                <a>Forgot password?</a>
+                <a href="placeholder">Forgot password?</a>
                 <button className={styles.loginButton} onClick={handleSubmit}>Login now</button>
             </form>
         </div>
         <Modal title='Warning' open={isOpen} onClose={()=>{
             setError(null)
             setIsOpen(false)
-        }}><span className={styles.error}>Failed to Log in : {error}</span></Modal>
+        }}><Error text={error}></Error></Modal>
     </>);
 }
  
