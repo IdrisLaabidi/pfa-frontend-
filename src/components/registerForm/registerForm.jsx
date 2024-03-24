@@ -64,7 +64,7 @@ const RegisterForm = () => {
                     console.log("user added" , json)
                     localStorage.setItem("user_id",json._id)
                     sessionStorage.setItem("user",JSON.stringify(json))
-                    navigate('/')
+                    navigate('/projects')
                 }
             }catch(err){
                 setError("Failed to connect to the api")
