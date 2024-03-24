@@ -12,7 +12,10 @@ import NewProjectPage from "./pages/newProject/newProjectPage";
 import Profile from "./pages/profile/profilePage";
 import Chat from "./pages/Chat/Chat";
 import Error from "./pages/Error/errorPage";
-import LeaveRequest from "./pages/LeaveRequest/leaveRequest";
+import NotAuthorizedPage from './pages/notAuthorized/NotAuth'
+import AdminDashboard from "./pages/adminDashbord/adminDashboard";
+import AdminProfile from './pages/profileAdmin/profileAdmin'
+import CreateUser from "./pages/createUserPage/createUser";
 
 function App() {
 
@@ -20,15 +23,18 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<LoginPage/>}/>
+          <Route index element={<LoginPage/>}/>
           <Route path="/Register" element={<RegisterPage />}/>
-          <Route index element={ <Layout path={'/'} children={<ProjectPage/>} title={'projects'} /> } />
+          <Route path="/projects" element={ <Layout path={'/projects'} children={<ProjectPage/>} title={'projects'} /> } />
           <Route path="/newProject" element={<Layout path={'/newProject'} children={<NewProjectPage/>} />} />
           <Route path="/Tasks" element={ <Layout path={'/tasks'} children={<Tasks/>} title={'tasks'} /> } />
           <Route path="/chat" element={ <Layout path={'/chat'} children={<Chat/>} title={'Chat'} />}/>
-          <Route path="/profile" element={<Layout path={'/profile'} children={<Profile/>}   />} />
+          <Route path="/profile" element={<Layout path={'/profile'} children={<Profile/>}/>} />
           <Route path="/leave" element={ <Layout path={'/leave'} children={<LeavePage/>} title={'Leave'} />}/>
-          <Route path="/leaveRequest" element={ <Layout path={'/leaveRequest'} children={<LeaveRequest/>} title={'Leave Request'} />}/>
+          <Route path="/admin/profile" element={ <Layout path={'/admin/profile'} children={<AdminProfile/>} title={'Profile'} />}/>
+          <Route path="/admin/newUser" element={ <Layout path='/admin/newUser' title='New User'> <CreateUser /> </Layout>} />
+          <Route path="/admin/members" element={ <Layout path={'/admin/members'} children={<AdminDashboard/>} title={'All users'} />}/>
+          <Route path="/notAuthorized" element={<NotAuthorizedPage/>}/>
           <Route path="*" element={<Error/>}/>
         </Routes>
       </BrowserRouter>

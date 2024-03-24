@@ -76,8 +76,6 @@ const LeavePage = ({token}) => {
         } else {
           const data = await response.json();
           console.log('Form submitted successfully:', data);
-          setError('Form submitted successfully')
-          setIsOpen(true)
           // Redirect or perform other actions upon successful submission
         }
       } catch (error) {
