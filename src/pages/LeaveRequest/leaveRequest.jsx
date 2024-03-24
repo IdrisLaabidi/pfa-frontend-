@@ -10,31 +10,31 @@ const token=Cookies.get("token");
 const { data: leaves, isPending, error } = useFetch('http://localhost:4000/api/leave/leaves/');
 const userIdArray = leaves.map((leave) => leave.concernedUser) || [];
 const [user, setUser] = useState(null);
-const fetching =async()=>{
-  try {
-      
-    const response = fetch('http://localhost:4000/api/auth/Leaveusers', {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({userIdArray})
-    });
+useEffect(() => {
+  const fetching = async () => {
+    try {
+      const response = await fetch('http://localhost:4000/api/auth/Leaveusers', {
+        method: 'GET', 
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userIdArray })
+      });
 
-    if (!response.ok) {
-      throw new Error('Failed to fetch user data');
+      if (!response.ok) {
+        throw new Error('Failed to fetch user data');
+      }
+
+      const userData = await response.json();
+      setUser(userData);
+    } catch (error) {
+      console.error('Error fetching user data:', error);
     }
+  };
 
-    const user = await response.json();
-    setUser(user);
-    console.log(user);
-    
-  } catch (error) {
-    console.error('Error fetching user data:', error);
-  }
-  
-}
+  fetching(); // Call the fetching function
+}, [token, userIdArray]);
    
     
 
@@ -42,7 +42,7 @@ const fetching =async()=>{
     <div className={styles.allLeaves}>
       {error && <div>{error}</div>}
       {isPending && <Spinner />}
-      {user && (
+      {user && Array.isArray(user) && (
         <table className={styles.Table}>
           <thead>
             <tr>
@@ -51,15 +51,16 @@ const fetching =async()=>{
             </tr>
           </thead>
           <tbody>
-            {user?.map(user1 => 
+            {user.map(user1 => (
               <tr key={user1.id}>
                 <td>{user1.firstName} {user1.lastName}</td>
                 <td>{user1.email}</td>
               </tr>
-            )}
+            ))}
           </tbody>
         </table>
-      )}
+)}
+
       <LoadingModal open={isPending} />
     </div>
   );
