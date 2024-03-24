@@ -6,65 +6,67 @@ import LoadingModal from '../../components/loadingModal/LoadingModal';
 import Cookies from 'js-cookie';
 
 const LeaveRequest = () => {
-const token=Cookies.get("token");
-const { data: leaves, isPending, error } = useFetch('http://localhost:4000/api/leave/leaves/');
-const userIdArray = leaves.map((leave) => leave.concernedUser) || [];
-const [user, setUser] = useState(null);
-useEffect(() => {
-  const fetching = async () => {
-    try {
-      const response = await fetch('http://localhost:4000/api/auth/Leaveusers', {
-        method: 'GET', 
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ userIdArray })
-      });
+  const token = Cookies.get("token");
 
-      if (!response.ok) {
-        throw new Error('Failed to fetch user data');
+  const [user, setUser] = useState(null);
+
+  const url = 'http://localhost:4000/api/auth/Leaveusers';
+
+  useEffect(() => {
+    const fetching = async () => {
+      try {
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch user data');
+        }
+
+        const userData = await response.json();
+        setUser(userData);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
       }
+    };
 
-      const userData = await response.json();
-      setUser(userData);
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-    }
-  };
-
-  fetching(); // Call the fetching function
-}, [token, userIdArray]);
-   
-    
+    fetching(); // Call the fetching function
+  }, [token]);
 
   return (
     <div className={styles.allLeaves}>
-      {error && <div>{error}</div>}
-      {isPending && <Spinner />}
-      {user && Array.isArray(user) && (
-        <table className={styles.Table}>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-            </tr>
-          </thead>
-          <tbody>
-            {user.map(user1 => (
-              <tr key={user1.id}>
-                <td>{user1.firstName} {user1.lastName}</td>
-                <td>{user1.email}</td>
+      {user ? (
+        Array.isArray(user) && user.length > 0 ? (
+          <table className={styles.Table}>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-)}
+            </thead>
+            <tbody>
+              {user.map(user1 => (
+                <tr key={user1.id}>
+                  <td>{user1.firstName} {user1.lastName}</td>
+                  <td>{user1.email}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <div>No users found</div>
+        )
+      ) : (
+        <Spinner />
+      )}
 
-      <LoadingModal open={isPending} />
+      <LoadingModal open={user === null} />
     </div>
   );
 };
 
 export default LeaveRequest;
-
