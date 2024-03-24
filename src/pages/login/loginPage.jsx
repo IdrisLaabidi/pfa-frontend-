@@ -6,10 +6,27 @@ import image from '../../assets/loginPageImage.jpg'
 import LoginForm from '../../components/loginForm/loginForm'
 import OrDivider from '../../components/orDivider/orDivider'
 import { useNavigate } from 'react-router'
+import { useEffect } from 'react'
+
 
 
 const LoginPage = () => {
     const navigator = useNavigate()
+    
+    const userId = localStorage.getItem('user_id')
+    const role = localStorage.getItem('role')
+
+    useEffect(() => {
+        if(userId){
+            if(role === 'admin'){
+                navigator('/admin/profile')
+            }else{
+                navigator('/projects')
+            }
+
+        }
+    } ,[])
+
     return (  
         <>
             <div className={styles.container}>

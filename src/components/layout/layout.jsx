@@ -25,7 +25,7 @@ import { useNavigate } from "react-router-dom";
             <Modal open={error !== null} title="Authentification error" onClose={() => window.location.reload()}>
                 <div className={styles.errorDiv}>
                     <span className={styles.error}>{error}</span>
-                    <button className={styles.login} onClick={() => navigate('/login')}>Go to login</button>
+                    <button className={styles.login} onClick={() => navigate('/')}>Go to login</button>
                 </div>
             </Modal>
         </div>

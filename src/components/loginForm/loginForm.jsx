@@ -40,8 +40,14 @@ const LoginForm = () => {
             if(response.ok){
                 console.log("user logged in" , json)
                 localStorage.setItem("user_id",json.user._id)
+                localStorage.setItem("role",json.user.role)
                 sessionStorage.setItem("user",JSON.stringify(json.user))
-                navigate('/')
+                if(json.user.role !== 'admin' ){
+                    navigate('/projects')
+                }else{
+                    navigate('/admin/profile')
+                }
+                
             }
             
         } catch (err) {
