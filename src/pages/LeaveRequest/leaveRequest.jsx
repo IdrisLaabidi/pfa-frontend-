@@ -39,9 +39,9 @@ const LeaveRequest = () => {
   const columns = [
     { label: 'Name', renderCell: (leave) => `${leave.concernedUser.firstName} ${leave.concernedUser.lastName}` },
     { label: 'Email', renderCell: (leave) => leave.concernedUser.email },
-    {label: 'Request Date' , renderCell: (leave)=>format(new Date(leave.createdAt)) },
+    {label: 'Request Date' , renderCell: (leave)=>format(new Date(leave.createdAt), 'dd/MM/yyyy') },
     {label :'leave Count' , renderCell :(leave => <ProgressBar 
-        completed={leave.concernedUser.leaveCount} 
+        completed={leave.concernedUser.leaveCount.toString()} 
         maxCompleted="90"
         bgColor='#08639c'
         ></ProgressBar>)},
@@ -54,7 +54,7 @@ const LeaveRequest = () => {
   return (
     <div className={styles.container}>
       {data && <CompactTable columns={columns} data={data} theme={theme} layout={{ fixedHeader: true , custom :true}}/>}
-      {isPending && <BeatLoader color="#ffffff"></BeatLoader>}
+      {isPending && <BeatLoader color="#08639c"></BeatLoader>}
       
       <LoadingModal open={data === null} />
     </div>
