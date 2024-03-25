@@ -7,7 +7,6 @@ import { useTheme } from '@table-library/react-table-library/theme';
 import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/material-ui';
 import React, { useEffect, useState } from 'react';
 import useFetch from '../../hooks/useFetch';
-import Spinner from '../../components/spinner/spinner';
 import { format } from 'date-fns';
 
 
