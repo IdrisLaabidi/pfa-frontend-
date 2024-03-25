@@ -8,7 +8,7 @@ import Error from '../Error/Error'
 
 
 const LeavePage = ({token}) => {
-
+  const userId = localStorage.getItem("user_id");
   const navigate = useNavigate()
 
   const id = localStorage.getItem('user_id')
@@ -32,6 +32,7 @@ const LeavePage = ({token}) => {
   };
   const isFormValid = () => {
     return leaveType && startDate && endDate && reason ;
+    
   };
   
    
@@ -54,7 +55,7 @@ const LeavePage = ({token}) => {
         startDate: startDate,
         endDate: endDate,
         reason: reason,
-        concernedUser : id
+        concernedUser:userId,
         //file: selectedFile
       };
 
@@ -104,6 +105,7 @@ const LeavePage = ({token}) => {
               <option value="annual">Annual Leave</option>
               <option value="normal">Normal Leave</option>
             </select>
+
           
           
             <label htmlFor="startDate" className={styles.label}>Start Date:</label>
