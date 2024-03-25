@@ -72,6 +72,7 @@ const LeavePage = ({token}) => {
     
         if (!response.ok) {
           setError('Submission unsuccessful. Please try again.')
+          console.log(error)
           setIsOpen(true)
         } else {
           const data = await response.json();
