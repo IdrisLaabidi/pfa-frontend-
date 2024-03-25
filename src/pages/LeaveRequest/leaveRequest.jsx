@@ -1,70 +1,46 @@
+
+import styles1 from '../../components/project/project.module.css'
+
+import { CompactTable } from '@table-library/react-table-library/compact';
+import { BeatLoader } from "react-spinners";
+import { useTheme } from '@table-library/react-table-library/theme';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/material-ui';
 import React, { useEffect, useState } from 'react';
 import useFetch from '../../hooks/useFetch';
 import Spinner from '../../components/spinner/spinner';
-import styles from './leaveRequest.css';
+import { format } from 'date-fns';
+
+
 import LoadingModal from '../../components/loadingModal/LoadingModal';
 import Cookies from 'js-cookie';
+
 
 const LeaveRequest = () => {
   const token = Cookies.get("token");
 
-  const [user, setUser] = useState(null);
+  const { data: nodes, isPending, error } = useFetch('http://localhost:4000/api/leave/leaves/');
+  let data
+  if(nodes){
+    
+    data={nodes}
+  
+  }
+ 
+  const materialTheme = getTheme(DEFAULT_OPTIONS);
+  const theme = useTheme(materialTheme);
 
-  const url = 'http://localhost:4000/api/auth/Leaveusers';
-
-  useEffect(() => {
-    const fetching = async () => {
-      try {
-        const response = await fetch(url, {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to fetch user data');
-        }
-
-        const userData = await response.json();
-        setUser(userData);
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-      }
-    };
-
-    fetching(); // Call the fetching function
-  }, [token]);
+  const columns = [
+    { label: 'Name', renderCell: (leave) => `${leave.concernedUser.firstName} ${leave.concernedUser.lastName}` },
+    { label: 'Email', renderCell: (leave) => leave.concernedUser.email },
+    {label: 'Request Date' , renderCell: (leave)=>format(new Date(leave.createdAt), 'dd/MM/yyyy') }
+    
+  ];
 
   return (
-    <div className={styles.allLeaves}>
-      {user ? (
-        Array.isArray(user) && user.length > 0 ? (
-          <table className={styles.Table}>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Email</th>
-              </tr>
-            </thead>
-            <tbody>
-              {user.map(user1 => (
-                <tr key={user1.id}>
-                  <td>{user1.firstName} {user1.lastName}</td>
-                  <td>{user1.email}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        ) : (
-          <div>No users found</div>
-        )
-      ) : (
-        <Spinner />
-      )}
-
-      <LoadingModal open={user === null} />
+    <div className={styles1.container}>
+      {data && <CompactTable columns={columns} data={data} theme={theme}/>}
+      {isPending && <BeatLoader color="#ffffff"></BeatLoader>}
+      <LoadingModal open={data === null} />
     </div>
   );
 };
