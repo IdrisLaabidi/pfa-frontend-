@@ -39,9 +39,9 @@ const LeaveRequest = () => {
   const columns = [
     { label: 'Name', renderCell: (leave) => `${leave.concernedUser.firstName} ${leave.concernedUser.lastName}` },
     { label: 'Email', renderCell: (leave) => leave.concernedUser.email },
-    {label: 'Request Date' , renderCell: (leave)=>format(new Date(leave.createdAt), 'dd/MM/yyyy') },
+    {label: 'Request Date' , renderCell: (leave)=>format(new Date(leave.createdAt)) },
     {label :'leave Count' , renderCell :(leave => <ProgressBar 
-        completed={leave.concernedUser.leaveCount.toString()} 
+        completed={leave.concernedUser.leaveCount} 
         maxCompleted="90"
         bgColor='#08639c'
         ></ProgressBar>)},
