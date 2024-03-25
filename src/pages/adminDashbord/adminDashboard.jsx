@@ -51,18 +51,21 @@ const AdminDashboard = () => {
     }
 
     const COLUMNS = [
-        { label: 'Name', renderCell: (item) => item.firstName+' '+item.lastName },
-        { label: 'Email', renderCell: (item) => item.email },
-        { label: 'Role', renderCell: (item) => item.role },
+        { 
+            label: 'Name', 
+            renderCell: (item) => <div style={{width: '20%'}}>{item.firstName+' '+item.lastName}</div> 
+          },
+        { label: 'Email', renderCell: (item) => item.email, className: styles.column2 },
+        { label: 'Role', renderCell: (item) => item.role, className: styles.column3 },
         { label : 'Edit' , renderCell : (item) => <button title="Edit user" className={styles1.button} onClick={() => {
             sessionStorage.setItem("selectedUser",JSON.stringify(item))
             navigate("/admin/profile")
         }}>
                 <img alt="icon" src={EditIcon} className={styles.icon} />
-            </button>},
+            </button>, className: styles.column4},
         { label : 'Delete' , renderCell : (item) => <button title="Delete user" className={styles1.button} onClick={() =>{setIsOpen(true) ; setSelected(item._id);}} >
             <img alt="icon" src={DeleteIcon} className={styles.icon} />
-        </button>}
+        </button>, className: styles.column4}
       ];
 
     const materialTheme = getTheme(DEFAULT_OPTIONS);

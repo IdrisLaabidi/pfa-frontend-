@@ -2,3 +2,21 @@
     width: 30px;
     height: 30px;
 }
+
+.column1 {
+    flex: 2 !important; /* 20% of the table width */
+  }
+  
+  .column2 {
+    flex: 5 !important; /* 50% of the table width */
+  }
+  
+  .column3 {
+    flex: 1.5 !important; /* 15% of the table width */
+  }
+  
+  .column4 {
+    flex: 1.5 !important; /* 15% of the table width */
+  }
+  
+  
