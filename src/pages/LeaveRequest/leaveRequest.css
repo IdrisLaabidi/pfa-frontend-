@@ -1,0 +1,17 @@
+.allLeaves {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #ffff;
+  }
+  
+  .Table {
+    border-collapse: collapse;
+    width: 80%; 
+    margin-top: 20px; 
+    border-color: black;
+    border-style:solid;
+  }
+  
+  
