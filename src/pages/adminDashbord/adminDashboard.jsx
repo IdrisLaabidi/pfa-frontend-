@@ -22,6 +22,11 @@ const AdminDashboard = () => {
     const navigate = useNavigate()
     const [isOpen , setIsOpen] = useState(false)
     const [selectedUser,setSelected] = useState(null)
+    const [search, setSearch] = useState("");
+
+    const handleSearch = (event) => {
+      setSearch(event.target.value);
+    };
 
     const role = localStorage.getItem("role")
 
@@ -69,17 +74,35 @@ const AdminDashboard = () => {
       ];
 
     const materialTheme = getTheme(DEFAULT_OPTIONS);
-    const theme = useTheme(materialTheme);
+    const theme = useTheme([materialTheme , {
+            Table: `
+              --data-table-library_grid-template-columns:  30% 40% 15% 7% 7%;
+            `,
+    }]);
 
     const {data :nodes  ,isPending,error} =useFetch('http://localhost:4000/api/auth/users')
     let data
     if(nodes){
         data ={nodes}
+        data = {
+            nodes: data?.nodes?.filter((item) =>
+              item.email.toLowerCase().includes(search.toLowerCase())
+            ),
+          };
     } 
     
+    
+    
     return ( <div className={styles.container}>
-        {data && <CompactTable columns={COLUMNS} data={data} theme={theme}/>}
-        {isPending && <BeatLoader color="#ffffff"></BeatLoader>}
+        {data && <>
+            <label htmlFor="search">
+            Search by email:&nbsp;
+            <input id="search" type="text" value={search} onChange={handleSearch} />
+            </label>
+            <br />
+            <CompactTable columns={COLUMNS} data={data} theme={theme} layout={{ fixedHeader: true , custom :true}}/>
+        </>}
+        {isPending && <BeatLoader color="#08639c"></BeatLoader>}
         <Modal className={styles1.deletemodal} open={isOpen} onClose={() => setIsOpen(false)} title='Delete user'>
                 <div className={styles1.msg}>Are you sure you want to delete the user ?</div>
                 <div className={styles1.buttons}>
