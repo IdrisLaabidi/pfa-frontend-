@@ -2,3 +2,8 @@
     width: 30px;
     height: 30px;
 }
+.container{
+    background-color: white;
+    border-radius: 15px;
+    padding: 10px;
+}

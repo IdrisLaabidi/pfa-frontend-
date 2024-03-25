@@ -1,0 +1,18 @@
+
+.container{
+  height: inherit;
+  background-color: var(--color-primary);
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.buttn{
+  background: transparent;
+  cursor: pointer;
+  border: none;
+}
+.icon{
+  width: 25px;
+  height: 25px;
+}
+  
