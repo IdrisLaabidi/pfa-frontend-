@@ -54,7 +54,7 @@ const LeaveRequest = () => {
   return (
     <div className={styles.container}>
       {data && <CompactTable columns={columns} data={data} theme={theme} layout={{ fixedHeader: true , custom :true}}/>}
-      {isPending && <BeatLoader color="#ffffff"></BeatLoader>}
+      {isPending && <BeatLoader color="#08639c"></BeatLoader>}
       
       <LoadingModal open={data === null} />
     </div>
