@@ -16,6 +16,7 @@ import AdminDashboard from "./pages/adminDashbord/adminDashboard";
 import AdminProfile from './pages/profileAdmin/profileAdmin'
 import CreateUser from "./pages/createUserPage/createUser";
 import Meet from "./pages/Meet/MeetPage";
+import LeaveRequest from "./pages/LeaveRequest/leaveRequest";
 function App() {
   return (
     <div className="App">
