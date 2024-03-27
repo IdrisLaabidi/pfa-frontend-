@@ -1,7 +1,6 @@
-import { BrowserRouter , Routes, Route } from "react-router-dom"; // import react router dom
-//import the theme variables 
-import './Themes/Themes'
-//import pages 
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import './Themes/Themes'; // Import the theme variables
+// Import pages
 import ProjectPage from "./pages/dashboard/dashboardPage";
 import LoginPage from "./pages/login/loginPage";
 import RegisterPage from "./pages/register/registerPage";
@@ -16,10 +15,9 @@ import NotAuthorizedPage from './pages/notAuthorized/NotAuth'
 import AdminDashboard from "./pages/adminDashbord/adminDashboard";
 import AdminProfile from './pages/profileAdmin/profileAdmin'
 import CreateUser from "./pages/createUserPage/createUser";
-import LeaveRequest from "./pages/LeaveRequest/leaveRequest"
-
+import Meet from "./pages/Meet/MeetPage";
+import LeaveRequest from "./pages/LeaveRequest/leaveRequest";
 function App() {
-
   return (
     <div className="App">
       <BrowserRouter>
@@ -31,6 +29,7 @@ function App() {
           <Route path="/Tasks" element={ <Layout path={'/tasks'} children={<Tasks/>} title={'tasks'} /> } />
           <Route path="/chat" element={ <Layout path={'/chat'} children={<Chat/>} title={'Chat'} />}/>
           <Route path="/profile" element={<Layout path={'/profile'} children={<Profile/>}/>} />
+          <Route path="/meet" element={<Layout path={'/meet'} children={<Meet/>}/>} />
           <Route path="/leave" element={ <Layout path={'/leave'} children={<LeavePage/>} title={'Leave'} />}/>
           <Route path="/admin/profile" element={ <Layout path={'/admin/profile'} children={<AdminProfile/>} title={'Profile'} />}/>
           <Route path="/admin/newUser" element={ <Layout path='/admin/newUser' title='New User'> <CreateUser /> </Layout>} />

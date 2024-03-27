@@ -1,0 +1,79 @@
+.videoGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 10px;
+    padding: 20px;
+    height: calc(98vh - 62px); 
+    box-sizing: border-box; 
+  }
+
+video {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    border: 3px solid #fff; 
+    overflow: hidden; 
+  }
+
+.StreamControls {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+.StreamControls button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 20px;
+    background-color: #007bff;
+    color: white;
+  }
+  
+.StreamControls button:hover {
+    background-color: #0056b3;
+  }
+.StreamControls button:active {
+    transform: scale(0.98); 
+  }
+.MeetContainer {
+  position: relative;
+  height: 91vh;
+  overflow: hidden;
+  }
+.MessagingComp {
+  border-radius: 10px ;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 300px;
+  background-color: var(--color-primary);
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  z-index: 100; 
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(120%); /* Start off-screen */
+}
+.MessagingComp-header {
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: center;
+  font-weight: bold;
+  
+}
+
+.MessagingComp.visible {
+  transform: translateX(0); /* Slide in */
+}
+
