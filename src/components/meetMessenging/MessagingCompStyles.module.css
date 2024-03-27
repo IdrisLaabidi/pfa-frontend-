@@ -17,13 +17,22 @@
   word-wrap: break-word;
 }
 .sent {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: var(--color-sentMessage);
+  border-radius: 10px;
+  max-width: 70%;
   align-self: flex-end;
-  background-color: #7193a7; /* Light green background for sent messages */
 }
 
 .received {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: var(--color-receivedMessage);
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  max-width: 70%;
   align-self: flex-start;
-  background-color: #afb2b4; /* Light grey background for received messages */
 }
 
 .inputContainer {

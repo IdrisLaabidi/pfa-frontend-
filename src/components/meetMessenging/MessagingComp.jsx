@@ -12,7 +12,7 @@ function Chat() {
   const sendMessage = (e) => {
     if (message!=='') {
       const MessageObj = {text : message , sender : 'self', id : socket.id};
-      socket.emit('chat message',MessageObj);
+      socket.emit('meet chat message',MessageObj);
       setMessage('');
     }
     
@@ -32,7 +32,7 @@ function Chat() {
   useEffect(()=>{
      scrollToBottom()
      // Listen for incoming messages
-     socket.on('chat message', (newMessage) => {
+     socket.on('meet chat message', (newMessage) => {
       console.log(newMessage.id === socket.id)
       if (newMessage.id === socket.id){
         newMessage.sender = 'self';

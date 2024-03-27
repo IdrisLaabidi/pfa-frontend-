@@ -15,7 +15,7 @@ import NotAuthorizedPage from './pages/notAuthorized/NotAuth'
 import AdminDashboard from "./pages/adminDashbord/adminDashboard";
 import AdminProfile from './pages/profileAdmin/profileAdmin'
 import CreateUser from "./pages/createUserPage/createUser";
-
+import Meet from "./pages/Meet/MeetPage";
 function App() {
   return (
     <div className="App">
@@ -28,6 +28,7 @@ function App() {
           <Route path="/Tasks" element={ <Layout path={'/tasks'} children={<Tasks/>} title={'tasks'} /> } />
           <Route path="/chat" element={ <Layout path={'/chat'} children={<Chat/>} title={'Chat'} />}/>
           <Route path="/profile" element={<Layout path={'/profile'} children={<Profile/>}/>} />
+          <Route path="/meet" element={<Layout path={'/meet'} children={<Meet/>}/>} />
           <Route path="/leave" element={ <Layout path={'/leave'} children={<LeavePage/>} title={'Leave'} />}/>
           <Route path="/admin/profile" element={ <Layout path={'/admin/profile'} children={<AdminProfile/>} title={'Profile'} />}/>
           <Route path="/admin/newUser" element={ <Layout path='/admin/newUser' title='New User'> <CreateUser /> </Layout>} />
