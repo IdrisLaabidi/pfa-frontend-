@@ -33,6 +33,7 @@ function App() {
           <Route path="/admin/profile" element={ <Layout path={'/admin/profile'} children={<AdminProfile/>} title={'Profile'} />}/>
           <Route path="/admin/newUser" element={ <Layout path='/admin/newUser' title='New User'> <CreateUser /> </Layout>} />
           <Route path="/admin/members" element={ <Layout path={'/admin/members'} children={<AdminDashboard/>} title={'All users'} />}/>
+          <Route path="/admin/leaveRequest" element={ <Layout path={'/admin/leaveRequest'} children={<LeaveRequest/>} title={'Leave Requests'} />}/>
           <Route path="/notAuthorized" element={<NotAuthorizedPage/>}/>
           <Route path="*" element={<Error/>}/>
         </Routes>
