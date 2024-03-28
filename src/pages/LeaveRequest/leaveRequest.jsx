@@ -14,46 +14,49 @@ import useFetch from '../../hooks/useFetch';
 import { format } from 'date-fns';
 import Cookies from 'js-cookie';
 
+
+
 const LeaveRequest = () => {
   const token = Cookies.get("token");
   
   const [isOpen , setIsOpen] = useState(false)
   const[selectedLeave,setSelectedLeave]=useState(null)
+
   const handleclick=(item)=>{
       setIsOpen(true); 
       setSelectedLeave(item)
       }
 
-      
-
-
-      const handleAccept=async ()=>{
-        try{
-          const response=await fetch(`http://localhost:4000/api/leave/leaves/${selectedLeave._id}`,
-            {
-              method:"PUT",
-              body: JSON.stringify({status:'confirmed'}),
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization':`Bearer ${token}`
-              },
-              credentials: 'include'
-            }
-          )
-
-          if (! response.ok)
+  const handleAccept=async ()=>{
+      try{
+        const response=await fetch(`http://localhost:4000/api/leave/leaves/${selectedLeave._id}`,
           {
-            console.log("status update is unsuccessful");
-            
+            method:"PUT",
+            body: JSON.stringify({status:'confirmed'}),
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization':`Bearer ${token}`
+            },
+            credentials: 'include'
           }
-          else{
-            console.log("status updated successfully");
-          }
-        }catch(error){
-          console.log(error);
+        )
+
+        if (! response.ok)
+        {
+          console.log("status update is unsuccessful");
+          
         }
+        else{
+          console.log("status updated successfully");
+        }
+      }catch(error){
+        console.log(error);
       }
-      const handleRefuse=async()=>{
+      window.location.reload();
+      }
+  
+  
+  const handleRefuse=async()=>{
         try{
         const response=await fetch(`http://localhost:4000/api/leave/leaves/${selectedLeave._id}`,
             {
@@ -78,6 +81,7 @@ const LeaveRequest = () => {
         }catch(error){
           console.log(error);
         }
+        window.location.reload();
       }
 
   
@@ -119,7 +123,7 @@ const LeaveRequest = () => {
       
       <LoadingModal open={data === null} />
 
-      <Modal open={isOpen} >
+      <Modal open={isOpen} onClose={()=>{setIsOpen(false)}}>
         { selectedLeave && 
       <div className={styles.modal}>
         
@@ -157,11 +161,12 @@ const LeaveRequest = () => {
               <textarea className={styles.textarea} value={selectedLeave?.reason} disabled={true} />
            
         </form>
+        {  selectedLeave?.status==="pending" &&
         <div className={styles.buttns}>
             <button onClick={handleAccept} className={styles.buttn1} >Accept Request</button>
             <button onClick={handleRefuse} className={styles.buttn2} >Refuse Request</button>
         </div>
-        
+        }
         </div>
          }
       </Modal>
