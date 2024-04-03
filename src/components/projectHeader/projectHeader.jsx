@@ -5,6 +5,7 @@ import { useState } from 'react';
 import {format} from 'date-fns'
 import useFetch from '../../hooks/useFetch';
 import UserTag from '../userTag/userTag';
+import { BeatLoader } from 'react-spinners';
 
 
 const Header = ({project}) => {
@@ -46,7 +47,9 @@ const Header = ({project}) => {
                 <span className={styles.text1}> { "Status : " + project?.status}</span>
                 <span className={styles.text1}> Due Date :  {format(new Date(project?.dueDate), 'dd/MM/yyyy')}</span>
                 <span className={styles.text1}> Assigned to : </span>
-                <div className={styles.users}>{users.map(user => <UserTag user={user}></UserTag>)}</div>
+                {error && <span>error occured while fetching users</span>}
+                {isPending && <BeatLoader></BeatLoader>}
+                {!isPending && <div className={styles.users}>{users.map(user => <UserTag user={user}></UserTag>)}</div>}
             </div>
         </div> }
         

@@ -11,6 +11,7 @@ import Submit from '../submitButton/submitButton';
 import { useNavigate } from 'react-router';
 import Modal from '../modal/Modal';
 import Error from '../Error/Error';
+import { BeatLoader } from 'react-spinners';
 
 
 
@@ -147,6 +148,7 @@ const NewProjectForm = ({token}) => {
                                  fontSize: '30px',
                             }}>Project collaborators</label>
                             {error && <div>{error}, please try again later!</div>}
+                            {isPending && <BeatLoader></BeatLoader>}
                             {users && <Select
                                 options={userlist}
                                 placeholder='Select collaborators...'
