@@ -1,7 +1,7 @@
 import React, { useState, useEffect ,useRef} from 'react';
 import io from 'socket.io-client';
 import styles from '../../components/meetMessenging/MessagingCompStyles.module.css'
-const SERVER_URL = 'http://localhost:4000';
+const SERVER_URL = 'https://meetserver.onrender.com';
 const socket = io(SERVER_URL);
 
 function Chat() {
