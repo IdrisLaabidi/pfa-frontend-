@@ -57,7 +57,7 @@ const AdminDashboard = () => {
 
     const COLUMNS = [
         { label: 'Name', renderCell: (item) => item.firstName+' '+item.lastName },
-        { label: 'Email', renderCell: (item) => item.email },
+        { label: 'Email', renderCell: (item) => item.email},
         { label: 'Role', renderCell: (item) => item.role },
         { label : 'Edit' , renderCell : (item) => <button title="Edit user" className={styles1.button} onClick={() => {
             sessionStorage.setItem("selectedUser",JSON.stringify(item))
