@@ -10,7 +10,7 @@ import useConnect from '../../hooks/useConnect';
 import { MoonLoader } from 'react-spinners';
 
 
-const SERVER_URL = 'http://localhost:4000';
+const SERVER_URL = 'https://meetserver.onrender.com';
 const socket = io(SERVER_URL);
 
 const Chat = () => {
@@ -24,9 +24,9 @@ const Chat = () => {
     const {user, isPending,error} = useConnect();
     const userId = localStorage.getItem('user_id');
     const userNameinSession = JSON.parse((sessionStorage.getItem('user')));
-    const { data: projectsData, isPending: isPendingProjects  } = useFetch(`http://localhost:4000/api/projects/myprojects/${userId}`);
-    const { data: UsersAssignedToaProject, isPending: isPendingUsers } = useFetch(`http://localhost:4000/api/projects/projusers/${selectedProject}`);
-    const { data: allMessagesData, isPending: isPendingMessages } = useFetch(`http://localhost:4000/api/messages/allMessage/${selectedProject}`);
+    const { data: projectsData, isPending: isPendingProjects  } = useFetch(`https://meetserver.onrender.com/api/projects/myprojects/${userId}`);
+    const { data: UsersAssignedToaProject, isPending: isPendingUsers } = useFetch(`https://meetserver.onrender.com/api/projects/projusers/${selectedProject}`);
+    const { data: allMessagesData, isPending: isPendingMessages } = useFetch(`https://meetserver.onrender.com/api/messages/allMessage/${selectedProject}`);
     
     const sendMessage = () => {
         if (message !== '' && selectedProject) {

@@ -8,8 +8,6 @@ import styles from './layout.module.css'
 import useConnect from "../../hooks/useConnect";
 import { useNavigate } from "react-router-dom";
 
-
-
   const Layout = ({children ,title ,path}) => {
     const navigate = useNavigate()
     //provide user for the components 

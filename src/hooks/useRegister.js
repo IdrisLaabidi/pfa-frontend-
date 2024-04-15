@@ -19,7 +19,7 @@ const useRegister = () => {
     const user = { email, userName, firstName, lastName, password, role };
 
     try {
-      const response = await fetch('http://localhost:4000/api/auth/createuser', {
+      const response = await fetch('https://meetserver.onrender.com/api/auth/createuser', {
         method: 'POST',
         body: JSON.stringify(user),
         headers: {

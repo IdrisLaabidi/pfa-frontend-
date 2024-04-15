@@ -1,0 +1,153 @@
+[33m78cd62d[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32midris[m[33m, [m[1;31morigin/idris[m[33m)[m fixed some warnings
+[33m9089e6d[m[33m ([m[1;31morigin/tasnime[m[33m)[m Merge branch 'rayen' of https://github.com/IdrisLaabidi/pfa-frontend- into tasnime
+[33mc969458[m notif finished
+[33m4f48868[m[33m ([m[1;32mmaster[m[33m)[m prep merge
+[33m51f5cf9[m Merge branch 'master' of https://github.com/IdrisLaabidi/pfa-frontend- into rayen
+[33mc59c1d0[m finished meet page frontend
+[33mc5b8a95[m[33m ([m[1;31morigin/master[m[33m)[m Merge branch 'tasnime' into idris
+[33md8fa2a6[m preparing merge
+[33m85a11d8[m[33m ([m[1;32mtasnime[m[33m)[m finished leave request demand
+[33mc8a9397[m Merge branch 'idris' of https://github.com/IdrisLaabidi/pfa-frontend- into tasnime
+[33mef1074d[m some truchikett in leave request
+[33m4e4b7d1[m completed leavereq styling
+[33m9cdaf7c[m pushing for youssef
+[33mcab8782[m Merge branch 'tasnime' into idris
+[33ma6f3bc0[m leaves req doneee lhmdullah
+[33m1961201[m modified admin dashboard
+[33ma384411[m Merge branch 'master' of https://github.com/IdrisLaabidi/pfa-frontend- into tasnime
+[33me83b534[m leaves req
+[33m8cb9b46[m Merge branch 'idris' of https://github.com/IdrisLaabidi/pfa-frontend- into rayen
+[33m250394a[m fixed package-log.json error
+[33mfda9a93[m merge bug2
+[33m1804a48[m merge bug
+[33m8100c49[m Meet page unfinished
+[33m65301a9[m added new user form for the admin ,completed admin home page
+[33mfcce690[m working on admin
+[33m1cbf510[m leave request fetching with useEffect
+[33m1c4fdde[m  added admin routes handling
+[33mc7fe434[m leave request fetchingg
+[33m7acf53c[m Merge branch 'master' of https://github.com/IdrisLaabidi/pfa-frontend- into tasnime
+[33m645ec89[m leave request also made changes in side menu and added a rrot
+[33m1b2fb0b[m fixed the chat client-side bugs
+[33m1822f35[m more bug fixes + error handling
+[33mcc96d62[m Merge branch 'rayen' of https://github.com/IdrisLaabidi/pfa-frontend- into tasnime
+[33mb48a2eb[m commit form
+[33m856ebba[m Merge branch 'rayen' of https://github.com/IdrisLaabidi/pfa-frontend into idris
+[33m4d61d2c[m installing web socket
+[33m581d4d0[m mergin with master
+[33m56720cc[m Merge branch 'master' of https://github.com/IdrisLaabidi/pfa-frontend- into rayen
+[33m5225d7e[m Merge branch 'master' of https://github.com/IdrisLaabidi/pfa-frontend- into tasnime
+[33md4c3c46[m Merge branch 'youssef' of https://github.com/IdrisLaabidi/pfa-frontend- into tasnime
+[33m9281a03[m Merge branch 'youssef' of https://github.com/IdrisLaabidi/pfa-frontend into idris
+[33mc7ef534[m youssef rahou fotfot
+[33mb34bbfc[m Merge branch 'idris' of https://github.com/IdrisLaabidi/pfa-frontend- into tasnime
+[33m67c0e63[m chat page completed
+[33m89b6f42[m fixed leave form bugs
+[33m2b097e2[m finished leave form3
+[33mbf0745b[m Merge branch 'idris' of https://github.com/IdrisLaabidi/pfa-frontend- into tasnime
+[33m5841f5a[m finished leave form22
+[33m5dcc539[m merged with tasnime
+[33m91f11f3[m Merge branch 'tasnime' of https://github.com/IdrisLaabidi/pfa-frontend into idris
+[33m34f28e1[m finished leave form
+[33m5d062b1[m major bug fixes
+[33m085ffce[m Merge branch 'idris' of https://github.com/IdrisLaabidi/pfa-frontend- into tasnime
+[33m95326ae[m bug fixes + role handleing + modified useConnect to store user in session
+[33m81ecee9[m added some error handling
+[33mc601c4d[m fixed some bugs + react spinner + login error handling
+[33mda965ef[m finished leave form changes
+[33m602abd7[m devided the chat into two sections but not completed yet
+[33mb6454ce[m grabbed  rayen work (profile)
+[33mf41e409[m profile all completed still working on chat
+[33mda8a0c2[m Merge branch 'youssef' into idris
+[33m381a4b6[m[33m ([m[1;32myoussef[m[33m)[m delete project 100% functionnal and update project 85% functionnal
+[33m48370a1[m update tasks done
+[33m6cb90b3[m Merge branch 'master' of https://github.com/IdrisLaabidi/pfa-frontend- into rayen
+[33ma5cfc24[m merged with youssef and fixed issues
+[33m87a18d2[m Merge branch 'youssef' into idris
+[33m703f1ea[m Merge branch 'youssef' of https://github.com/IdrisLaabidi/pfa-frontend into youssef
+[33ma8964d8[m newProjectForm 95% functionnal, css design done
+[33m0e88612[m user profile page completed succ
+[33m6887c8a[m new task feature complete + bug to be fixed after submit
+[33mc79f45d[m Merge branch 'youssef' into idris
+[33m3c59baf[m Merge branch 'youssef' of https://github.com/IdrisLaabidi/pfa-frontend into youssef
+[33m06d006c[m css style for newProjectForm done
+[33m6f253c7[m started the new task form
+[33m36d4ef3[m Merge branch 'youssef' into idris
+[33m12546c2[m Merge branch 'youssef' of https://github.com/IdrisLaabidi/pfa-frontend into youssef
+[33m729c563[m checking out
+[33m53cc5f9[m newProjectForm component and design done (sending data to dbis missing)
+[33m0072979[m user profile page most likely finished , changed the userupdata controller
+[33me10be88[m working on task details
+[33m1cf721e[m finished the leave form
+[33m24f2932[m task page backend done added modal and working on task details
+[33m9a8f92c[m Merge branch 'youssef' into idris
+[33m98eb0b0[m checking out
+[33m4cba9f1[m checking out
+[33md8cebf4[m Merge branch 'youssef' of https://github.com/IdrisLaabidi/pfa-frontend- into youssef
+[33m17ea120[m new primary css design for list of projects + correcting date format
+[33m50bce26[m Merge branch 'youssef' of https://github.com/IdrisLaabidi/pfa-frontend- into tasnime
+[33m0263756[m Merge branch 'idris' of https://github.com/IdrisLaabidi/pfa-frontend- into tasnime
+[33mebc36f8[m Merge branch 'idris' of https://github.com/IdrisLaabidi/pfa-frontend- into youssef
+[33m714f57b[m tasks page nearly done
+[33m168bea7[m done2
+[33md1bc6f5[m done
+[33m1bc7332[m Merge branch 'idris' into youssef
+[33mcf689d8[m not authorized error fixed
+[33ma7435ac[m fixed user name in navbar
+[33mc035686[m adding importing all projects from db
+[33m25a7997[m Merge branch 'idris' of https://github.com/IdrisLaabidi/pfa-frontend- into youssef
+[33m5121786[m all fixed hmdlh
+[33m3e80f9b[m Merge branch 'idris' of https://github.com/IdrisLaabidi/pfa-frontend- into tasnime
+[33m8f88f57[m added register and login hook , fixing the conditional routing
+[33ma65c35a[m added some comments
+[33m3f251b6[m transmitting cookie and token from backend to frontend
+[33m4243d9c[m added cutom hooks plus auto auth when user crdentials are stored
+[33mae16469[m layout component works as a context provider
+[33me64aca8[m Merge branch 'no-chat' into idris
+[33m4b64ebd[m[33m ([m[1;32mno-chat[m[33m)[m cookie working
+[33mcb7bd3a[m cookies not recieved from the back
+[33md141564[m fixing the side menu styles
+[33m66748d6[m quitting my brach
+[33m7e9efd4[m merge frontend from master
+[33mf642655[m[33m ([m[1;32mrayen[m[33m)[m used user ID in displaying messages instead of socket.id ,changing messageObj to match the message model putting the enter (sende message) event listener into a useEffect to ensure the event listener is cleaned up later
+[33mfbf263c[m Merge branch 'master' of https://github.com/IdrisLaabidi/pfa-frontend- into rayen
+[33md5de2f8[m added js-cookies dep
+[33m9ea1ff6[m adding fixing the login page , added data transfer between pages , preventing user from navigating pages while logged out and navigating login or register pages while logged in
+[33me4b545c[m layout done
+[33me8e01e8[m Merge branch 'youssef'
+[33m1ff5331[m bleda
+[33m7a9ffc1[m Merge branch 'idris' into youssef
+[33mabf5e6a[m nav and side done
+[33mc85469a[m displaying all messages from db
+[33m6ff3f97[m Merge branch 'master' of https://github.com/IdrisLaabidi/pfa-frontend- into rayen
+[33md29a72e[m getting all messages but still unfinished
+[33m52cceef[m chat mssg obj updates
+[33m0b1457e[m adjusting css styles for navbar and side menu
+[33md0d893e[m Merge branch 'idris'
+[33m4ebc0fe[m login and register fully working front+back
+[33me08ccfc[m committing Funcional Chat Page with unfinished Styles
+[33m2332c5f[m register page complete
+[33m657c587[m adding a sidemenu and a navbar to the main page
+[33m435afa7[m added login interface
+[33mb5c8762[m adding components of navbar and sidemenu (void files)
+[33m37f5f26[m committing chat page with unfinished styles and backend
+[33m7a5c12e[m make changes in Themes.js (2)
+[33mae3673e[m make changes in Themes.js
+[33m4dbc6e0[m first commit
+[33md8a78c6[m Merge branch 'master' of https://github.com/IdrisLaabidi/pfa-frontend
+[33mcb6081a[m login page done and started register
+[33mf81a3ab[m added Styles to Chat Page
+[33medbbcb8[m added Unfinished Chat Page
+[33m7bda957[m created the input field component , function to access the value to be done
+[33m7b29500[m Merge branch 'master' into rayen
+[33mdff46bc[m Merge branch 'master' of https://github.com/IdrisLaabidi/pfa-frontend-
+[33mb75b5fd[m themes
+[33m68237b1[m Themes
+[33mffbfb02[m Merge branch 'rayen'
+[33mf4761ba[m started login interface
+[33m23c68d6[m pushing Themes File with the new gradiant value changes
+[33me672b20[m pushing Themes File
+[33md8f422b[m removing pages test1 folder
+[33m4d73022[m test1
+[33m447932d[m initializing repo
+[33me031ca9[m Initialize project using Create React App
