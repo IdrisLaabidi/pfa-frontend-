@@ -46,7 +46,7 @@ const RegisterForm = () => {
             setIsOpen(true)
         }else{
             try{
-                const response = await fetch('https://meetserver.onrender.com/api/auth/createuser',{
+                const response = await fetch('http://localhost:4000/api/auth/createuser',{
                     method : 'POST',
                     body : JSON.stringify(user),
                     headers : {

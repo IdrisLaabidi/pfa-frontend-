@@ -17,6 +17,7 @@ import AdminProfile from './pages/profileAdmin/profileAdmin'
 import CreateUser from "./pages/createUserPage/createUser";
 import Meet from "./pages/Meet/MeetPage";
 import LeaveRequest from "./pages/LeaveRequest/leaveRequest";
+import Setting from "./pages/settingsPage/setting";
 function App() {
   return (
     <div className="App">
@@ -36,6 +37,7 @@ function App() {
           <Route path="/admin/members" element={ <Layout path={'/admin/members'} children={<AdminDashboard/>} title={'All users'} />}/>
           <Route path="/admin/leaveRequest" element={ <Layout path={'/admin/leaveRequest'} children={<LeaveRequest/>} title={'Leave Requests'} />}/>
           <Route path="/notAuthorized" element={<NotAuthorizedPage/>}/>
+          <Route path="/setting" element={ <Layout path={'/setting'} children={<Setting/>} title={'Leave Requests'} />}/>
           <Route path="*" element={<Error/>}/>
         </Routes>
       </BrowserRouter>

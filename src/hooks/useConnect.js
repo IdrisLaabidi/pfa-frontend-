@@ -12,7 +12,7 @@ const useConnect = () => {
    const getUser = async (id,token) => {
      try {
         const response = await fetch(
-          "https://meetserver.onrender.com/api/auth/users/"+id,
+          "http://localhost:4000/api/auth/users/"+id,
           {
             method : 'GET',
             headers : {

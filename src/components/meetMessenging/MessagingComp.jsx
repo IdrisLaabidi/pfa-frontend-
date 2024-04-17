@@ -5,7 +5,6 @@ const SERVER_URL = 'https://meetserver.onrender.com';
 const socket = io(SERVER_URL);
 
 function Chat() {
-  console.log('hallo')
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
   const messageAreaRef = useRef(null);
@@ -46,9 +45,9 @@ function Chat() {
         document.getElementById("send").click()
       }
     }
-    document.getElementById("input_mess").addEventListener("keyup",handleEnterKeyUp);
+     //document.getElementById("input_mess").addEventListener("keyup",handleEnterKeyUp);
     return()=>{
-      document.getElementById("input_mess").removeEventListener("keyup",handleEnterKeyUp);
+      //document.getElementById("input_mess").removeEventListener("keyup",handleEnterKeyUp);
       socket.off();
     };
 
