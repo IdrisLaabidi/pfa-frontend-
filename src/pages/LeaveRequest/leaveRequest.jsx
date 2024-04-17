@@ -9,7 +9,7 @@ import fromIcon from '../../assets/form-icon.svg'
 
 import { useTheme } from '@table-library/react-table-library/theme';
 import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/material-ui';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import useFetch from '../../hooks/useFetch';
 import { format } from 'date-fns';
 import Cookies from 'js-cookie';
@@ -97,7 +97,7 @@ const LeaveRequest = () => {
   const materialTheme = getTheme(DEFAULT_OPTIONS);
   const theme = useTheme([materialTheme , {
     Table: `
-      --data-table-library_grid-template-columns:  20% 32% 10% 30% 8%;
+      --data-table-library_grid-template-columns:  20% 32% 10% 10% 20% 8%;
     `,
 }]);
 
@@ -105,6 +105,7 @@ const LeaveRequest = () => {
     { label: 'Name', renderCell: (leave) => `${leave.concernedUser.firstName} ${leave.concernedUser.lastName}` },
     { label: 'Email', renderCell: (leave) => leave.concernedUser.email },
     {label: 'Request Date' , renderCell: (leave)=>format(new Date(leave.createdAt), 'dd/MM/yyyy') },
+    {label : 'status' , renderCell: (leave) => leave.status },
     {label :'leave Count' , renderCell :(leave => <ProgressBar 
         completed={leave.concernedUser.leaveCount.toString()} 
         maxCompleted="90"
@@ -118,6 +119,7 @@ const LeaveRequest = () => {
 
   return (
     <div className={styles.container}>
+      {error && <span>error fetching leave requests</span>}
       {data && <CompactTable columns={columns} data={data} theme={theme} layout={{ fixedHeader: true , custom :true}}/>}
       {isPending && <BeatLoader color="#08639c"></BeatLoader>}
       

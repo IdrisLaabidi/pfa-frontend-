@@ -4,12 +4,8 @@ import Peer from 'peerjs';
 import { v4 as uuidv4 } from 'uuid';
 import MessagingComp from '../../components/meetMessenging/MessagingComp'
 import styles from '../Meet/MeetPageStyles.module.css';
-import useFetch from '../../hooks/useFetch';
 
-const SERVER_URL = 'http://102.159.196.3:9000';
-const PEER_SERVER_HOST = '102.159.196.3';
-const PEER_SERVER_PORT = 9000; // The port you set up for the PeerJS server
-const PEER_SERVER_PATH = '/peerjs/myapp'
+const SERVER_URL = 'https://meetserver.onrender.com';
 const socket = io(SERVER_URL);
 
 const MeetPage = () => {
@@ -27,10 +23,9 @@ const MeetPage = () => {
   const myPeerRef = useRef(null);
   const myStreamRef = useRef(null);
   const messageAreaRef = useRef(null);
-  const {data : user , isPending : isPending , error : errorFindingUser } = useFetch();
   // Use an object to keep track of peer connections.
   const peers = {};
-  
+
   /*we used useMemo hook because it allows us to memorize result of a compuation which in our case iteraring 
   through streams array of objects is a considered as a computation function
   rendering video elements involves iterating over the streams object, 
@@ -54,7 +49,7 @@ const MeetPage = () => {
   );
   const toggleMessages = () => {
     setShowMessages(!showMessages);
-    
+
   }
   const toggleMute = () => {
     myStreamRef.current.getAudioTracks()[0].enabled = isMuted;
@@ -113,12 +108,7 @@ const MeetPage = () => {
     // Generate a unique user ID for the local user.
     const uniqueUserId = uuidv4();
     // Initialize the Peer object with the unique user ID.
-    myPeerRef.current = new Peer(uniqueUserId, {
-      host: PEER_SERVER_HOST,
-      port: PEER_SERVER_PORT,
-      path: PEER_SERVER_PATH,
-      secure : false
-    });
+    myPeerRef.current = new Peer(uniqueUserId, {});
     let stream;
     // Request access to the local video and audio.
     navigator.mediaDevices.getUserMedia({

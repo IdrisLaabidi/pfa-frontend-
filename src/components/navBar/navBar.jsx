@@ -5,6 +5,7 @@ import useFetch from '../../hooks/useFetch';
 import React, {useState } from 'react';
 import Notifications from '../notifications/notification';
 import Modal from '../../components/modal/Modal';
+import { BeatLoader } from 'react-spinners';
 
 
 const NavBar = ({title,user,isLoading,error}) => {
@@ -12,7 +13,7 @@ const NavBar = ({title,user,isLoading,error}) => {
   const id = localStorage.getItem('user_id');
   const role=localStorage.getItem('role');
   const [notification, setNotifications] = useState([]);
-  const { data: notif, isPending, error1 } = useFetch(`http://localhost:4000/api/notification/notifications/${id}`);
+  const { data: notif, isPending } = useFetch(`http://localhost:4000/api/notification/notifications/${id}`);
 
   const handleNotificationClick = () => {
     setIsOpen(true); 
@@ -28,8 +29,9 @@ const NavBar = ({title,user,isLoading,error}) => {
            
                 <Modal title={"Notifications"}  open={isOpen} onClose={()=>{setIsOpen(false)}}>
                        <div className={styles.container}>
-                      {notification.length!=0 && <Notifications notifications={notification} />}
-                      {notification.length===0 && <div>No notifications!</div>}
+                        {isPending && <BeatLoader></BeatLoader>}
+                        {notification.length!==0 && <Notifications notifications={notification} />}
+                        {notification.length===0 && <div>No notifications!</div>}
                       </div>
                   </Modal>
              

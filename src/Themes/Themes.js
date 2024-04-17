@@ -3,7 +3,6 @@ const themes = {
   background: '#08639C',
   primary: '#FFFFFF',
   primaryBlue:'#08639C',
-  primary : '#FFFFFF',
   buttons:'#1F2733',
   notif:'#D9E9F0',
   create:'#E1DEDE',
