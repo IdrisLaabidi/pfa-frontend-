@@ -1,5 +1,4 @@
 import { GridLoader } from 'react-spinners';
-import Logo from '../../assets/logo.png'
 import styles from './userAccount.module.css'
 import { useNavigate } from 'react-router-dom';
 
@@ -12,7 +11,7 @@ const UserAccount = ({user,isLoading,error}) => {
     }
     return ( <>
             {(!isLoading && !error) && <div className={styles.MainDiv} onClick={() => {navigate('/profile')}}>
-                <img className={styles.ProfileImage} src={Logo} alt='profile img'/>
+                <img className={styles.ProfileImage} src={user.pictureURL} alt='profile img'/>
                 <div>
                     <p className={styles.Username}>{user.firstName +' '+ user.lastName}</p>
                     <p className={styles.UserRole}>{user.role}</p>

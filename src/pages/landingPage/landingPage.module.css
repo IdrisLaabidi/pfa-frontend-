@@ -1,0 +1,107 @@
+/* LandingPage.module.css */
+.container {
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .title {
+    font-size: 2rem;
+  }
+  
+  .navigation {
+    display: flex;
+  }
+  
+  .navLink {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 1rem;
+  }
+  
+  .hero {
+    text-align: center;
+    padding: 4rem 2rem;
+    
+    background-size: cover;
+  }
+  
+  .heroTitle {
+    font-size: 3rem;
+    color: #fff;
+  }
+  
+  .heroSubtitle {
+    font-size: 1.5rem;
+    color: #ddd;
+  }
+  
+  .ctaButton {
+    padding: 1rem 2rem;
+    background-color: #0066ff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 2rem;
+    display: inline-block;
+  }
+  
+  .features {
+    display: flex;
+    justify-content: space-around;
+    padding: 2rem;
+    
+  }
+
+    .feature {
+        text-align: center;
+        max-width: 300px;
+        
+    }
+
+    .featureTitle {
+        font-size: 1.5rem;
+        color: #333;
+        margin-bottom: 1rem;
+    }
+
+    .featureDescription {
+        color:rgb(49, 47, 47)
+    }
+  
+  .about {
+    text-align: center;
+    padding: 2rem;
+    background-color: #f9f9f9;
+  }
+  
+  .aboutTitle {
+    font-size: 2rem;
+    color: #333;
+  }
+  
+  .aboutDescription {
+    color: #666;
+  }
+  
+  .footer {
+    text-align: center;
+    padding: 2rem;
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .footerTitle {
+    font-size: 2rem;
+  }
+  
+  .footerDescription {
+    color: #ddd;
+  }

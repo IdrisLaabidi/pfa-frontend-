@@ -18,12 +18,14 @@ import CreateUser from "./pages/createUserPage/createUser";
 import Meet from "./pages/Meet/MeetPage";
 import LeaveRequest from "./pages/LeaveRequest/leaveRequest";
 import Setting from "./pages/settingsPage/setting";
+import LandingPage from "./pages/landingPage/landingPage";
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route index element={<LoginPage/>}/>
+          <Route index element={<LandingPage/>}/>
+          <Route path='/login' element={<LoginPage/>}/>
           <Route path="/Register" element={<RegisterPage />}/>
           <Route path="/projects" element={ <Layout path={'/projects'} children={<ProjectPage/>} title={'projects'} /> } />
           <Route path="/newProject" element={<Layout path={'/newProject'} children={<NewProjectPage/>} />} />
