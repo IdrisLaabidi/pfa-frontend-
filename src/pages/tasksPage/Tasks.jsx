@@ -19,7 +19,7 @@ const Tasks = () => {
         }
     }, [project,navigate]); // Run this effect whenever project changes
 
-    const {data : tasks , isPending, error} = useFetch('http://localhost:4000/api/task/projtasks/'+project?._id)
+    const {data : tasks , isPending, error} = useFetch('https://meetserver.onrender.com/api/task/projtasks/'+project?._id)
 
     return ( 
         <div className={styles.taskpage}>

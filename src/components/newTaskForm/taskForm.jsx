@@ -96,7 +96,7 @@ const TaskForm = ({project ,onSubmit}) => {
 
     const token = Cookies.get("token")
     //fetch users from db
-    const {data: users,isPending, error} = useFetch('http://localhost:4000/api/projects/projusers/'+project._id, token)
+    const {data: users,isPending, error} = useFetch('https://meetserver.onrender.com/api/projects/projusers/'+project._id, token)
     //store users in an array
     const userlist = users? users?.map(user => (
        {value:user, label: `${user.firstName} ${user.lastName}`}

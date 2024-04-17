@@ -61,7 +61,7 @@ const LeavePage = ({token}) => {
 
     
       try {
-        const response = await fetch('http://localhost:4000/api/leave/createleave', {
+        const response = await fetch('https://meetserver.onrender.com/api/leave/createleave', {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`,

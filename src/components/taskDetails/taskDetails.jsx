@@ -43,7 +43,7 @@ const TaskDetails = ({task,onDelete,onUpdate}) => {
     const user = JSON.parse(sessionStorage.getItem("user"))
 
     const handleDelete = () => {
-        fetch("http://localhost:4000/api/task/tasks/"+task._id,
+        fetch("https://meetserver.onrender.com/api/task/tasks/"+task._id,
             {   method : "DELETE" ,
                 headers : {
                     Authorization: `Bearer ${token}`,

@@ -14,7 +14,7 @@ const Header = ({project}) => {
     //get user from session storage
     const user = JSON.parse(sessionStorage.getItem("user"))
 
-    const {data : users , isPending,error} = useFetch("http://localhost:4000/api/projects/projusers/"+project?._id)
+    const {data : users , isPending,error} = useFetch("https://meetserver.onrender.com/api/projects/projusers/"+project?._id)
 
     return ( <>
         

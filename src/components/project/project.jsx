@@ -38,7 +38,7 @@ const Project = ({ data }) => {
     const [isOpen2,  setIsOpen2] = useState(false)
 
     const handleDelete = () => {
-        fetch("http://localhost:4000/api/projects/"+data._id,
+        fetch("https://meetserver.onrender.com/api/projects/"+data._id,
             {   method : "DELETE" ,
                 headers : {
                     Authorization: `Bearer ${token}`,
@@ -56,8 +56,8 @@ const Project = ({ data }) => {
     
     //UPDATE PROJECT
     //fetch users from db: all users & users assigned to the project
-    const {data: users, isPending, error} = useFetch('http://localhost:4000/api/auth/users', token)
-    const {data: projusers} = useFetch('http://localhost:4000/api/projects/projusers/'+data._id)
+    const {data: users, isPending, error} = useFetch('https://meetserver.onrender.com/api/auth/users', token)
+    const {data: projusers} = useFetch('https://meetserver.onrender.com/api/projects/projusers/'+data._id)
     
     //store users in arrays : userlist for all users & projuserlist for users assigned to a project
     const members = users?.filter(user => user.role === 'member')
@@ -113,7 +113,7 @@ const Project = ({ data }) => {
         e.preventDefault();
         console.log('Token: ', token)
         try {
-            const response = await fetch(`http://localhost:4000/api/projects/${data._id}`, {
+            const response = await fetch(`https://meetserver.onrender.com/api/projects/${data._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

@@ -75,7 +75,7 @@ const ProfilePage = () => {
                 updatedUserData.currentPassword = currentPassword;
                 updatedUserData.password = newPassword;
             }
-            const url = `http://localhost:4000/api/auth/users/${userId}`;
+            const url = `https://meetserver.onrender.com/api/auth/users/${userId}`;
             const response = await fetch(url,{
                 method : 'PUT',
                 headers : {

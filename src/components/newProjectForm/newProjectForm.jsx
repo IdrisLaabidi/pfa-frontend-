@@ -43,7 +43,7 @@ const NewProjectForm = ({token}) => {
             return null;
         }else{
             try {
-                const response = await fetch('http://localhost:4000/api/projects',{
+                const response = await fetch('https://meetserver.onrender.com/api/projects',{
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -73,7 +73,7 @@ const NewProjectForm = ({token}) => {
     }
 
     //fetch users from db
-    const {data: users, isPending, error} = useFetch('http://localhost:4000/api/auth/users')
+    const {data: users, isPending, error} = useFetch('hhttps://meetserver.onrender.com/api/auth/users')
 
     //store users in an array
     const members = users?.filter(user => user.role === 'member')
