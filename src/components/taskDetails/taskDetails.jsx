@@ -13,7 +13,7 @@ import inProgress from '../../assets/in-progress-icon.svg'
 //import necessities
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router';
-import React,{ useState } from 'react';
+import React,{ useEffect, useState } from 'react';
 import { format } from 'date-fns'
 import useFetch from '../../hooks/useFetch';
 //import compoenents
@@ -30,13 +30,20 @@ const TaskDetails = ({task,onDelete,onUpdate}) => {
     const token = Cookies.get("token")
     const navigate = useNavigate()
     const [edit,setEdit] = useState(false)
+
+    //  function to format the date value
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        return format(date, 'yyyy-MM-dd');
+      };
+
     const [newTask,setNewTask]=useState({
         description : task.description,
         title :task.title,
         status : task.status,
         priority : task.priority,
         assignedTo : task.assignedTo,
-        dueDate : task.dueDate
+        dueDate : formatDate(task.dueDate)
     })
 
     //get user from session storage
@@ -190,11 +197,9 @@ const TaskDetails = ({task,onDelete,onUpdate}) => {
                     value={newTask.title}
                     onChange={(e) => {setNewTask({...newTask , title : e.target.value})}}
                 />
-                <label className={styles.label}>Title</label>
+                <label className={styles.label}>Due date</label>
                 <InputField
-                    
                     type='date'
-                    required
                     value={newTask.dueDate}
                     onChange={(e) => {setNewTask({...newTask , dueDate : e.target.value})}}
                     icon={date} 
