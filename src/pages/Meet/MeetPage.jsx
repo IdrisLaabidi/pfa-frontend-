@@ -4,6 +4,7 @@ import Peer from 'peerjs';
 import { v4 as uuidv4 } from 'uuid';
 import MessagingComp from '../../components/meetMessenging/MessagingComp'
 import styles from '../Meet/MeetPageStyles.module.css';
+import { useNavigate } from 'react-router-dom';
 
 const SERVER_URL = 'https://meetserver.onrender.com';
 const socket = io(SERVER_URL);
@@ -25,6 +26,7 @@ const MeetPage = () => {
   const messageAreaRef = useRef(null);
   // Use an object to keep track of peer connections.
   const peers = {};
+  const navigate = useNavigate()
 
   /*we used useMemo hook because it allows us to memorize result of a compuation which in our case iteraring 
   through streams array of objects is a considered as a computation function
@@ -46,6 +48,7 @@ const MeetPage = () => {
         />
       )),
     [streams]
+
   );
   const toggleMessages = () => {
     setShowMessages(!showMessages);
@@ -103,6 +106,35 @@ const MeetPage = () => {
   /*const hangUp = ()=>{
     window.location.href()
   }*/
+  const hangUp = () => {
+    // Stop all media tracks
+    if (myStreamRef.current) {
+      myStreamRef.current.getTracks().forEach(track => track.stop());
+    }
+
+    // Emit an event to the server to inform other users that this user has hung up
+    socket.emit('User left', myPeerRef.current.id);
+
+    // Perform any additional cleanup if necessary, such as navigating the user away from the page
+    // window.location.href = '/some/other/page';
+
+    // Destroy the Peer object
+    if (myPeerRef.current) {
+      myPeerRef.current.destroy();
+    }
+
+    // Disconnect from the socket
+    socket.off();
+
+    // Close all peer connections
+    Object.values(peers).forEach(peer => {
+      if (peer && peer.close) {
+        peer.close();
+      }
+    });
+    //After hanging up locate user to projects page 
+    navigate('/MeetingEndedPage')
+  };
   // useEffect hook to handle component side effects.
   useEffect(() => {
     // Generate a unique user ID for the local user.
@@ -165,6 +197,7 @@ const MeetPage = () => {
         <button onClick={toggleMute}>{!isMuted ? 'Mute' : 'Unmute'}</button>
         <button onClick={toggleCamera}>{isCameraOff ? 'Show Camera' : 'Hide Camera'}</button>
         <button onClick={toggleMessages}>{showMessages ? 'Hide Messages' : 'Show Messages'}</button>
+        <button style={{backgroundColor:'red'}} onClick={hangUp}>Hang Up</button> {/* Hang up button */}
       </div>
     </div>
   );
