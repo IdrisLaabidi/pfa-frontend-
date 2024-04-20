@@ -77,3 +77,22 @@ video {
   transform: translateX(0); /* Slide in */
 }
 
+.userName {
+  position: absolute;
+  bottom: 30px; 
+  right: 20px;
+  padding: 5px;
+  color: #fff; 
+  border-radius: 5px;
+  font-size: 25px;
+  
+}
+
+.profilePicture {
+  position: absolute;
+  top: 37%;
+  left: 37%;
+  width:20%;
+  height: 30%;
+  border-radius: 50%; /* Optional: if you want rounded corners */
+}

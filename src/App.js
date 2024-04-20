@@ -19,6 +19,7 @@ import Meet from "./pages/Meet/MeetPage";
 import LeaveRequest from "./pages/LeaveRequest/leaveRequest";
 import Setting from "./pages/settingsPage/setting";
 import LandingPage from "./pages/landingPage/landingPage";
+import MeetingEndedPage from "./pages/Meet/MeetingEndedPage";
 function App() {
   return (
     <div className="App">
@@ -40,6 +41,7 @@ function App() {
           <Route path="/admin/leaveRequest" element={ <Layout path={'/admin/leaveRequest'} children={<LeaveRequest/>} title={'Leave Requests'} />}/>
           <Route path="/notAuthorized" element={<NotAuthorizedPage/>}/>
           <Route path="/setting" element={ <Layout path={'/setting'} children={<Setting/>} title={'Leave Requests'} />}/>
+          <Route path="/MeetingEndedPage" element={<MeetingEndedPage/>} />
           <Route path="*" element={<Error/>}/>
         </Routes>
       </BrowserRouter>
