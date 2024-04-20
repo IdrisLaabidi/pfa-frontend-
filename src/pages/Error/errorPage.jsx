@@ -16,7 +16,7 @@ export default function ErrorPage() {
     <div className={styles.notFound}>
         <h1>404 Not Found</h1>
         <p>Oops! The page you're looking for doesn't exist.</p>
-        <Link to={path} className={styles.homeLink}>Go to Homepage</Link>
+        <Link to={path}>Go to Homepage</Link>
     </div>
   );
 }

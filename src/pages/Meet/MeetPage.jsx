@@ -4,7 +4,7 @@ import Peer from 'peerjs';
 import { v4 as uuidv4 } from 'uuid';
 import MessagingComp from '../../components/meetMessenging/MessagingComp'
 import styles from '../Meet/MeetPageStyles.module.css';
-
+import {useNavigate} from 'react-router-dom'
 const SERVER_URL = 'https://meetserver.onrender.com';
 const socket = io(SERVER_URL);
 
@@ -25,7 +25,9 @@ const MeetPage = () => {
   const messageAreaRef = useRef(null);
   // Use an object to keep track of peer connections.
   const peers = {};
-
+  const navigate = useNavigate();
+  const userData = JSON.parse(sessionStorage.getItem('user'))
+  console.log(userData)
   /*we used useMemo hook because it allows us to memorize result of a compuation which in our case iteraring 
   through streams array of objects is a considered as a computation function
   rendering video elements involves iterating over the streams object, 
@@ -34,18 +36,28 @@ const MeetPage = () => {
   const videos = useMemo(
     () =>
       Object.entries(streams).map(([userId, stream]) => (
-        <video
-          key={userId}
-          playsInline
-          autoPlay
-          ref={(video) => {
-            if (video) {
-              video.srcObject = stream;
-            }
-          }}
-        />
+        <div key={userId} className={styles.videoContainer}>
+          <video
+            playsInline
+            autoPlay
+            muted={userId === myPeerRef.current?.id} // Mute the local user's video
+            ref={(video) => {
+              if (video) {
+                video.srcObject = stream;
+              }
+            }}
+          />
+          <span className={styles.userName}>{userData.firstName+' '+userData.lastName || "Unknown"}</span>
+          {isCameraOff && (
+          <img
+            src={userData.pictureURL}
+            alt={'default-profile-picture-url'}
+            className={styles.profilePicture}
+          />
+        )}
+        </div>
       )),
-    [streams]
+    [[streams, userData, isCameraOff]]
   );
   const toggleMessages = () => {
     setShowMessages(!showMessages);
@@ -61,8 +73,8 @@ const MeetPage = () => {
   }
   // Function to add a video stream to the streams state.
   const addVideoStream = (stream, userId) => {
-    console.log('Adding video stream for user:', userId);
-    setStreams(prevStreams => ({ ...prevStreams, [userId]: stream }));
+    console.log('Adding video stream for user:', userData._id);
+    setStreams(prevStreams => ({ ...prevStreams, [userData._id]: stream }));
   };
   // Function to handle the connection to a new user.
   const connectToNewUser = (userId, stream) => {
@@ -103,6 +115,36 @@ const MeetPage = () => {
   /*const hangUp = ()=>{
     window.location.href()
   }*/
+  const hangUp = () => {
+    // Stop all media tracks
+    if (myStreamRef.current) {
+      myStreamRef.current.getTracks().forEach(track => track.stop());
+    }
+
+    // Emit an event to the server to inform other users that this user has hung up
+    socket.emit('User left', myPeerRef.current.id);
+
+    // Perform any additional cleanup if necessary, such as navigating the user away from the page
+    // window.location.href = '/some/other/page';
+
+    // Destroy the Peer object
+    if (myPeerRef.current) {
+      myPeerRef.current.destroy();
+    }
+
+    // Disconnect from the socket
+    socket.off();
+
+    // Close all peer connections
+    Object.values(peers).forEach(peer => {
+      if (peer && peer.close) {
+        peer.close();
+      }
+    });
+    //After hanging up locate user to projects page 
+    navigate('/MeetingEndedPage')
+  };
+  
   // useEffect hook to handle component side effects.
   useEffect(() => {
     // Generate a unique user ID for the local user.
@@ -165,6 +207,7 @@ const MeetPage = () => {
         <button onClick={toggleMute}>{!isMuted ? 'Mute' : 'Unmute'}</button>
         <button onClick={toggleCamera}>{isCameraOff ? 'Show Camera' : 'Hide Camera'}</button>
         <button onClick={toggleMessages}>{showMessages ? 'Hide Messages' : 'Show Messages'}</button>
+        <button style={{backgroundColor:'red'}} onClick={hangUp}>Hang Up</button> {/* Hang up button */}
       </div>
     </div>
   );
