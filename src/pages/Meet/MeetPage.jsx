@@ -4,7 +4,8 @@ import Peer from 'peerjs';
 import { v4 as uuidv4 } from 'uuid';
 import MessagingComp from '../../components/meetMessenging/MessagingComp'
 import styles from '../Meet/MeetPageStyles.module.css';
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+
 const SERVER_URL = 'https://meetserver.onrender.com';
 const socket = io(SERVER_URL);
 
@@ -25,9 +26,8 @@ const MeetPage = () => {
   const messageAreaRef = useRef(null);
   // Use an object to keep track of peer connections.
   const peers = {};
-  const navigate = useNavigate();
-  const userData = JSON.parse(sessionStorage.getItem('user'))
-  console.log(userData)
+  const navigate = useNavigate()
+
   /*we used useMemo hook because it allows us to memorize result of a compuation which in our case iteraring 
   through streams array of objects is a considered as a computation function
   rendering video elements involves iterating over the streams object, 
@@ -36,28 +36,19 @@ const MeetPage = () => {
   const videos = useMemo(
     () =>
       Object.entries(streams).map(([userId, stream]) => (
-        <div key={userId} className={styles.videoContainer}>
-          <video
-            playsInline
-            autoPlay
-            muted={userId === myPeerRef.current?.id} // Mute the local user's video
-            ref={(video) => {
-              if (video) {
-                video.srcObject = stream;
-              }
-            }}
-          />
-          <span className={styles.userName}>{userData.firstName+' '+userData.lastName || "Unknown"}</span>
-          {isCameraOff && (
-          <img
-            src={userData.pictureURL}
-            alt={'default-profile-picture-url'}
-            className={styles.profilePicture}
-          />
-        )}
-        </div>
+        <video
+          key={userId}
+          playsInline
+          autoPlay
+          ref={(video) => {
+            if (video) {
+              video.srcObject = stream;
+            }
+          }}
+        />
       )),
-    [[streams, userData, isCameraOff]]
+    [streams]
+
   );
   const toggleMessages = () => {
     setShowMessages(!showMessages);
@@ -73,8 +64,8 @@ const MeetPage = () => {
   }
   // Function to add a video stream to the streams state.
   const addVideoStream = (stream, userId) => {
-    console.log('Adding video stream for user:', userData._id);
-    setStreams(prevStreams => ({ ...prevStreams, [userData._id]: stream }));
+    console.log('Adding video stream for user:', userId);
+    setStreams(prevStreams => ({ ...prevStreams, [userId]: stream }));
   };
   // Function to handle the connection to a new user.
   const connectToNewUser = (userId, stream) => {
@@ -144,7 +135,6 @@ const MeetPage = () => {
     //After hanging up locate user to projects page 
     navigate('/MeetingEndedPage')
   };
-  
   // useEffect hook to handle component side effects.
   useEffect(() => {
     // Generate a unique user ID for the local user.
