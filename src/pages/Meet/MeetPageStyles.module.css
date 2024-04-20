@@ -3,7 +3,7 @@
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 10px;
     padding: 20px;
-    height: calc(98vh - 62px); 
+    height: 92vh;
     box-sizing: border-box; 
   }
 
@@ -47,7 +47,7 @@ video {
   }
 .MeetContainer {
   position: relative;
-  height: 91vh;
+  height: 92vh;
   overflow: hidden;
   }
 .MessagingComp {

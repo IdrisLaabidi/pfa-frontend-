@@ -194,7 +194,6 @@ const Project = ({ data }) => {
                             value={form.name}
                             onChange={(e) => {setForm({...form, name: e.target.value})}}
                         />
-                        {console.log(form)}
                         <label className={styles1.inputtitle}>Description</label>
                         <textarea className={styles1.grandentree} 
                             value={form.description}
