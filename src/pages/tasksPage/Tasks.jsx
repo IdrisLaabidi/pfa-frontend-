@@ -11,11 +11,11 @@ const Tasks = () => {
     const navigate = useNavigate()
     const project = JSON.parse(sessionStorage.getItem("project"))    
     // Check if project is null or undefined
-    useEffect(() => {
+    useEffect( () => {
         // Check if project is null or undefined
         if (!project) {
-            // Redirect to the home page)
-            navigate('/')
+            // Redirect to the home page 
+            navigate('/projects')
         }
     }, [project,navigate]); // Run this effect whenever project changes
 

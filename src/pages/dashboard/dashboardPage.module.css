@@ -4,3 +4,8 @@
     gap: 20px;
     padding: 20px;
 }
+.text{
+    font-size: 25px;
+    color: var(--color-primary);
+    padding-left: 20px;
+}

@@ -29,7 +29,6 @@
   .hero {
     text-align: center;
     padding: 4rem 2rem;
-    
     background-size: cover;
   }
   
@@ -57,13 +56,13 @@
     display: flex;
     justify-content: space-around;
     padding: 2rem;
-    
+    height: 350px;
   }
 
     .feature {
         text-align: center;
         max-width: 300px;
-        
+        max-height: 200px;
     }
 
     .featureTitle {
@@ -104,4 +103,28 @@
   
   .footerDescription {
     color: #ddd;
+  }
+
+  .image{
+    height: 100%;
+    width: 100%;
+  }
+
+  .aboutdiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5%;
+  }
+
+  .paragraph{
+    max-width: 30%;
+    text-wrap:wrap;
+    color: #666;
+  }
+
+  .imageFST{
+    width: 229px;
+    height: 161px;
   }
