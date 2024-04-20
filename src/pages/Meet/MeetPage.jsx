@@ -80,6 +80,7 @@ const MeetPage = () => {
   filters out the entry with the userId, and Object.fromEntries() converts it back into an object. 
   This effectively removes the key-value pair associated with the userId from the streams state.*/
   const removeVideoStream = (userId) => {
+    console.log(userId)
     setStreams((prevStreams) => {
       const updatedStreams = Object.fromEntries(
         Object.entries(prevStreams).filter(([key]) => key !== userId)
@@ -160,7 +161,9 @@ const MeetPage = () => {
       setUsersInRoom(users => users.filter(user => user !== userLeftId));
       removeVideoStream(userLeftId);
     });
-
+    socket.on('users-in-room', (users) => {
+      setUsersInRoom(users);
+    });
     // Cleanup on component unmount
     return () => {
       if (myPeerRef.current) {
