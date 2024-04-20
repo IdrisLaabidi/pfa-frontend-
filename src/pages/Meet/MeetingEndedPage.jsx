@@ -35,7 +35,7 @@ const MeetingEndedPage = () => {
           <strong>Resources:</strong> Access additional resources related to the meeting topic. <a href="#">View Resources</a>
         </li>
         <li>
-          <strong>Support:</strong> Need assistance? Contact our support team at <a href="#">support@example.com</a>.
+          <strong>Support:</strong> Need assistance? Contact our support team at <a href="#">support@example.com</a>
         </li>
       </ul>
     </div>
