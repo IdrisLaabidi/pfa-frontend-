@@ -59,7 +59,7 @@ const NewProjectForm = ({token}) => {
                 }
                 if(response.ok){
                     console.log("project added" , data)
-                    navigate('/')
+                    navigate('/projects')
                 }
             } catch (error) {
                 setErr(error);

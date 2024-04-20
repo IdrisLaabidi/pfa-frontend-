@@ -40,6 +40,7 @@ const MeetPage = () => {
           key={userId}
           playsInline
           autoPlay
+          muted={userId === myPeerRef.current?.id} // Mute the local user's video
           ref={(video) => {
             if (video) {
               video.srcObject = stream;

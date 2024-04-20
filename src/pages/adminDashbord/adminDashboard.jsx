@@ -48,6 +48,7 @@ const AdminDashboard = () => {
         }) 
         if(! response.ok ) {
             console.log(error)
+            console.log(response.message)
         }
         if(response.ok){
             console.log('user Deleted')
