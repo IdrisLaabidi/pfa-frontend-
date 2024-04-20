@@ -20,6 +20,7 @@ const ProfilePage = () => {
     const [confirmNewPassword, setConfirmNewPassword] = useState("");
     const [profilePicture, setProfilePicture] = useState("");
     const [user, isPending, error] = useConnect();
+    const [fetching,setFetching]=useState(false)
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -53,6 +54,7 @@ const ProfilePage = () => {
 
     const saveChangesHandler = async () => {
         try {
+            setFetching(true)
             const userId = localStorage.getItem('user_id');
             if (!userId) {
                 throw new Error('User ID is not found. Please log in again');
@@ -91,17 +93,22 @@ const ProfilePage = () => {
                 } else {
                     throw new Error('An unexpected error occurred');
                 }
+                setFetching(false)
             }
             Cookies.remove('token');
-            navigate(0);
+            localStorage.removeItem('user_id')
+            localStorage.removeItem('role')
+            sessionStorage.removeItem('user')
+            navigate('/login');
         } catch (error) {
             alert(error.message);
+            setFetching(false)
         }
     };
 
     return (
         <div className={styles.profilePageContainer}>
-            <LoadingModal open={isPending} />
+            <LoadingModal open={isPending || fetching} />
             <div className={styles.profilePictureContainer}>
                 {profilePicture ? (
                     <img src={profilePicture} alt="Profile" className={styles.profilePicture} />
