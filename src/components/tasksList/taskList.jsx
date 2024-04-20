@@ -19,8 +19,6 @@ const TaskList = ( {title,type,tasks} ) => {
     return ( 
         <div className={styles.container}>
             <ListHeader title={title} handleClick={hideTasks} />
-            {console.log(Date.now())}
-            {console.log(tasks[0].dueDate)}
             {toggleTasks && <div className={styles.list}>
                 {type === "overdue" ? tasks.filter((task) => isPast(new Date(task.dueDate))).map(task => (<TaskCard task={task} key={task._id}/>)) :tasks.filter((task) => task.status === type).map(task => (<TaskCard task={task} key={task._id}/>))}
             { }

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 
-const useFetch = (url) => {
+const useFetch = (url,dependency) => {
   const [data, setData] = useState(null);
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(null);
@@ -39,7 +39,7 @@ const useFetch = (url) => {
 
     // abort the fetch
     return () => abortCont.abort();
-  }, [url, token])
+  }, [url, token,dependency])
 
   return { data, isPending, error };
 }

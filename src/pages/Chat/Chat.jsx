@@ -10,7 +10,7 @@ import useConnect from '../../hooks/useConnect';
 import { MoonLoader } from 'react-spinners';
 
 
-const SERVER_URL = 'https://meetserver.onrender.com';
+const SERVER_URL = 'http://localhost:4000';
 const socket = io(SERVER_URL);
 
 const Chat = () => {
@@ -21,12 +21,12 @@ const Chat = () => {
     const [usersProject, setUsersProject] = useState([]);
     const [userName , setUserName] = useState('');
     const messageAreaRef = useRef();
-    const {user, isPending,error} = useConnect();
+    const {user, isPending,error} = useConnect();//zeyda
     const userId = localStorage.getItem('user_id');
     const userNameinSession = JSON.parse((sessionStorage.getItem('user')));
-    const { data: projectsData, isPending: isPendingProjects  } = useFetch(`https://meetserver.onrender.com/api/projects/myprojects/${userId}`);
-    const { data: UsersAssignedToaProject, isPending: isPendingUsers } = useFetch(`https://meetserver.onrender.com/api/projects/projusers/${selectedProject}`);
-    const { data: allMessagesData, isPending: isPendingMessages } = useFetch(`https://meetserver.onrender.com/api/messages/allMessage/${selectedProject}`);
+    const { data: projectsData, isPending: isPendingProjects  } = useFetch(`http://localhost:4000/api/projects/myprojects/${userId}`);
+    const { data: UsersAssignedToaProject, isPending: isPendingUsers } = useFetch(`http://localhost:4000/api/projects/projusers/${selectedProject}`);
+    const { data: allMessagesData, isPending: isPendingMessages } = useFetch(`http://localhost:4000/api/messages/allMessage/${selectedProject}`);
     
     const sendMessage = () => {
         if (message !== '' && selectedProject) {
@@ -35,7 +35,7 @@ const Chat = () => {
                 sender: userId,
                 sentTo: usersProject, 
                 project: selectedProject,
-                sentAt: Date.now(),
+                sentAt:  new Date(),
                 who: userName
             };
             socket.emit('chat message', messageObj);
@@ -57,7 +57,7 @@ const Chat = () => {
         if(!isPending){
           setUserName(userNameinSession.firstName + ' ' +userNameinSession.lastName)
         }
-      },[user , isPending])
+      },[userNameinSession , isPending])
 
     useEffect(() => {
         if (!isPendingProjects && projectsData) {
@@ -81,15 +81,18 @@ const Chat = () => {
                 who : mssg.who
             }));
             setMessages(formattedMessages);
+            console.log(formattedMessages)
         }
     }, [allMessagesData, isPendingMessages, userId]);
 
     useEffect(() => {
         const newMessageHandler = (newMessage) => {
+            let nouvMessage = JSON.parse(newMessage)
             setMessages(prevMessages => [
                 ...prevMessages,
-                { ...newMessage, sender: newMessage.sender === userId ? 'self' : 'other' }
+                { ...nouvMessage, sender: nouvMessage.sender === userId ? 'self' : 'other' }
             ]);
+            console.log(messages)
         };
 
         socket.on('chat message', newMessageHandler);
