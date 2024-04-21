@@ -1,0 +1,10 @@
+.videoresponsive {
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 5%;
+  }
+  
+  .videoresponsive iframe {
+    left: 0;
+    top: 0;
+  }

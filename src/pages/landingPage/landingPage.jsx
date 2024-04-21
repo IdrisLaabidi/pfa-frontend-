@@ -6,6 +6,7 @@ import meetIcon from '../../assets/video-call-webcam-landingpage.svg'
 import chatIcon from '../../assets/chat-profile-profiles-landingpage.svg'
 import projectIcon from '../../assets/networking-collaboration-landingpage.svg'
 import logoFST from '../../assets/logo-fst.png'
+import YoutubeEmbed from '../../components/youtubeEmbed/youtubeEmbed';
 const LandingPage = () => {
     const readingLottieAnimationOption = {
         loop: true,
@@ -15,6 +16,7 @@ const LandingPage = () => {
           preserveAspectRatio: "xMidYMid slice"
         }
       };
+      
     return (
         <div className={styles.container}>
             <header className={styles.header}>
@@ -56,10 +58,10 @@ const LandingPage = () => {
                 </div>
                 
             </section>
-            <div>
-    <p>Découvrez les fonctionnalités de notre application à travers cette vidéo démo</p>
-    <iframe src="https://www.youtube.com/embed/AAB6ijquQ9c" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-</div>
+            <div className={styles.ytdiv}>
+                <p className={styles.paragraph} style={{color: "#333", textAlign: "center"}}>Discover our app's features in our demo video. Explore seamless project management and real-time collaboration. See how it streamlines workflow and boosts productivity. Join us to learn more.</p>
+                <YoutubeEmbed embedId="AAB6ijquQ9c" />
+            </div>
             <section id="about" className={styles.about}>
                 <h2 className={styles.aboutTitle}>About WorkElite</h2>
                 <p className={styles.aboutDescription}>Discover WorkElite: your all-in-one online platform tailored to elevate IT startups. In today's fast-paced world, where efficiency and seamless communication are paramount, WorkElite stands out as the ultimate solution for turning daily challenges into growth opportunities.</p>

@@ -118,6 +118,14 @@
     gap: 5%;
   }
 
+  .ytdiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5%;
+  }
+
   .paragraph{
     max-width: 30%;
     text-wrap:wrap;
