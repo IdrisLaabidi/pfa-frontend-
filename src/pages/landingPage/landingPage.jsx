@@ -57,9 +57,9 @@ const LandingPage = () => {
                 
             </section>
             <div>
-                <p>Découvrez les fonctionnalités de notre application à travers cette vidéo démo</p>
-                <embed src="https://drive.google.com/file/d/1Zqr7yeeh4EyHWIV10zwL1sAuBg0fYGyB/view?usp=sharing" />
-            </div>
+    <p>Découvrez les fonctionnalités de notre application à travers cette vidéo démo</p>
+    <iframe src="https://www.youtube.com/embed/AAB6ijquQ9c" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
             <section id="about" className={styles.about}>
                 <h2 className={styles.aboutTitle}>About WorkElite</h2>
                 <p className={styles.aboutDescription}>Discover WorkElite: your all-in-one online platform tailored to elevate IT startups. In today's fast-paced world, where efficiency and seamless communication are paramount, WorkElite stands out as the ultimate solution for turning daily challenges into growth opportunities.</p>
