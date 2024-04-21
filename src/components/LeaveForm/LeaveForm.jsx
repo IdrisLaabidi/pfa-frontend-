@@ -4,11 +4,12 @@ import { useNavigate } from 'react-router';
 import Submit from '../submitButton/submitButton';
 import Modal from '../modal/Modal'
 import Error from '../Error/Error'
+import Cookies from 'js-cookie';
 
 
-
-const LeavePage = ({token}) => {
+const LeavePage = () => {
   const userId = localStorage.getItem("user_id");
+  const token = Cookies.get("token")
   const navigate = useNavigate()
 
   const id = localStorage.getItem('user_id')
