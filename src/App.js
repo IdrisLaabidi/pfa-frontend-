@@ -17,6 +17,9 @@ import AdminProfile from './pages/profileAdmin/profileAdmin'
 import CreateUser from "./pages/createUserPage/createUser";
 import Meet from "./pages/Meet/MeetPage";
 import LeaveRequest from "./pages/LeaveRequest/leaveRequest";
+import Settings from "./pages/settings/settings"
+
+
 function App() {
   return (
     <div className="App">
@@ -31,6 +34,7 @@ function App() {
           <Route path="/profile" element={<Layout path={'/profile'} children={<Profile/>}/>} />
           <Route path="/meet" element={<Layout path={'/meet'} children={<Meet/>}/>} />
           <Route path="/leave" element={ <Layout path={'/leave'} children={<LeavePage/>} title={'Leave'} />}/>
+          <Route path="/setting" element={ <Layout path={'/setting'} children={<Settings/>} title={'Settings'} />}/>
           <Route path="/admin/profile" element={ <Layout path={'/admin/profile'} children={<AdminProfile/>} title={'Profile'} />}/>
           <Route path="/admin/newUser" element={ <Layout path='/admin/newUser' title='New User'> <CreateUser /> </Layout>} />
           <Route path="/admin/members" element={ <Layout path={'/admin/members'} children={<AdminDashboard/>} title={'All users'} />}/>

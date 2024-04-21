@@ -71,6 +71,7 @@ const ProfilePage = () => {
                 firstName: firstName !== ''? firstName:user.firstName,
                 lastName: lastName !== '' ? lastName:user.lastName,
                 email: email !== '' ? email : user.email,
+                
             };
             if (newPassword) {
                 updatedUserData.currentPassword = user.password;

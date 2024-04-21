@@ -41,14 +41,9 @@ function Chat() {
       }
       setMessages(messages=>[...messages,newMessage]);
     });
-    const handleEnterKeyUp = (event)=>{
-      if(event.keyCode===13){
-        document.getElementById("send").click()
-      }
-    }
-    document.getElementById("input_mess").addEventListener("keyup",handleEnterKeyUp);
+   
     return()=>{
-      document.getElementById("input_mess").removeEventListener("keyup",handleEnterKeyUp);
+     
       socket.off();
     };
 
